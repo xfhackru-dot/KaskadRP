@@ -6,253 +6,394 @@
     <title>Kaskad RP</title>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <style>
+        /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
         }
+
         body {
-            background: linear-gradient(145deg, #0b1a1f 0%, #0d2a2e 100%);
+            background: #000000;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             padding: 16px 12px 40px;
         }
+
         .app {
             max-width: 420px;
             width: 100%;
-            background: rgba(12, 30, 35, 0.85);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            background: #0a0a0a;
             border-radius: 40px 40px 28px 28px;
             padding: 24px 18px 32px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(60, 180, 200, 0.2);
-            border: 1px solid rgba(80, 210, 230, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.2s;
         }
+
+        /* ===== ЦВЕТА ===== */
         :root {
-            --teal: #25d0d9;
-            --teal-dark: #17a2b0;
-            --teal-glow: rgba(37, 208, 217, 0.3);
-            --blue-light: #6bc8e8;
-            --white-smoke: #eef6f8;
-            --dark-bg: #0b1e22;
-            --card-bg: rgba(20, 50, 58, 0.5);
-            --border-light: rgba(100, 210, 230, 0.25);
+            --bg-primary: #000000;
+            --bg-card: #111111;
+            --bg-card-hover: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #aaaaaa;
+            --border-color: rgba(255, 255, 255, 0.12);
+            --border-active: rgba(255, 255, 255, 0.3);
+            --accent-green: #00c853;
+            --accent-red: #ff1744;
+            --accent-green-dim: rgba(0, 200, 83, 0.15);
+            --accent-red-dim: rgba(255, 23, 68, 0.15);
         }
-        h1, h2, h3, p, label, span { color: var(--white-smoke); }
+
+        /* ===== ТЕКСТ ===== */
+        h1, h2, h3, p, label, span, div {
+            color: var(--text-primary);
+        }
+
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+
+        /* ===== ЗАГОЛОВКИ ===== */
         .project-title {
             font-size: 28px;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-align: center;
-            color: #fff;
-            text-shadow: 0 0 20px var(--teal-glow);
-            margin-bottom: 6px;
+            color: #ffffff;
+            margin-bottom: 4px;
         }
-        .project-title span { color: var(--teal); }
+        .project-title span {
+            color: #ffffff;
+            font-weight: 300;
+            opacity: 0.7;
+        }
         .subhead {
             text-align: center;
-            font-size: 14px;
-            opacity: 0.7;
+            font-size: 13px;
+            opacity: 0.4;
             margin-bottom: 22px;
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 18px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
+
+        /* ===== СТРАНИЦЫ ===== */
         .page {
             display: none;
             flex-direction: column;
-            gap: 20px;
-            animation: fadeSlide 0.3s ease;
+            gap: 18px;
+            animation: fadeSlide 0.25s ease;
         }
-        .page.active { display: flex; }
+        .page.active {
+            display: flex;
+        }
+
         @keyframes fadeSlide {
-            0% { opacity: 0.4; transform: translateY(12px); }
+            0% { opacity: 0.3; transform: translateY(10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
+
+        /* ===== КАРТОЧКИ ===== */
         .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border-radius: 28px;
+            background: var(--bg-card);
+            border-radius: 24px;
             padding: 20px 18px;
-            border: 1px solid var(--border-light);
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: border-color 0.2s;
         }
+        .card:hover {
+            border-color: var(--border-active);
+        }
+
         .card-highlight {
-            border-left: 4px solid var(--teal);
-            background: rgba(30, 80, 90, 0.3);
+            border-left: 3px solid var(--accent-green);
+            background: rgba(0, 200, 83, 0.04);
         }
+
+        /* ===== КНОПКИ ===== */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             padding: 14px 22px;
             border-radius: 60px;
-            font-weight: 700;
-            font-size: 16px;
-            border: none;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1.5px solid var(--border-color);
             cursor: pointer;
-            transition: 0.2s;
-            background: var(--teal);
-            color: #0b1e22;
-            letter-spacing: 0.3px;
-            box-shadow: 0 4px 12px rgba(37, 208, 217, 0.3);
+            transition: all 0.2s ease;
+            background: transparent;
+            color: var(--text-primary);
             width: 100%;
             text-decoration: none;
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
         }
-        .btn:active { transform: scale(0.96); }
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+            font-weight: 700;
+        }
+        .btn-primary:active {
+            background: #e0e0e0;
+            border-color: #e0e0e0;
+        }
+
         .btn-secondary {
+            border-color: var(--border-color);
             background: transparent;
-            color: var(--teal);
-            border: 1.5px solid var(--teal);
-            box-shadow: none;
         }
-        .btn-secondary:active { background: rgba(37, 208, 217, 0.1); }
-        .btn-dark {
-            background: #1d3d44;
-            color: #cdeef5;
-            box-shadow: none;
+        .btn-secondary:active {
+            background: rgba(255, 255, 255, 0.05);
         }
-        .btn-dark:active { background: #2b555e; }
-        .btn-block { margin-top: 8px; }
+
+        .btn-success {
+            background: var(--accent-green);
+            color: #000000;
+            border-color: var(--accent-green);
+            font-weight: 700;
+        }
+        .btn-success:active {
+            background: #00b84a;
+            border-color: #00b84a;
+        }
+
+        .btn-danger {
+            background: var(--accent-red);
+            color: #ffffff;
+            border-color: var(--accent-red);
+            font-weight: 700;
+        }
+        .btn-danger:active {
+            background: #e0133d;
+            border-color: #e0133d;
+        }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .btn-block {
+            margin-top: 4px;
+        }
+
+        /* ===== ПОЛЯ ВВОДА ===== */
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            margin-bottom: 10px;
+            gap: 5px;
+            margin-bottom: 8px;
         }
         .input-group label {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            opacity: 0.8;
+            opacity: 0.6;
             margin-left: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
-        .input-group input, .input-group select {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-light);
+        .input-group input,
+        .input-group select {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
             border-radius: 40px;
             padding: 14px 18px;
             font-size: 15px;
-            color: #f0f8fa;
+            color: #ffffff;
             outline: none;
             transition: 0.2s;
         }
         .input-group input:focus {
-            border-color: var(--teal);
-            box-shadow: 0 0 0 3px var(--teal-glow);
+            border-color: var(--border-active);
+            background: rgba(255, 255, 255, 0.06);
         }
         .input-group input::placeholder {
-            color: rgba(200, 230, 240, 0.4);
+            color: rgba(255, 255, 255, 0.2);
         }
+
+        /* ===== СЛОТ-МАШИНА (ГЕНЕРАТОР) ===== */
         .slot-machine {
-            background: #091a1f;
-            border-radius: 60px;
+            background: #0a0a0a;
+            border-radius: 40px;
             padding: 24px 12px;
-            border: 1px dashed var(--teal);
+            border: 1px solid var(--border-color);
             text-align: center;
         }
         .slot-result {
-            font-size: 38px;
-            font-weight: 800;
-            letter-spacing: 6px;
-            background: #0d2a2e;
-            padding: 16px 10px;
-            border-radius: 40px;
-            color: var(--teal);
-            text-shadow: 0 0 20px var(--teal-glow);
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            background: #050505;
+            padding: 20px 10px;
+            border-radius: 30px;
+            color: #ffffff;
             min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Courier New', monospace;
+            border: 1px solid var(--border-color);
         }
-        .slot-region-select { margin: 16px 0 10px; }
-        .code-display {
-            background: #0a1c20;
-            padding: 12px;
-            border-radius: 30px;
-            text-align: center;
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 6px;
-            color: var(--teal);
-            border: 1px solid var(--border-light);
+        .slot-result.generated {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 30px rgba(0, 200, 83, 0.05);
         }
-        .link-like {
-            color: var(--teal);
-            text-decoration: underline;
-            cursor: pointer;
-            font-weight: 600;
+        .slot-region-select {
+            margin: 16px 0 10px;
         }
+
+        /* ===== ПАСПОРТ ===== */
         .passport-preview {
-            background: #102a30;
-            border-radius: 24px;
+            background: #050505;
+            border-radius: 20px;
             padding: 16px;
             white-space: pre-wrap;
-            font-family: monospace;
-            color: #b0e4ed;
-            border: 1px solid var(--border-light);
-            font-size: 14px;
-        }
-        hr {
-            border: none;
-            height: 1px;
-            background: var(--border-light);
-            margin: 14px 0;
-        }
-        @media (max-width: 400px) {
-            .app { padding: 16px 12px; }
-            .btn { font-size: 14px; padding: 12px 16px; }
-        }
-        .about-text {
-            font-size: 15px;
+            font-family: 'Courier New', monospace;
+            color: #cccccc;
+            border: 1px solid var(--border-color);
+            font-size: 13px;
             line-height: 1.6;
-            opacity: 0.9;
         }
-        .about-text strong { color: var(--teal); }
+
+        /* ===== ПРОЧЕЕ ===== */
         .flex-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .flex-buttons .btn {
             flex: 1;
-            min-width: 100px;
+            min-width: 80px;
         }
+
         .status-badge {
-            background: #1b4149;
-            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 5px 14px;
             border-radius: 40px;
-            font-size: 13px;
+            font-size: 12px;
             display: inline-block;
-            color: #9ad7e6;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            letter-spacing: 0.5px;
+        }
+
+        .divider {
+            border: none;
+            height: 1px;
+            background: var(--border-color);
+            margin: 10px 0;
+        }
+
+        .about-text {
+            font-size: 15px;
+            line-height: 1.7;
+            opacity: 0.85;
+        }
+        .about-text strong {
+            color: #ffffff;
+            opacity: 1;
+        }
+
+        .price-tag {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .price-tag .currency {
+            opacity: 0.4;
+            font-weight: 400;
+        }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 400px) {
+            .app {
+                padding: 16px 12px;
+            }
+            .btn {
+                font-size: 14px;
+                padding: 12px 16px;
+            }
+            .slot-result {
+                font-size: 26px;
+                padding: 16px 8px;
+                min-height: 60px;
+            }
+        }
+
+        /* ===== УВЕДОМЛЕНИЯ (TOAST) ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 14px 24px;
+            border-radius: 60px;
+            border: 1px solid var(--border-color);
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            max-width: 90%;
+            text-align: center;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast.success {
+            border-color: var(--accent-green);
+        }
+        .toast.error {
+            border-color: var(--accent-red);
         }
     </style>
 </head>
 <body>
+
+<!-- ===== TOAST УВЕДОМЛЕНИЕ ===== -->
+<div class="toast" id="toast"></div>
+
 <div class="app" id="app">
 
     <div class="project-title">KASKAD <span>RP</span></div>
     <div class="subhead">✦ car parking multiplayer ✦</div>
 
-    <!-- ================== СТРАНИЦА 1: О ПРОЕКТЕ + РЕГИСТРАЦИЯ ================== -->
+    <!-- ================== СТРАНИЦА 1: ГЛАВНАЯ ================== -->
     <div id="page-main" class="page active">
         <div class="card card-highlight">
             <div class="about-text">
-                <p><strong>Kaskad RP</strong> — это ролевой проект по игре <strong>Car Parking Multiplayer</strong>.</p>
-                <p style="margin-top: 10px;">🚗 Вход всем желающим! Для начала пройдите регистрацию по кнопке ниже.</p>
+                <p><strong>Kaskad RP</strong> — ролевой проект по игре <strong>Car Parking Multiplayer</strong>.</p>
+                <p style="margin-top: 10px;">🚗 Вход всем желающим! Пройдите регистрацию ниже.</p>
             </div>
         </div>
-        <button class="btn" id="btnToRegister">📝 Зарегистрироваться</button>
+        <button class="btn btn-primary" id="btnToRegister">📝 Зарегистрироваться</button>
         <button class="btn btn-secondary" id="btnToLogin">🔑 Вход по коду</button>
-        <div style="font-size: 13px; text-align: center; opacity: 0.5; margin-top: -6px;">Уже есть код? Войдите</div>
+        <div style="font-size: 12px; text-align: center; opacity: 0.3; margin-top: -4px;">Уже есть код? Войдите</div>
     </div>
 
-    <!-- ================== СТРАНИЦА 2: ФОРМА РЕГИСТРАЦИИ ================== -->
+    <!-- ================== СТРАНИЦА 2: РЕГИСТРАЦИЯ ================== -->
     <div id="page-register" class="page">
-        <h2 style="color: var(--teal);">📋 Регистрация</h2>
+        <h2 style="font-weight: 300; letter-spacing: 1px;">📋 Регистрация</h2>
         <div class="card">
             <div class="input-group">
                 <label>РП ФИО</label>
@@ -267,43 +408,43 @@
                 <input type="text" id="regOther" placeholder="Да / Нет / Название">
             </div>
         </div>
-        <button class="btn" id="btnRegisterSubmit">✅ Готово</button>
+        <button class="btn btn-success" id="btnRegisterSubmit">✅ Готово</button>
         <button class="btn btn-secondary btn-block" id="btnBackToMain">← Назад</button>
     </div>
 
     <!-- ================== СТРАНИЦА 3: ВХОД ПО КОДУ ================== -->
     <div id="page-login" class="page">
-        <h2 style="color: var(--teal);">🔐 Вход по коду</h2>
+        <h2 style="font-weight: 300; letter-spacing: 1px;">🔐 Вход по коду</h2>
         <div class="card">
             <div class="input-group">
                 <label>Введите код доступа</label>
                 <input type="text" id="loginCode" placeholder="Введите код">
             </div>
         </div>
-        <button class="btn" id="btnLoginSubmit">🚪 Войти</button>
+        <button class="btn btn-primary" id="btnLoginSubmit">🚪 Войти</button>
         <button class="btn btn-secondary btn-block" id="btnBackFromLogin">← Назад</button>
     </div>
 
-    <!-- ================== СТРАНИЦА 4: ОСНОВНОЙ САЙТ (после входа) ================== -->
+    <!-- ================== СТРАНИЦА 4: ОСНОВНАЯ ПАНЕЛЬ ================== -->
     <div id="page-site" class="page">
         <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2 style="color: var(--teal);">🏠 Панель</h2>
+            <h2 style="font-weight: 300; letter-spacing: 1px;">🏠 Панель</h2>
             <span class="status-badge" id="userStatus">online</span>
         </div>
         <div class="flex-buttons">
-            <button class="btn btn-dark" id="btnPassport">🪪 Паспорт</button>
-            <button class="btn btn-dark" id="btnGosNumber">🚘 Госномер</button>
+            <button class="btn btn-secondary" id="btnPassport">🪪 Паспорт</button>
+            <button class="btn btn-secondary" id="btnGosNumber">🚘 Госномер</button>
         </div>
-        <a href="https://t.me/+-FEx5i7S8lQ3Y2My" target="_blank" class="btn btn-secondary">📲 Перейти в проект</a>
-        <button class="btn btn-secondary btn-block" id="btnLogout" style="background: transparent; border-color: #6b8f96; color: #8bbbc4;">Выйти</button>
+        <a href="https://t.me/+-FEx5i7S8lQ3Y2My" target="_blank" class="btn btn-primary">📲 Перейти в проект</a>
+        <button class="btn btn-secondary btn-block" id="btnLogout" style="opacity:0.4;">Выйти</button>
     </div>
 
-    <!-- ================== СТРАНИЦА 5: ПОЛУЧЕНИЕ ПАСПОРТА ================== -->
+    <!-- ================== СТРАНИЦА 5: ПАСПОРТ ================== -->
     <div id="page-passport" class="page">
-        <h2 style="color: var(--teal);">🪪 Оформление паспорта</h2>
+        <h2 style="font-weight: 300; letter-spacing: 1px;">🪪 Оформление паспорта</h2>
         <div class="card">
             <div class="input-group">
-                <label>ФИО (из регистрации)</label>
+                <label>ФИО</label>
                 <input type="text" id="passFio" placeholder="Иван Петров">
             </div>
             <div class="input-group">
@@ -315,27 +456,27 @@
                 <input type="text" id="passCode" placeholder="KASKAD-XXXX">
             </div>
         </div>
-        <button class="btn" id="btnPassportSubmit">✅ Получить паспорт</button>
+        <button class="btn btn-success" id="btnPassportSubmit">✅ Получить паспорт</button>
         <button class="btn btn-secondary btn-block" id="btnBackToSite">← Назад</button>
     </div>
 
-    <!-- ================== СТРАНИЦА 6: ГОСНОМЕР (выбор типа) ================== -->
+    <!-- ================== СТРАНИЦА 6: ВЫБОР ТИПА ГОСНОМЕРА ================== -->
     <div id="page-gosnumber" class="page">
-        <h2 style="color: var(--teal);">🚘 Госномер</h2>
+        <h2 style="font-weight: 300; letter-spacing: 1px;">🚘 Госномер</h2>
         <div class="card">
-            <label style="display: block; margin-bottom: 12px;">Выберите тип:</label>
+            <label style="display: block; margin-bottom: 14px; opacity:0.5; font-size:13px; text-transform:uppercase; letter-spacing:1px;">Выберите тип:</label>
             <div class="flex-buttons">
-                <button class="btn btn-dark" id="gosTypeNormal">Обычный</button>
-                <button class="btn btn-dark" id="gosTypePremium">Премиум</button>
-                <button class="btn btn-dark" id="gosTypeCustom">Кастомный</button>
+                <button class="btn btn-secondary" id="gosTypeNormal">Обычный</button>
+                <button class="btn btn-secondary" id="gosTypePremium">Премиум</button>
+                <button class="btn btn-secondary" id="gosTypeCustom">Кастомный</button>
             </div>
         </div>
         <button class="btn btn-secondary btn-block" id="btnBackToSiteGos">← Назад</button>
     </div>
 
-    <!-- ================== СТРАНИЦА 7: ГЕНЕРАТОР НОМЕРА (казино-колесо) ================== -->
+    <!-- ================== СТРАНИЦА 7: ГЕНЕРАТОР ================== -->
     <div id="page-generator" class="page">
-        <h2 style="color: var(--teal);" id="genTitle">🎰 Генератор</h2>
+        <h2 style="font-weight: 300; letter-spacing: 1px;" id="genTitle">🎰 Генератор</h2>
         <div class="card slot-machine">
             <div class="slot-result" id="slotDisplay">???</div>
             <div class="slot-region-select">
@@ -344,19 +485,25 @@
                     <input type="text" id="regionInput" placeholder="116, 777, 01..." value="116">
                 </div>
             </div>
-            <button class="btn" id="btnGenerateSlot">🎲 Сгенерировать</button>
+            <button class="btn btn-primary" id="btnGenerateSlot">🎲 Сгенерировать</button>
         </div>
-        <div class="card" style="background: #102a30;">
-            <p><strong>Цена:</strong> <span id="priceDisplay">5 000</span> ₽</p>
-            <p><strong>Тип:</strong> <span id="typeDisplay">Обычный</span></p>
+        <div class="card" style="background: #050505;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="opacity:0.4; font-size:13px;">Цена</span>
+                <span class="price-tag"><span id="priceDisplay">5 000</span> <span class="currency">₽</span></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                <span style="opacity:0.4; font-size:13px;">Тип</span>
+                <span id="typeDisplay" style="font-weight:500;">Обычный</span>
+            </div>
         </div>
-        <button class="btn" id="btnBuyGosnumber">💳 Оплатить и отправить</button>
+        <button class="btn btn-success" id="btnBuyGosnumber">💳 Оплатить и отправить</button>
         <button class="btn btn-secondary btn-block" id="btnBackToGosType">← Назад к типам</button>
     </div>
 
-    <!-- ================== СТРАНИЦА 8: ГОТОВЫЙ ПАСПОРТ (JSON) ================== -->
+    <!-- ================== СТРАНИЦА 8: ГОТОВЫЙ ПАСПОРТ ================== -->
     <div id="page-passport-ready" class="page">
-        <h2 style="color: var(--teal);">✅ Паспорт получен</h2>
+        <h2 style="font-weight: 300; letter-spacing: 1px;">✅ Паспорт получен</h2>
         <div class="card passport-preview" id="passportJsonDisplay">{
             "фио": "Иван Петров",
             "возраст": 25,
@@ -372,7 +519,7 @@
         "use strict";
 
         // =================================================================
-        // === НАСТРОЙКИ (ваши данные) =====================================
+        // === НАСТРОЙКИ ===================================================
         const BOT_TOKEN = '8098284771:AAHHkybTZ6a_mMB8dF52EY9JlLIEiAqPXzI';
         const CHAT_ID = '-1003755482745';
         const TOPIC_REG = '14';
@@ -385,6 +532,7 @@
         let currentGeneratedNumber = '';
         let currentGeneratedType = 'Обычный';
         let currentPrice = 5000;
+        let isGenerated = false; // Флаг: сгенерирован ли номер
 
         const pages = {
             main: document.getElementById('page-main'),
@@ -405,7 +553,23 @@
 
         function getInputVal(id) { return document.getElementById(id).value.trim(); }
 
-        // ===== ОСНОВНАЯ ФУНКЦИЯ ОТПРАВКИ (РАБОТАЕТ ВСЕГДА) =====
+        // ===== TOAST УВЕДОМЛЕНИЯ =====
+        let toastTimeout;
+
+        function showToast(message, type = '') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            // Принудительный reflow для перезапуска анимации
+            void toast.offsetWidth;
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // ===== ОТПРАВКА В TELEGRAM =====
         function sendToTelegram(message, topicId) {
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
             const payload = {
@@ -414,39 +578,43 @@
                 parse_mode: 'HTML',
                 message_thread_id: parseInt(topicId, 10)
             };
-            
-            console.log('📤 Отправка в Telegram:', payload);
-            
             return axios.post(url, payload)
                 .then(response => {
-                    console.log('✅ Успешно отправлено!', response.data);
+                    console.log('✅ Отправлено:', response.data);
                     return response;
                 })
                 .catch(error => {
-                    console.error('❌ Ошибка при отправке:', error);
+                    console.error('❌ Ошибка:', error);
                     if (error.response) {
-                        console.error('Ответ от Telegram:', error.response.data);
-                        alert('Ошибка Telegram: ' + JSON.stringify(error.response.data));
+                        showToast('Ошибка Telegram: ' + (error.response.data.description || 'неизвестная'), 'error');
                     } else {
-                        alert('Ошибка соединения. Проверьте интернет.');
+                        showToast('Ошибка соединения', 'error');
                     }
                     throw error;
                 });
         }
 
-        // --- Переключение по кнопкам ---
+        // ===== НАВИГАЦИЯ =====
         document.getElementById('btnToRegister').addEventListener('click', () => showPage('register'));
         document.getElementById('btnToLogin').addEventListener('click', () => showPage('login'));
         document.getElementById('btnBackToMain').addEventListener('click', () => showPage('main'));
         document.getElementById('btnBackFromLogin').addEventListener('click', () => showPage('main'));
+        document.getElementById('btnBackToSite').addEventListener('click', () => showPage('site'));
+        document.getElementById('btnBackToSiteGos').addEventListener('click', () => showPage('site'));
+        document.getElementById('btnBackToSiteFromPass').addEventListener('click', () => showPage('site'));
+        document.getElementById('btnBackToGosType').addEventListener('click', () => {
+            showPage('gosnumber');
+            isGenerated = false;
+            document.getElementById('btnGenerateSlot').disabled = false;
+        });
 
-        // --- РЕГИСТРАЦИЯ ---
+        // ===== РЕГИСТРАЦИЯ =====
         document.getElementById('btnRegisterSubmit').addEventListener('click', function() {
             const fio = getInputVal('regFio');
             const age = getInputVal('regAge');
             const other = getInputVal('regOther');
             if (!fio || !age) {
-                alert('Заполните ФИО и возраст!');
+                showToast('Заполните ФИО и возраст!', 'error');
                 return;
             }
             activity.fio = fio;
@@ -460,44 +628,40 @@
                     showPage('main');
                     activity.authorized = true;
                     localStorage.setItem('activity_kaskad', JSON.stringify({ authorized: true, fio, age, other }));
-                    alert('✅ Регистрация завершена! Вы перенаправлены в проект.');
+                    showToast('✅ Регистрация завершена!', 'success');
                 })
                 .catch(() => {
-                    alert('⚠️ Регистрация не была отправлена в Telegram, но данные сохранены.');
+                    showToast('⚠️ Ошибка отправки, но данные сохранены', 'error');
                 });
         });
 
-        // --- ВХОД ПО КОДУ ---
+        // ===== ВХОД ПО КОДУ =====
         document.getElementById('btnLoginSubmit').addEventListener('click', function() {
             const code = getInputVal('loginCode');
             if (!code) {
-                alert('Введите код!');
+                showToast('Введите код!', 'error');
                 return;
             }
             if (code !== ADMIN_CODE) {
-                alert('❌ Неверный код доступа!');
+                showToast('❌ Неверный код доступа!', 'error');
                 return;
             }
             activity.authorized = true;
             localStorage.setItem('activity_kaskad', JSON.stringify({ authorized: true }));
             showPage('site');
-            document.getElementById('userStatus').textContent = '✅ ' + code;
+            document.getElementById('userStatus').textContent = '✅ активен';
+            showToast('✅ Добро пожаловать!', 'success');
         });
 
-        // --- ВЫХОД ---
+        // ===== ВЫХОД =====
         document.getElementById('btnLogout').addEventListener('click', function() {
             activity.authorized = false;
             localStorage.removeItem('activity_kaskad');
             showPage('main');
+            showToast('👋 Вы вышли', '');
         });
 
-        // --- НАЗАД НА ГЛАВНУЮ С САЙТА ---
-        document.getElementById('btnBackToSite').addEventListener('click', () => showPage('site'));
-        document.getElementById('btnBackToSiteGos').addEventListener('click', () => showPage('site'));
-        document.getElementById('btnBackToSiteFromPass').addEventListener('click', () => showPage('site'));
-        document.getElementById('btnBackToGosType').addEventListener('click', () => showPage('gosnumber'));
-
-        // --- ПАСПОРТ ---
+        // ===== ПАСПОРТ =====
         document.getElementById('btnPassport').addEventListener('click', function() {
             if (activity.passport) {
                 document.getElementById('passportJsonDisplay').textContent = JSON.stringify(activity.passport, null, 2);
@@ -514,7 +678,7 @@
             const age = getInputVal('passAge');
             const code = getInputVal('passCode');
             if (!fio || !age || !code) {
-                alert('Заполните все поля!');
+                showToast('Заполните все поля!', 'error');
                 return;
             }
             const passportData = { фио: fio, возраст: parseInt(age, 10), код: code };
@@ -526,12 +690,13 @@
 
             document.getElementById('passportJsonDisplay').textContent = JSON.stringify(passportData, null, 2);
             showPage('passportReady');
+            showToast('✅ Паспорт получен!', 'success');
         });
 
-        // --- ГОСНОМЕР ---
+        // ===== ВЫБОР ТИПА ГОСНОМЕРА =====
         document.getElementById('btnGosNumber').addEventListener('click', function() {
             if (!activity.passport) {
-                alert('Сначала получите паспорт!');
+                showToast('Сначала получите паспорт!', 'error');
                 return;
             }
             showPage('gosnumber');
@@ -539,48 +704,52 @@
 
         let selectedGosType = 'Обычный';
 
-        document.getElementById('gosTypeNormal').addEventListener('click', function() {
-            selectedGosType = 'Обычный';
-            currentPrice = 5000;
-            document.getElementById('genTitle').textContent = '🎰 Обычный номер';
-            document.getElementById('priceDisplay').textContent = '5 000';
-            document.getElementById('typeDisplay').textContent = 'Обычный';
-            showPage('generator');
+        function setupGenerator(type, price, title, displayType) {
+            selectedGosType = type;
+            currentPrice = price;
+            isGenerated = false;
+            document.getElementById('btnGenerateSlot').disabled = false;
+            document.getElementById('genTitle').textContent = title;
+            document.getElementById('priceDisplay').textContent = price.toLocaleString();
+            document.getElementById('typeDisplay').textContent = displayType;
             document.getElementById('slotDisplay').textContent = '???';
+            document.getElementById('slotDisplay').className = 'slot-result';
             currentGeneratedNumber = '';
+            showPage('generator');
+        }
+
+        document.getElementById('gosTypeNormal').addEventListener('click', function() {
+            setupGenerator('Обычный', 5000, '🎰 Обычный номер', 'Обычный');
         });
         document.getElementById('gosTypePremium').addEventListener('click', function() {
-            selectedGosType = 'Премиум';
-            currentPrice = 100000;
-            document.getElementById('genTitle').textContent = '✨ Премиум номер';
-            document.getElementById('priceDisplay').textContent = '100 000';
-            document.getElementById('typeDisplay').textContent = 'Премиум';
-            showPage('generator');
-            document.getElementById('slotDisplay').textContent = '???';
-            currentGeneratedNumber = '';
+            setupGenerator('Премиум', 100000, '✨ Премиум номер', 'Премиум');
         });
         document.getElementById('gosTypeCustom').addEventListener('click', function() {
-            selectedGosType = 'Кастомный';
-            currentPrice = 1000000;
-            document.getElementById('genTitle').textContent = '🎨 Кастомный номер';
-            document.getElementById('priceDisplay').textContent = '1 000 000';
-            document.getElementById('typeDisplay').textContent = 'Кастомный (введите вручную)';
-            showPage('generator');
-            document.getElementById('slotDisplay').textContent = 'ВВЕДИТЕ ТЕКСТ';
-            currentGeneratedNumber = '';
+            setupGenerator('Кастомный', 1000000, '🎨 Кастомный номер', 'Кастомный (введите вручную)');
         });
 
-        // --- ГЕНЕРАТОР ---
+        // ===== ГЕНЕРАТОР =====
         document.getElementById('btnGenerateSlot').addEventListener('click', function() {
+            // Если уже сгенерировано — блокируем
+            if (isGenerated) {
+                showToast('⛔ Номер уже сгенерирован. Оплатите или выберите другой тип.', 'error');
+                return;
+            }
+
             const region = getInputVal('regionInput') || '116';
+            const slotDisplay = document.getElementById('slotDisplay');
 
             if (selectedGosType === 'Кастомный') {
                 const custom = prompt('Введите желаемый госномер (буквы и цифры):', 'A001AA');
                 if (custom && custom.length > 1) {
                     currentGeneratedNumber = custom + ' | ' + region;
-                    document.getElementById('slotDisplay').textContent = custom + ' ' + region;
+                    slotDisplay.textContent = custom + ' ' + region;
+                    slotDisplay.className = 'slot-result generated';
+                    isGenerated = true;
+                    document.getElementById('btnGenerateSlot').disabled = true;
+                    showToast('✅ Номер сгенерирован!', 'success');
                 } else {
-                    alert('Введите корректный номер');
+                    showToast('Введите корректный номер', 'error');
                 }
                 return;
             }
@@ -623,30 +792,46 @@
                     }
                 }
             }
+
             currentGeneratedNumber = result + ' | ' + region;
-            document.getElementById('slotDisplay').textContent = result + ' ' + region;
+            slotDisplay.textContent = result + ' ' + region;
+            slotDisplay.className = 'slot-result generated';
+            isGenerated = true;
+            document.getElementById('btnGenerateSlot').disabled = true;
+            showToast('✅ Номер сгенерирован!', 'success');
         });
 
-        // --- КУПИТЬ И ОТПРАВИТЬ ГОСНОМЕР ---
+        // ===== ОПЛАТА И ОТПРАВКА =====
         document.getElementById('btnBuyGosnumber').addEventListener('click', function() {
             if (!currentGeneratedNumber) {
-                alert('Сначала сгенерируйте номер!');
+                showToast('Сначала сгенерируйте номер!', 'error');
                 return;
             }
             if (!activity.passport) {
-                alert('Паспорт не найден! Получите паспорт.');
+                showToast('Паспорт не найден! Получите паспорт.', 'error');
                 return;
             }
+
             const fio = activity.passport.фио || activity.fio || 'Неизвестно';
-            const msg = `🚘 <b>НОВЫЙ ГОСНОМЕР</b>\n\n🔢 Номер: ${currentGeneratedNumber}\n👤 Пользователь: ${fio}\n💰 К оплате: ${currentPrice} ₽\n🏷 Тип: ${selectedGosType}`;
+            const msg = `🚘 <b>НОВЫЙ ГОСНОМЕР</b>\n\n🔢 Номер: ${currentGeneratedNumber}\n👤 Пользователь: ${fio}\n💰 К оплате: ${currentPrice.toLocaleString()} ₽\n🏷 Тип: ${selectedGosType}`;
+
             sendToTelegram(msg, TOPIC_GOSNUMBER)
                 .then(() => {
-                    alert('✅ Госномер отправлен в ветку!');
+                    showToast('✅ Госномер отправлен в ветку!', 'success');
+                    // Сбрасываем генератор
+                    isGenerated = false;
+                    document.getElementById('btnGenerateSlot').disabled = false;
+                    document.getElementById('slotDisplay').textContent = '???';
+                    document.getElementById('slotDisplay').className = 'slot-result';
+                    currentGeneratedNumber = '';
                     showPage('site');
+                })
+                .catch(() => {
+                    showToast('❌ Ошибка отправки', 'error');
                 });
         });
 
-        // --- Восстановление состояния ---
+        // ===== ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ =====
         function loadState() {
             const saved = localStorage.getItem('activity_kaskad');
             if (saved) {
@@ -660,13 +845,13 @@
                         showPage('site');
                         document.getElementById('userStatus').textContent = '✅ активен';
                     }
-                } catch (e) {}
+                } catch (e) { /* ignore */ }
             }
             const passportSaved = localStorage.getItem('passport_kaskad');
             if (passportSaved) {
                 try {
                     activity.passport = JSON.parse(passportSaved);
-                } catch (e) {}
+                } catch (e) { /* ignore */ }
             }
         }
         loadState();
@@ -675,11 +860,7 @@
             showPage('site');
         }
 
-        console.log('✅ Kaskad RP App загружена!');
-        console.log('📌 Токен установлен:', BOT_TOKEN ? 'да' : 'нет');
-        console.log('📌 Chat ID:', CHAT_ID);
-        console.log('📌 Ветки:', { reg: TOPIC_REG, passport: TOPIC_PASSPORT, gos: TOPIC_GOSNUMBER });
-        console.log('📌 Код для входа:', ADMIN_CODE);
+        console.log('✅ Kaskad RP (черно-белая тема) загружена!');
     })();
 </script>
 </body>
