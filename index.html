@@ -602,7 +602,7 @@
             age: '',
             other: '',
             passport: null,
-            job: null // { level: '1 уровень', name: 'Продавец', salary: '60.000₽' }
+            job: null
         };
 
         // ===== ДАННЫЕ ДЛЯ ГЕНЕРАТОРА =====
@@ -613,9 +613,8 @@
 
         // ===== ДАННЫЕ ДЛЯ РАБОТЫ =====
         let selectedJobLevel = '';
-        let selectedJobName = '';
 
-        // ===== ВСЕ РАБОТЫ ПО УРОВНЯМ =====
+        // ===== ВСЕ РАБОТЫ ПО УРОВНЯМ (чистые названия, без (0/1) и т.п.) =====
         const jobsData = {
             '1 уровень': [
                 { emoji: '🍟', name: 'Продавец в Макдональдсе/магазине', salary: '60.000₽' },
@@ -660,7 +659,7 @@
                 { emoji: '💰', name: 'Инкассатор', salary: '190.000₽' },
                 { emoji: '🃏', name: 'Крупье', salary: '0.5% от ставки' },
                 { emoji: '🪨', name: 'Бурильщик', salary: '200.000₽' },
-                { emoji: '🪨', name: 'Главный механик шахты', salary: '230.000₽ (1 место)' },
+                { emoji: '🪨', name: 'Главный механик шахты', salary: '230.000₽' },
                 { emoji: '👮', name: 'СОБР', salary: 'от 120.000₽ до 500.000₽' },
                 { emoji: '👮', name: 'ОМОН', salary: 'от 105.000₽ до 460.000₽' },
                 { emoji: '🖥', name: 'ИТ-специалист', salary: '200.000₽' },
@@ -1088,7 +1087,6 @@
                     <span class="job-salary">${job.salary}</span>
                 `;
                 div.addEventListener('click', function() {
-                    // Проверяем, не устроен ли уже на эту работу
                     if (activity.job && activity.job.name === job.name && activity.job.level === level) {
                         showToast('⚠️ Вы уже устроены на эту работу!', 'error');
                         return;
@@ -1164,7 +1162,6 @@
 
         // ===== ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ =====
         function loadState() {
-            // Восстановление авторизации
             const saved = localStorage.getItem('activity_kaskad');
             if (saved) {
                 try {
@@ -1180,7 +1177,6 @@
                 } catch (e) { /* ignore */ }
             }
 
-            // Восстановление паспорта
             const passportSaved = localStorage.getItem('passport_kaskad');
             if (passportSaved) {
                 try {
@@ -1188,7 +1184,6 @@
                 } catch (e) { /* ignore */ }
             }
 
-            // Восстановление работы
             const jobSaved = localStorage.getItem('activity_kaskad_job');
             if (jobSaved) {
                 try {
@@ -1205,10 +1200,8 @@
             showPage('site');
         }
 
-        console.log('✅ Kaskad RP (с работами) загружена!');
-        console.log('📊 Всего уровней:', Object.keys(jobsData).length);
-        console.log('📊 Всего работ:', Object.values(jobsData).reduce((acc, arr) => acc + arr.length, 0));
+        console.log('✅ Kaskad RP (чистые названия работ) загружена!');
     })();
 </script>
 </body>
-    </html>
+</html>
