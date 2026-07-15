@@ -441,12 +441,8 @@
 
         function getInputVal(id) { return document.getElementById(id).value.trim(); }
 
+        // ===== ИСПРАВЛЕННАЯ ФУНКЦИЯ ОТПРАВКИ (БЕЗ ПРОВЕРОК) =====
         function sendToTelegram(message, topicId) {
-            if (!BOT_TOKEN || BOT_TOKEN === '8098284771:AAHHkybTZ6a_mMB8dF52EY9JlLIEiAqPXzI') {
-                console.warn('⚠️ Токен бота не настроен! Сообщение:', message);
-                alert('⚠️ Бот не настроен. Сообщение отправлено в консоль.\n' + message);
-                return Promise.resolve();
-            }
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
             const payload = {
                 chat_id: CHAT_ID,
@@ -454,10 +450,21 @@
                 parse_mode: 'HTML',
                 message_thread_id: parseInt(topicId, 10)
             };
-            return axios.post(url, payload).catch(err => {
-                console.error('Ошибка отправки в ТГ:', err);
-                alert('❌ Не удалось отправить в Telegram. Проверьте токен/ID.');
-            });
+            return axios.post(url, payload)
+                .then(response => {
+                    console.log('✅ Сообщение отправлено:', response.data);
+                    return response;
+                })
+                .catch(err => {
+                    console.error('❌ Ошибка отправки:', err);
+                    if (err.response) {
+                        console.error('Ответ Telegram:', err.response.data);
+                        alert('❌ Ошибка Telegram: ' + JSON.stringify(err.response.data));
+                    } else {
+                        alert('❌ Не удалось отправить сообщение. Проверьте интернет и настройки.');
+                    }
+                    throw err;
+                });
         }
 
         // --- Переключение по кнопкам ---
@@ -480,13 +487,17 @@
             activity.other = other || 'Не указано';
 
             const message = `📝 <b>Новая регистрация</b>\n\n👤 ФИО: ${fio}\n📅 Возраст: ${age}\n📌 Другие РП: ${other || 'Не указано'}`;
-            sendToTelegram(message, TOPIC_REG).then(() => {
-                window.open('https://t.me/+-FEx5i7S8lQ3Y2My', '_blank');
-                showPage('main');
-                activity.authorized = true;
-                localStorage.setItem('activity_kaskad', JSON.stringify({ authorized: true, fio, age, other }));
-                alert('✅ Регистрация завершена! Вы перенаправлены в проект.');
-            });
+            sendToTelegram(message, TOPIC_REG)
+                .then(() => {
+                    window.open('https://t.me/+-FEx5i7S8lQ3Y2My', '_blank');
+                    showPage('main');
+                    activity.authorized = true;
+                    localStorage.setItem('activity_kaskad', JSON.stringify({ authorized: true, fio, age, other }));
+                    alert('✅ Регистрация завершена! Вы перенаправлены в проект.');
+                })
+                .catch(() => {
+                    alert('⚠️ Регистрация не была отправлена в Telegram, но данные сохранены.');
+                });
         });
 
         // --- ВХОД ПО КОДУ (проверка на ADMIN_CODE) ---
@@ -661,10 +672,11 @@
             }
             const fio = activity.passport.фио || activity.fio || 'Неизвестно';
             const msg = `🚘 <b>НОВЫЙ ГОСНОМЕР</b>\n\n🔢 Номер: ${currentGeneratedNumber}\n👤 Пользователь: ${fio}\n💰 К оплате: ${currentPrice} ₽\n🏷 Тип: ${selectedGosType}`;
-            sendToTelegram(msg, TOPIC_GOSNUMBER).then(() => {
-                alert('✅ Госномер отправлен в ветку!');
-                showPage('site');
-            });
+            sendToTelegram(msg, TOPIC_GOSNUMBER)
+                .then(() => {
+                    alert('✅ Госномер отправлен в ветку!');
+                    showPage('site');
+                });
         });
 
         // --- Восстановление состояния ---
@@ -696,7 +708,10 @@
             showPage('site');
         }
 
-        console.log('✅ Kaskad RP App загружен с вашими настройками!');
+        console.log('✅ Kaskad RP App загружена!');
+        console.log('📌 Токен:', BOT_TOKEN ? 'установлен' : 'не установлен');
+        console.log('📌 Chat ID:', CHAT_ID);
+        console.log('📌 Ветки:', { reg: TOPIC_REG, passport: TOPIC_PASSPORT, gos: TOPIC_GOSNUMBER });
     })();
 </script>
 </body>
