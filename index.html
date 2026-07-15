@@ -6,7 +6,6 @@
     <title>Kaskad RP</title>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <style>
-        /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
         * {
             margin: 0;
             padding: 0;
@@ -31,34 +30,22 @@
             padding: 24px 18px 32px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.2s;
         }
 
-        /* ===== ЦВЕТА ===== */
         :root {
             --bg-primary: #000000;
             --bg-card: #111111;
-            --bg-card-hover: #1a1a1a;
             --text-primary: #ffffff;
             --text-secondary: #aaaaaa;
             --border-color: rgba(255, 255, 255, 0.12);
             --border-active: rgba(255, 255, 255, 0.3);
             --accent-green: #00c853;
             --accent-red: #ff1744;
-            --accent-green-dim: rgba(0, 200, 83, 0.15);
-            --accent-red-dim: rgba(255, 23, 68, 0.15);
         }
 
-        /* ===== ТЕКСТ ===== */
-        h1, h2, h3, p, label, span, div {
-            color: var(--text-primary);
-        }
+        h1, h2, h3, p, label, span, div { color: var(--text-primary); }
+        .text-secondary { color: var(--text-secondary); }
 
-        .text-secondary {
-            color: var(--text-secondary);
-        }
-
-        /* ===== ЗАГОЛОВКИ ===== */
         .project-title {
             font-size: 28px;
             font-weight: 700;
@@ -68,7 +55,6 @@
             margin-bottom: 4px;
         }
         .project-title span {
-            color: #ffffff;
             font-weight: 300;
             opacity: 0.7;
         }
@@ -83,23 +69,19 @@
             text-transform: uppercase;
         }
 
-        /* ===== СТРАНИЦЫ ===== */
         .page {
             display: none;
             flex-direction: column;
             gap: 18px;
             animation: fadeSlide 0.25s ease;
         }
-        .page.active {
-            display: flex;
-        }
+        .page.active { display: flex; }
 
         @keyframes fadeSlide {
             0% { opacity: 0.3; transform: translateY(10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== КАРТОЧКИ ===== */
         .card {
             background: var(--bg-card);
             border-radius: 24px;
@@ -108,16 +90,12 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             transition: border-color 0.2s;
         }
-        .card:hover {
-            border-color: var(--border-active);
-        }
-
+        .card:hover { border-color: var(--border-active); }
         .card-highlight {
             border-left: 3px solid var(--accent-green);
             background: rgba(0, 200, 83, 0.04);
         }
 
-        /* ===== КНОПКИ ===== */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -134,11 +112,12 @@
             width: 100%;
             text-decoration: none;
             letter-spacing: 0.3px;
-            position: relative;
-            overflow: hidden;
         }
-        .btn:active {
-            transform: scale(0.97);
+        .btn:active { transform: scale(0.97); }
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
         }
 
         .btn-primary {
@@ -147,18 +126,13 @@
             border-color: #ffffff;
             font-weight: 700;
         }
-        .btn-primary:active {
-            background: #e0e0e0;
-            border-color: #e0e0e0;
-        }
+        .btn-primary:active { background: #e0e0e0; }
 
         .btn-secondary {
             border-color: var(--border-color);
             background: transparent;
         }
-        .btn-secondary:active {
-            background: rgba(255, 255, 255, 0.05);
-        }
+        .btn-secondary:active { background: rgba(255, 255, 255, 0.05); }
 
         .btn-success {
             background: var(--accent-green);
@@ -166,10 +140,7 @@
             border-color: var(--accent-green);
             font-weight: 700;
         }
-        .btn-success:active {
-            background: #00b84a;
-            border-color: #00b84a;
-        }
+        .btn-success:active { background: #00b84a; }
 
         .btn-danger {
             background: var(--accent-red);
@@ -177,22 +148,10 @@
             border-color: var(--accent-red);
             font-weight: 700;
         }
-        .btn-danger:active {
-            background: #e0133d;
-            border-color: #e0133d;
-        }
+        .btn-danger:active { background: #e0133d; }
 
-        .btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            transform: none !important;
-        }
+        .btn-block { margin-top: 4px; }
 
-        .btn-block {
-            margin-top: 4px;
-        }
-
-        /* ===== ПОЛЯ ВВОДА ===== */
         .input-group {
             display: flex;
             flex-direction: column;
@@ -207,8 +166,7 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
-        .input-group input,
-        .input-group select {
+        .input-group input {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-color);
             border-radius: 40px;
@@ -226,7 +184,6 @@
             color: rgba(255, 255, 255, 0.2);
         }
 
-        /* ===== СЛОТ-МАШИНА (ГЕНЕРАТОР) ===== */
         .slot-machine {
             background: #0a0a0a;
             border-radius: 40px;
@@ -253,11 +210,8 @@
             border-color: var(--accent-green);
             box-shadow: 0 0 30px rgba(0, 200, 83, 0.05);
         }
-        .slot-region-select {
-            margin: 16px 0 10px;
-        }
+        .slot-region-select { margin: 16px 0 10px; }
 
-        /* ===== ПАСПОРТ ===== */
         .passport-preview {
             background: #050505;
             border-radius: 20px;
@@ -270,7 +224,6 @@
             line-height: 1.6;
         }
 
-        /* ===== ПРОЧЕЕ ===== */
         .flex-buttons {
             display: flex;
             gap: 10px;
@@ -290,13 +243,6 @@
             color: var(--text-secondary);
             border: 1px solid var(--border-color);
             letter-spacing: 0.5px;
-        }
-
-        .divider {
-            border: none;
-            height: 1px;
-            background: var(--border-color);
-            margin: 10px 0;
         }
 
         .about-text {
@@ -319,23 +265,57 @@
             font-weight: 400;
         }
 
-        /* ===== АДАПТИВ ===== */
-        @media (max-width: 400px) {
-            .app {
-                padding: 16px 12px;
-            }
-            .btn {
-                font-size: 14px;
-                padding: 12px 16px;
-            }
-            .slot-result {
-                font-size: 26px;
-                padding: 16px 8px;
-                min-height: 60px;
-            }
+        .job-item {
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .job-item:active {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(0.98);
+        }
+        .job-item .job-name {
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .job-item .job-salary {
+            opacity: 0.5;
+            font-size: 13px;
+        }
+        .job-item .job-emoji {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .job-item .job-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+        .job-item .job-badge {
+            font-size: 11px;
+            opacity: 0.3;
+            background: rgba(255,255,255,0.05);
+            padding: 2px 10px;
+            border-radius: 40px;
         }
 
-        /* ===== УВЕДОМЛЕНИЯ (TOAST) ===== */
+        .job-level-title {
+            font-size: 16px;
+            font-weight: 600;
+            padding: 8px 0 4px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
         .toast {
             position: fixed;
             bottom: 30px;
@@ -360,17 +340,33 @@
             opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
-        .toast.success {
-            border-color: var(--accent-green);
+        .toast.success { border-color: var(--accent-green); }
+        .toast.error { border-color: var(--accent-red); }
+
+        .confirm-box {
+            background: rgba(255, 23, 68, 0.06);
+            border: 1px solid var(--accent-red);
+            border-radius: 20px;
+            padding: 16px;
+            text-align: center;
         }
-        .toast.error {
-            border-color: var(--accent-red);
+        .confirm-box p {
+            opacity: 0.7;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 400px) {
+            .app { padding: 16px 12px; }
+            .btn { font-size: 14px; padding: 12px 16px; }
+            .slot-result { font-size: 26px; padding: 16px 8px; min-height: 60px; }
+            .job-item { padding: 10px 14px; }
+            .job-item .job-name { font-size: 13px; }
         }
     </style>
 </head>
 <body>
 
-<!-- ===== TOAST УВЕДОМЛЕНИЕ ===== -->
 <div class="toast" id="toast"></div>
 
 <div class="app" id="app">
@@ -378,7 +374,7 @@
     <div class="project-title">KASKAD <span>RP</span></div>
     <div class="subhead">✦ car parking multiplayer ✦</div>
 
-    <!-- ================== СТРАНИЦА 1: ГЛАВНАЯ ================== -->
+    <!-- ===== СТРАНИЦА 1: ГЛАВНАЯ ===== -->
     <div id="page-main" class="page active">
         <div class="card card-highlight">
             <div class="about-text">
@@ -391,7 +387,7 @@
         <div style="font-size: 12px; text-align: center; opacity: 0.3; margin-top: -4px;">Уже есть код? Войдите</div>
     </div>
 
-    <!-- ================== СТРАНИЦА 2: РЕГИСТРАЦИЯ ================== -->
+    <!-- ===== СТРАНИЦА 2: РЕГИСТРАЦИЯ ===== -->
     <div id="page-register" class="page">
         <h2 style="font-weight: 300; letter-spacing: 1px;">📋 Регистрация</h2>
         <div class="card">
@@ -412,7 +408,7 @@
         <button class="btn btn-secondary btn-block" id="btnBackToMain">← Назад</button>
     </div>
 
-    <!-- ================== СТРАНИЦА 3: ВХОД ПО КОДУ ================== -->
+    <!-- ===== СТРАНИЦА 3: ВХОД ПО КОДУ ===== -->
     <div id="page-login" class="page">
         <h2 style="font-weight: 300; letter-spacing: 1px;">🔐 Вход по коду</h2>
         <div class="card">
@@ -425,7 +421,7 @@
         <button class="btn btn-secondary btn-block" id="btnBackFromLogin">← Назад</button>
     </div>
 
-    <!-- ================== СТРАНИЦА 4: ОСНОВНАЯ ПАНЕЛЬ ================== -->
+    <!-- ===== СТРАНИЦА 4: ОСНОВНАЯ ПАНЕЛЬ ===== -->
     <div id="page-site" class="page">
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h2 style="font-weight: 300; letter-spacing: 1px;">🏠 Панель</h2>
@@ -434,12 +430,13 @@
         <div class="flex-buttons">
             <button class="btn btn-secondary" id="btnPassport">🪪 Паспорт</button>
             <button class="btn btn-secondary" id="btnGosNumber">🚘 Госномер</button>
+            <button class="btn btn-secondary" id="btnJob">💼 Работа</button>
         </div>
         <a href="https://t.me/+-FEx5i7S8lQ3Y2My" target="_blank" class="btn btn-primary">📲 Перейти в проект</a>
         <button class="btn btn-secondary btn-block" id="btnLogout" style="opacity:0.4;">Выйти</button>
     </div>
 
-    <!-- ================== СТРАНИЦА 5: ПАСПОРТ ================== -->
+    <!-- ===== СТРАНИЦА 5: ПАСПОРТ ===== -->
     <div id="page-passport" class="page">
         <h2 style="font-weight: 300; letter-spacing: 1px;">🪪 Оформление паспорта</h2>
         <div class="card">
@@ -460,7 +457,28 @@
         <button class="btn btn-secondary btn-block" id="btnBackToSite">← Назад</button>
     </div>
 
-    <!-- ================== СТРАНИЦА 6: ВЫБОР ТИПА ГОСНОМЕРА ================== -->
+    <!-- ===== СТРАНИЦА 5.1: РЕДАКТОР ПАСПОРТА ===== -->
+    <div id="page-passport-edit" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">✏️ Редактировать паспорт</h2>
+        <div class="card">
+            <div class="input-group">
+                <label>ФИО</label>
+                <input type="text" id="editPassFio" placeholder="Иван Петров">
+            </div>
+            <div class="input-group">
+                <label>Возраст</label>
+                <input type="number" id="editPassAge" placeholder="25">
+            </div>
+            <div class="input-group">
+                <label>Уникальный код</label>
+                <input type="text" id="editPassCode" placeholder="KASKAD-XXXX">
+            </div>
+        </div>
+        <button class="btn btn-success" id="btnPassportEditSave">💾 Сохранить изменения</button>
+        <button class="btn btn-secondary btn-block" id="btnBackToPassport">← Назад к паспорту</button>
+    </div>
+
+    <!-- ===== СТРАНИЦА 6: ВЫБОР ТИПА ГОСНОМЕРА ===== -->
     <div id="page-gosnumber" class="page">
         <h2 style="font-weight: 300; letter-spacing: 1px;">🚘 Госномер</h2>
         <div class="card">
@@ -474,7 +492,7 @@
         <button class="btn btn-secondary btn-block" id="btnBackToSiteGos">← Назад</button>
     </div>
 
-    <!-- ================== СТРАНИЦА 7: ГЕНЕРАТОР ================== -->
+    <!-- ===== СТРАНИЦА 7: ГЕНЕРАТОР ===== -->
     <div id="page-generator" class="page">
         <h2 style="font-weight: 300; letter-spacing: 1px;" id="genTitle">🎰 Генератор</h2>
         <div class="card slot-machine">
@@ -501,15 +519,63 @@
         <button class="btn btn-secondary btn-block" id="btnBackToGosType">← Назад к типам</button>
     </div>
 
-    <!-- ================== СТРАНИЦА 8: ГОТОВЫЙ ПАСПОРТ ================== -->
+    <!-- ===== СТРАНИЦА 8: ГОТОВЫЙ ПАСПОРТ ===== -->
     <div id="page-passport-ready" class="page">
-        <h2 style="font-weight: 300; letter-spacing: 1px;">✅ Паспорт получен</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 style="font-weight: 300; letter-spacing: 1px;">✅ Паспорт</h2>
+            <button class="btn btn-secondary" id="btnEditPassport" style="width: auto; padding: 8px 18px; font-size: 13px;">✏️ Редактировать</button>
+        </div>
         <div class="card passport-preview" id="passportJsonDisplay">{
             "фио": "Иван Петров",
             "возраст": 25,
             "код": "KASKAD-XXXX"
         }</div>
         <button class="btn btn-secondary btn-block" id="btnBackToSiteFromPass">← На главную</button>
+    </div>
+
+    <!-- ===== СТРАНИЦА 9: РАБОТА ===== -->
+    <div id="page-job" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">💼 Работа</h2>
+        <div class="card" style="text-align: center; opacity:0.6; font-size:14px;" id="jobStatusDisplay">
+            Текущая работа: <strong style="color:#fff;">не выбрана</strong>
+        </div>
+        <div class="flex-buttons">
+            <button class="btn btn-primary" id="btnJobHire">📋 Устроиться</button>
+            <button class="btn btn-danger" id="btnJobFire">🚫 Уволиться</button>
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToSiteJob">← Назад</button>
+    </div>
+
+    <!-- ===== СТРАНИЦА 9.1: УСТРОИТЬСЯ (УРОВНИ) ===== -->
+    <div id="page-job-hire" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">📋 Выберите уровень</h2>
+        <div class="card" id="jobLevelsContainer">
+            <!-- Уровни вставляются скриптом -->
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToJob">← Назад</button>
+    </div>
+
+    <!-- ===== СТРАНИЦА 9.2: УСТРОИТЬСЯ (РАБОТЫ) ===== -->
+    <div id="page-job-hire-sub" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;" id="jobSubTitle">Выберите работу</h2>
+        <div class="card" id="jobSubContainer">
+            <!-- Работы вставляются скриптом -->
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToHire">← Назад к уровням</button>
+    </div>
+
+    <!-- ===== СТРАНИЦА 9.3: УВОЛИТЬСЯ ===== -->
+    <div id="page-job-fire" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">🚫 Увольнение</h2>
+        <div class="card confirm-box">
+            <p>⚠️ Вы уверены, что хотите уволиться?</p>
+            <p style="font-size: 13px; opacity: 0.5;" id="fireJobDisplay">Работа: не выбрана</p>
+        </div>
+        <div class="flex-buttons">
+            <button class="btn btn-danger" id="btnFireConfirm">✅ Да, уволить</button>
+            <button class="btn btn-secondary" id="btnFireCancel">❌ Отмена</button>
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToJobFire">← Назад</button>
     </div>
 
 </div>
@@ -525,26 +591,111 @@
         const TOPIC_REG = '14';
         const TOPIC_PASSPORT = '389';
         const TOPIC_GOSNUMBER = '399';
+        const TOPIC_JOB = '441';
         const ADMIN_CODE = 'kaskadRP109287codeA';
         // =================================================================
 
-        let activity = { authorized: false, fio: '', age: '', other: '', passport: null };
+        // ===== ДАННЫЕ ПОЛЬЗОВАТЕЛЯ =====
+        let activity = {
+            authorized: false,
+            fio: '',
+            age: '',
+            other: '',
+            passport: null,
+            job: null // { level: '1 уровень', name: 'Продавец', salary: '60.000₽' }
+        };
+
+        // ===== ДАННЫЕ ДЛЯ ГЕНЕРАТОРА =====
         let currentGeneratedNumber = '';
         let currentGeneratedType = 'Обычный';
         let currentPrice = 5000;
-        let isGenerated = false; // Флаг: сгенерирован ли номер
+        let isGenerated = false;
 
+        // ===== ДАННЫЕ ДЛЯ РАБОТЫ =====
+        let selectedJobLevel = '';
+        let selectedJobName = '';
+
+        // ===== ВСЕ РАБОТЫ ПО УРОВНЯМ =====
+        const jobsData = {
+            '1 уровень': [
+                { emoji: '🍟', name: 'Продавец в Макдональдсе/магазине', salary: '60.000₽' },
+                { emoji: '🚗', name: 'Заправщик', salary: '45.000₽' },
+                { emoji: '🧹', name: 'Уборщик', salary: '35.000₽' },
+                { emoji: '🛠', name: 'Механик', salary: '65.000₽' },
+                { emoji: '🚘', name: 'Парковщик', salary: '60.000₽' },
+                { emoji: '💧', name: 'Мойщик', salary: '65.000₽' },
+                { emoji: '🪨', name: 'Охраник шахты', salary: '60.000₽' },
+                { emoji: '👮‍♂', name: 'МВД', salary: 'от 60.000₽ до 340.000₽' },
+                { emoji: '🪖', name: 'Мин.Обороны', salary: 'от 50.000₽ до 250.000₽' },
+                { emoji: '👨‍🚒', name: 'МЧС', salary: 'от 55.000₽ до 270.000₽' }
+            ],
+            '2 уровень': [
+                { emoji: '☕️', name: 'Кассир в Старбакс', salary: '75.000₽' },
+                { emoji: '👮‍♂', name: 'Охранник банка', salary: '90.000₽' },
+                { emoji: '🚌', name: 'Водитель автобуса', salary: '80.000₽' },
+                { emoji: '🚗', name: 'Доставщик', salary: '80.000₽' },
+                { emoji: '🚕', name: 'Таксист (Эконом)', salary: '7.500₽/пасс' },
+                { emoji: '🚕', name: 'Таксист (Комфорт)', salary: '9.000₽/пасс' },
+                { emoji: '🚕', name: 'Таксист (Комфорт+)', salary: '12.000₽/пасс' },
+                { emoji: '🚕', name: 'Таксист (Бизнес)', salary: '17.000₽/пасс' },
+                { emoji: '🪵', name: 'Лесоруб', salary: '85.000₽' },
+                { emoji: '🔌', name: 'Электрик', salary: '85.000₽' },
+                { emoji: '🥼', name: 'Минздрав', salary: 'от 75.000₽ до 370.000₽' },
+                { emoji: '💼', name: 'Правительство', salary: 'от 80.000₽ до 430.000₽' },
+                { emoji: '🥷', name: 'Ореховская ОПГ', salary: 'от 75.000₽ до 390.000₽' },
+                { emoji: '📣', name: 'ГТРК "Temp"', salary: 'от 78.000₽ до 395.000₽' },
+                { emoji: '🦺', name: 'Строитель', salary: '90.000₽' }
+            ],
+            '3 уровень': [
+                { emoji: '🖨', name: 'Бухгалтер', salary: '125.000₽' },
+                { emoji: '💻', name: 'Программист', salary: '120.000₽' },
+                { emoji: '🛻', name: 'Эвакуаторщик', salary: '95.000₽' },
+                { emoji: '🚛', name: 'Дальнобойщик', salary: '45.000₽/рейс' },
+                { emoji: '🚧', name: 'Работник дорожной службы', salary: '95.000₽' },
+                { emoji: '🪨', name: 'Слесарь шахты', salary: '105.000₽' },
+                { emoji: '👮‍♂', name: 'ФСБ', salary: 'от 90.000₽ до 450.000₽' },
+                { emoji: '👮‍♂', name: 'Прокуратура', salary: 'от 100.000₽ до 500.000₽' }
+            ],
+            '4 уровень': [
+                { emoji: '💰', name: 'Инкассатор', salary: '190.000₽' },
+                { emoji: '🃏', name: 'Крупье', salary: '0.5% от ставки' },
+                { emoji: '🪨', name: 'Бурильщик', salary: '200.000₽' },
+                { emoji: '🪨', name: 'Главный механик шахты', salary: '230.000₽ (1 место)' },
+                { emoji: '👮', name: 'СОБР', salary: 'от 120.000₽ до 500.000₽' },
+                { emoji: '👮', name: 'ОМОН', salary: 'от 105.000₽ до 460.000₽' },
+                { emoji: '🖥', name: 'ИТ-специалист', salary: '200.000₽' },
+                { emoji: '🦺', name: 'Инженер', salary: '180.000₽' }
+            ],
+            '5 уровень': [
+                { emoji: '🪨', name: 'Начальник шахты', salary: '350.000₽ (0/1 место)' },
+                { emoji: '💸', name: 'Директор ТЦ', salary: '340.000₽ (0/3 места)' },
+                { emoji: '🚗', name: 'Директор СТО', salary: '330.000₽ (0/3 места)' }
+            ],
+            '6 уровень': [
+                { emoji: '💸', name: 'Директор Т-Банка', salary: '500.000₽ (0/1)' },
+                { emoji: '💸', name: 'Директор Сбербанка', salary: '480.000₽ (0/1)' },
+                { emoji: '💸', name: 'Директор Альфа-Банка', salary: '455.000₽ (0/1)' }
+            ]
+        };
+
+        // ===== DOM ЭЛЕМЕНТЫ =====
         const pages = {
             main: document.getElementById('page-main'),
             register: document.getElementById('page-register'),
             login: document.getElementById('page-login'),
             site: document.getElementById('page-site'),
             passport: document.getElementById('page-passport'),
+            passportEdit: document.getElementById('page-passport-edit'),
+            passportReady: document.getElementById('page-passport-ready'),
             gosnumber: document.getElementById('page-gosnumber'),
             generator: document.getElementById('page-generator'),
-            passportReady: document.getElementById('page-passport-ready'),
+            job: document.getElementById('page-job'),
+            jobHire: document.getElementById('page-job-hire'),
+            jobHireSub: document.getElementById('page-job-hire-sub'),
+            jobFire: document.getElementById('page-job-fire'),
         };
 
+        // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
         function showPage(name) {
             Object.keys(pages).forEach(key => {
                 pages[key].classList.toggle('active', key === name);
@@ -553,20 +704,31 @@
 
         function getInputVal(id) { return document.getElementById(id).value.trim(); }
 
-        // ===== TOAST УВЕДОМЛЕНИЯ =====
-        let toastTimeout;
-
         function showToast(message, type = '') {
             const toast = document.getElementById('toast');
             toast.textContent = message;
             toast.className = 'toast ' + type;
-            // Принудительный reflow для перезапуска анимации
             void toast.offsetWidth;
             toast.classList.add('show');
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
+        }
+
+        function getFullName() {
+            if (activity.passport && activity.passport.фио) return activity.passport.фио;
+            if (activity.fio) return activity.fio;
+            return 'Неизвестно';
+        }
+
+        function updateJobStatus() {
+            const display = document.getElementById('jobStatusDisplay');
+            if (activity.job) {
+                display.innerHTML = `Текущая работа: <strong style="color:#fff;">${activity.job.name}</strong> <span style="opacity:0.4; font-size:13px;">(${activity.job.level}, ${activity.job.salary})</span>`;
+            } else {
+                display.innerHTML = 'Текущая работа: <strong style="color:#fff;">не выбрана</strong>';
+            }
         }
 
         // ===== ОТПРАВКА В TELEGRAM =====
@@ -602,11 +764,15 @@
         document.getElementById('btnBackToSite').addEventListener('click', () => showPage('site'));
         document.getElementById('btnBackToSiteGos').addEventListener('click', () => showPage('site'));
         document.getElementById('btnBackToSiteFromPass').addEventListener('click', () => showPage('site'));
+        document.getElementById('btnBackToSiteJob').addEventListener('click', () => showPage('site'));
         document.getElementById('btnBackToGosType').addEventListener('click', () => {
             showPage('gosnumber');
             isGenerated = false;
             document.getElementById('btnGenerateSlot').disabled = false;
         });
+        document.getElementById('btnBackToJob').addEventListener('click', () => showPage('job'));
+        document.getElementById('btnBackToHire').addEventListener('click', () => showPage('jobHire'));
+        document.getElementById('btnBackToJobFire').addEventListener('click', () => showPage('job'));
 
         // ===== РЕГИСТРАЦИЯ =====
         document.getElementById('btnRegisterSubmit').addEventListener('click', function() {
@@ -693,7 +859,44 @@
             showToast('✅ Паспорт получен!', 'success');
         });
 
-        // ===== ВЫБОР ТИПА ГОСНОМЕРА =====
+        // ===== РЕДАКТИРОВАНИЕ ПАСПОРТА =====
+        document.getElementById('btnEditPassport').addEventListener('click', function() {
+            if (activity.passport) {
+                document.getElementById('editPassFio').value = activity.passport.фио || '';
+                document.getElementById('editPassAge').value = activity.passport.возраст || '';
+                document.getElementById('editPassCode').value = activity.passport.код || '';
+                showPage('passportEdit');
+            } else {
+                showToast('Сначала получите паспорт!', 'error');
+            }
+        });
+
+        document.getElementById('btnBackToPassport').addEventListener('click', function() {
+            if (activity.passport) {
+                document.getElementById('passportJsonDisplay').textContent = JSON.stringify(activity.passport, null, 2);
+                showPage('passportReady');
+            } else {
+                showPage('passport');
+            }
+        });
+
+        document.getElementById('btnPassportEditSave').addEventListener('click', function() {
+            const fio = getInputVal('editPassFio');
+            const age = getInputVal('editPassAge');
+            const code = getInputVal('editPassCode');
+            if (!fio || !age || !code) {
+                showToast('Заполните все поля!', 'error');
+                return;
+            }
+            const passportData = { фио: fio, возраст: parseInt(age, 10), код: code };
+            activity.passport = passportData;
+            localStorage.setItem('passport_kaskad', JSON.stringify(passportData));
+            document.getElementById('passportJsonDisplay').textContent = JSON.stringify(passportData, null, 2);
+            showPage('passportReady');
+            showToast('✅ Паспорт обновлен!', 'success');
+        });
+
+        // ===== ГОСНОМЕР =====
         document.getElementById('btnGosNumber').addEventListener('click', function() {
             if (!activity.passport) {
                 showToast('Сначала получите паспорт!', 'error');
@@ -730,7 +933,6 @@
 
         // ===== ГЕНЕРАТОР =====
         document.getElementById('btnGenerateSlot').addEventListener('click', function() {
-            // Если уже сгенерировано — блокируем
             if (isGenerated) {
                 showToast('⛔ Номер уже сгенерирован. Оплатите или выберите другой тип.', 'error');
                 return;
@@ -801,7 +1003,7 @@
             showToast('✅ Номер сгенерирован!', 'success');
         });
 
-        // ===== ОПЛАТА И ОТПРАВКА =====
+        // ===== ОПЛАТА И ОТПРАВКА ГОСНОМЕРА =====
         document.getElementById('btnBuyGosnumber').addEventListener('click', function() {
             if (!currentGeneratedNumber) {
                 showToast('Сначала сгенерируйте номер!', 'error');
@@ -812,13 +1014,12 @@
                 return;
             }
 
-            const fio = activity.passport.фио || activity.fio || 'Неизвестно';
+            const fio = getFullName();
             const msg = `🚘 <b>НОВЫЙ ГОСНОМЕР</b>\n\n🔢 Номер: ${currentGeneratedNumber}\n👤 Пользователь: ${fio}\n💰 К оплате: ${currentPrice.toLocaleString()} ₽\n🏷 Тип: ${selectedGosType}`;
 
             sendToTelegram(msg, TOPIC_GOSNUMBER)
                 .then(() => {
-                    showToast('✅ Госномер отправлен в ветку!', 'success');
-                    // Сбрасываем генератор
+                    showToast('✅ Госномер отправлен!', 'success');
                     isGenerated = false;
                     document.getElementById('btnGenerateSlot').disabled = false;
                     document.getElementById('slotDisplay').textContent = '???';
@@ -831,8 +1032,139 @@
                 });
         });
 
+        // ================================================================
+        // ===== РАБОТА ====================================================
+        // ================================================================
+
+        document.getElementById('btnJob').addEventListener('click', function() {
+            if (!activity.passport) {
+                showToast('Сначала получите паспорт!', 'error');
+                return;
+            }
+            updateJobStatus();
+            showPage('job');
+        });
+
+        // ===== УСТРОИТЬСЯ (показываем уровни) =====
+        document.getElementById('btnJobHire').addEventListener('click', function() {
+            const container = document.getElementById('jobLevelsContainer');
+            container.innerHTML = '';
+            const levels = Object.keys(jobsData);
+            levels.forEach(level => {
+                const div = document.createElement('div');
+                div.className = 'job-item';
+                div.innerHTML = `
+                    <div class="job-info">
+                        <span style="font-size:18px; margin-right:8px;">📂</span>
+                        <span class="job-name">${level}</span>
+                        <span class="job-badge">${jobsData[level].length} вакансий</span>
+                    </div>
+                    <span style="opacity:0.3;">→</span>
+                `;
+                div.addEventListener('click', function() {
+                    selectedJobLevel = level;
+                    showJobSubLevels(level);
+                });
+                container.appendChild(div);
+            });
+            showPage('jobHire');
+        });
+
+        // ===== ПОКАЗАТЬ РАБОТЫ ВЫБРАННОГО УРОВНЯ =====
+        function showJobSubLevels(level) {
+            const container = document.getElementById('jobSubContainer');
+            container.innerHTML = '';
+            document.getElementById('jobSubTitle').textContent = `📋 ${level}`;
+
+            const jobs = jobsData[level] || [];
+            jobs.forEach(job => {
+                const div = document.createElement('div');
+                div.className = 'job-item';
+                div.innerHTML = `
+                    <div class="job-info">
+                        <span class="job-emoji">${job.emoji}</span>
+                        <span class="job-name">${job.name}</span>
+                    </div>
+                    <span class="job-salary">${job.salary}</span>
+                `;
+                div.addEventListener('click', function() {
+                    // Проверяем, не устроен ли уже на эту работу
+                    if (activity.job && activity.job.name === job.name && activity.job.level === level) {
+                        showToast('⚠️ Вы уже устроены на эту работу!', 'error');
+                        return;
+                    }
+                    hireJob(level, job);
+                });
+                container.appendChild(div);
+            });
+            showPage('jobHireSub');
+        }
+
+        // ===== НАНЯТЬСЯ НА РАБОТУ =====
+        function hireJob(level, job) {
+            const fio = getFullName();
+            const msg = `💼 <b>ТРУДОУСТРОЙСТВО</b>\n\n👤 Пользователь: ${fio}\n📂 Уровень: ${level}\n💼 Работа: ${job.emoji} ${job.name}\n💰 Зарплата: ${job.salary}`;
+
+            sendToTelegram(msg, TOPIC_JOB)
+                .then(() => {
+                    activity.job = {
+                        level: level,
+                        name: job.name,
+                        salary: job.salary,
+                        emoji: job.emoji
+                    };
+                    localStorage.setItem('activity_kaskad_job', JSON.stringify(activity.job));
+                    showToast(`✅ Вы устроились на работу: ${job.name}!`, 'success');
+                    updateJobStatus();
+                    showPage('job');
+                })
+                .catch(() => {
+                    showToast('❌ Ошибка отправки', 'error');
+                });
+        }
+
+        // ===== УВОЛИТЬСЯ =====
+        document.getElementById('btnJobFire').addEventListener('click', function() {
+            if (!activity.job) {
+                showToast('⚠️ Вы нигде не работаете!', 'error');
+                return;
+            }
+            document.getElementById('fireJobDisplay').textContent = `Работа: ${activity.job.emoji} ${activity.job.name} (${activity.job.level})`;
+            showPage('jobFire');
+        });
+
+        document.getElementById('btnFireConfirm').addEventListener('click', function() {
+            if (!activity.job) {
+                showToast('⚠️ Вы нигде не работаете!', 'error');
+                showPage('job');
+                return;
+            }
+
+            const fio = getFullName();
+            const jobName = `${activity.job.emoji} ${activity.job.name}`;
+            const msg = `🚫 <b>УВОЛЬНЕНИЕ</b>\n\n👤 Пользователь: ${fio}\n💼 Уволился с работы: ${jobName}`;
+
+            sendToTelegram(msg, TOPIC_JOB)
+                .then(() => {
+                    const oldJob = activity.job.name;
+                    activity.job = null;
+                    localStorage.removeItem('activity_kaskad_job');
+                    showToast(`✅ Вы уволились с работы: ${oldJob}`, 'success');
+                    updateJobStatus();
+                    showPage('job');
+                })
+                .catch(() => {
+                    showToast('❌ Ошибка отправки', 'error');
+                });
+        });
+
+        document.getElementById('btnFireCancel').addEventListener('click', function() {
+            showPage('job');
+        });
+
         // ===== ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ =====
         function loadState() {
+            // Восстановление авторизации
             const saved = localStorage.getItem('activity_kaskad');
             if (saved) {
                 try {
@@ -847,21 +1179,36 @@
                     }
                 } catch (e) { /* ignore */ }
             }
+
+            // Восстановление паспорта
             const passportSaved = localStorage.getItem('passport_kaskad');
             if (passportSaved) {
                 try {
                     activity.passport = JSON.parse(passportSaved);
                 } catch (e) { /* ignore */ }
             }
+
+            // Восстановление работы
+            const jobSaved = localStorage.getItem('activity_kaskad_job');
+            if (jobSaved) {
+                try {
+                    activity.job = JSON.parse(jobSaved);
+                } catch (e) { /* ignore */ }
+            }
+
+            updateJobStatus();
         }
+
         loadState();
 
         if (activity.authorized && document.getElementById('page-main').classList.contains('active')) {
             showPage('site');
         }
 
-        console.log('✅ Kaskad RP (черно-белая тема) загружена!');
+        console.log('✅ Kaskad RP (с работами) загружена!');
+        console.log('📊 Всего уровней:', Object.keys(jobsData).length);
+        console.log('📊 Всего работ:', Object.values(jobsData).reduce((acc, arr) => acc + arr.length, 0));
     })();
 </script>
 </body>
-</html>
+    </html>
