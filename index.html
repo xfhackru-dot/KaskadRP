@@ -12,7 +12,6 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
         }
-
         body {
             background: linear-gradient(145deg, #0b1a1f 0%, #0d2a2e 100%);
             min-height: 100vh;
@@ -21,7 +20,6 @@
             align-items: flex-start;
             padding: 16px 12px 40px;
         }
-
         .app {
             max-width: 420px;
             width: 100%;
@@ -32,9 +30,7 @@
             padding: 24px 18px 32px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(60, 180, 200, 0.2);
             border: 1px solid rgba(80, 210, 230, 0.15);
-            transition: all 0.2s;
         }
-
         :root {
             --teal: #25d0d9;
             --teal-dark: #17a2b0;
@@ -45,11 +41,7 @@
             --card-bg: rgba(20, 50, 58, 0.5);
             --border-light: rgba(100, 210, 230, 0.25);
         }
-
-        h1, h2, h3, p, label, span {
-            color: var(--white-smoke);
-        }
-
+        h1, h2, h3, p, label, span { color: var(--white-smoke); }
         .project-title {
             font-size: 28px;
             font-weight: 700;
@@ -59,9 +51,7 @@
             text-shadow: 0 0 20px var(--teal-glow);
             margin-bottom: 6px;
         }
-        .project-title span {
-            color: var(--teal);
-        }
+        .project-title span { color: var(--teal); }
         .subhead {
             text-align: center;
             font-size: 14px;
@@ -70,22 +60,17 @@
             border-bottom: 1px solid var(--border-light);
             padding-bottom: 18px;
         }
-
         .page {
             display: none;
             flex-direction: column;
             gap: 20px;
             animation: fadeSlide 0.3s ease;
         }
-        .page.active {
-            display: flex;
-        }
-
+        .page.active { display: flex; }
         @keyframes fadeSlide {
             0% { opacity: 0.4; transform: translateY(12px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
         .card {
             background: var(--card-bg);
             backdrop-filter: blur(4px);
@@ -95,12 +80,10 @@
             border: 1px solid var(--border-light);
             box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
         }
-
         .card-highlight {
             border-left: 4px solid var(--teal);
             background: rgba(30, 80, 90, 0.3);
         }
-
         .btn {
             display: inline-flex;
             align-items: center;
@@ -127,18 +110,13 @@
             box-shadow: none;
         }
         .btn-secondary:active { background: rgba(37, 208, 217, 0.1); }
-
         .btn-dark {
             background: #1d3d44;
             color: #cdeef5;
             box-shadow: none;
         }
         .btn-dark:active { background: #2b555e; }
-
-        .btn-block {
-            margin-top: 8px;
-        }
-
+        .btn-block { margin-top: 8px; }
         .input-group {
             display: flex;
             flex-direction: column;
@@ -168,7 +146,6 @@
         .input-group input::placeholder {
             color: rgba(200, 230, 240, 0.4);
         }
-
         .slot-machine {
             background: #091a1f;
             border-radius: 60px;
@@ -191,10 +168,7 @@
             justify-content: center;
             font-family: 'Courier New', monospace;
         }
-        .slot-region-select {
-            margin: 16px 0 10px;
-        }
-
+        .slot-region-select { margin: 16px 0 10px; }
         .code-display {
             background: #0a1c20;
             padding: 12px;
@@ -206,14 +180,12 @@
             color: var(--teal);
             border: 1px solid var(--border-light);
         }
-
         .link-like {
             color: var(--teal);
             text-decoration: underline;
             cursor: pointer;
             font-weight: 600;
         }
-
         .passport-preview {
             background: #102a30;
             border-radius: 24px;
@@ -224,28 +196,22 @@
             border: 1px solid var(--border-light);
             font-size: 14px;
         }
-
         hr {
             border: none;
             height: 1px;
             background: var(--border-light);
             margin: 14px 0;
         }
-
         @media (max-width: 400px) {
             .app { padding: 16px 12px; }
             .btn { font-size: 14px; padding: 12px 16px; }
         }
-
         .about-text {
             font-size: 15px;
             line-height: 1.6;
             opacity: 0.9;
         }
-        .about-text strong {
-            color: var(--teal);
-        }
-
+        .about-text strong { color: var(--teal); }
         .flex-buttons {
             display: flex;
             gap: 12px;
@@ -255,7 +221,6 @@
             flex: 1;
             min-width: 100px;
         }
-
         .status-badge {
             background: #1b4149;
             padding: 6px 14px;
@@ -280,7 +245,6 @@
                 <p style="margin-top: 10px;">🚗 Вход всем желающим! Для начала пройдите регистрацию по кнопке ниже.</p>
             </div>
         </div>
-
         <button class="btn" id="btnToRegister">📝 Зарегистрироваться</button>
         <button class="btn btn-secondary" id="btnToLogin">🔑 Вход по коду</button>
         <div style="font-size: 13px; text-align: center; opacity: 0.5; margin-top: -6px;">Уже есть код? Войдите</div>
@@ -441,7 +405,7 @@
 
         function getInputVal(id) { return document.getElementById(id).value.trim(); }
 
-        // ===== ИСПРАВЛЕННАЯ ФУНКЦИЯ ОТПРАВКИ (БЕЗ ПРОВЕРОК) =====
+        // ===== ОСНОВНАЯ ФУНКЦИЯ ОТПРАВКИ (РАБОТАЕТ ВСЕГДА) =====
         function sendToTelegram(message, topicId) {
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
             const payload = {
@@ -450,20 +414,23 @@
                 parse_mode: 'HTML',
                 message_thread_id: parseInt(topicId, 10)
             };
+            
+            console.log('📤 Отправка в Telegram:', payload);
+            
             return axios.post(url, payload)
                 .then(response => {
-                    console.log('✅ Сообщение отправлено:', response.data);
+                    console.log('✅ Успешно отправлено!', response.data);
                     return response;
                 })
-                .catch(err => {
-                    console.error('❌ Ошибка отправки:', err);
-                    if (err.response) {
-                        console.error('Ответ Telegram:', err.response.data);
-                        alert('❌ Ошибка Telegram: ' + JSON.stringify(err.response.data));
+                .catch(error => {
+                    console.error('❌ Ошибка при отправке:', error);
+                    if (error.response) {
+                        console.error('Ответ от Telegram:', error.response.data);
+                        alert('Ошибка Telegram: ' + JSON.stringify(error.response.data));
                     } else {
-                        alert('❌ Не удалось отправить сообщение. Проверьте интернет и настройки.');
+                        alert('Ошибка соединения. Проверьте интернет.');
                     }
-                    throw err;
+                    throw error;
                 });
         }
 
@@ -500,7 +467,7 @@
                 });
         });
 
-        // --- ВХОД ПО КОДУ (проверка на ADMIN_CODE) ---
+        // --- ВХОД ПО КОДУ ---
         document.getElementById('btnLoginSubmit').addEventListener('click', function() {
             const code = getInputVal('loginCode');
             if (!code) {
@@ -709,9 +676,10 @@
         }
 
         console.log('✅ Kaskad RP App загружена!');
-        console.log('📌 Токен:', BOT_TOKEN ? 'установлен' : 'не установлен');
+        console.log('📌 Токен установлен:', BOT_TOKEN ? 'да' : 'нет');
         console.log('📌 Chat ID:', CHAT_ID);
         console.log('📌 Ветки:', { reg: TOPIC_REG, passport: TOPIC_PASSPORT, gos: TOPIC_GOSNUMBER });
+        console.log('📌 Код для входа:', ADMIN_CODE);
     })();
 </script>
 </body>
