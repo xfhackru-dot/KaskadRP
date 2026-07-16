@@ -613,7 +613,7 @@
         const TOPIC_PASSPORT = '389';
         const TOPIC_GOSNUMBER = '399';
         const TOPIC_JOB = '441';
-        const TOPIC_CARDEALER = '441'; // Ветка для автосалонов
+        const TOPIC_CARDEALER = '1036'; // Ветка для автосалонов
         const ADMIN_CODE = 'kaskadRP109287codeA';
         // =================================================================
 
@@ -692,4 +692,754 @@
             ],
             '5 уровень': [
                 { emoji: '🪨', name: 'Начальник шахты', salary: '350.000₽' },
-                { emoji: '💸', name: 'Директор ТЦ', salary:
+                { emoji: '💸', name: 'Директор ТЦ', salary: '340.000₽' },
+                { emoji: '🚗', name: 'Директор СТО', salary: '330.000₽' }
+            ],
+            '6 уровень': [
+                { emoji: '💸', name: 'Директор Т-Банка', salary: '500.000₽' },
+                { emoji: '💸', name: 'Директор Сбербанка', salary: '480.000₽' },
+                { emoji: '💸', name: 'Директор Альфа-Банка', salary: '455.000₽' }
+            ]
+        };
+
+        // ===== ВСЕ АВТОМОБИЛИ ПО КЛАССАМ =====
+        const carsData = {
+            'Низкий класс': [
+                { name: 'BMW M5 E28', hp: '', price: '500.000💸' },
+                { name: 'Volkswagen GOLF GTI 2', hp: '', price: '200.000💸' },
+                { name: 'Honda Civic', hp: '', price: '800.000💸' },
+                { name: 'ВАЗ 2107', hp: '110 HP', price: '150.000₽💸' },
+                { name: 'Mercedes-Benz W210 E430', hp: '280 HP', price: '850.000₽💸' },
+                { name: 'LADA Niva 4х4 Urban', hp: '130 HP', price: '550.000💸' },
+                { name: 'Mercedes-Benz 190e', hp: '220 HP', price: '250.000₽💸' },
+                { name: 'ВАЗ 2114', hp: '100 HP', price: '170.000₽💸' },
+                { name: 'Лада Приора', hp: '140 HP', price: '600.000₽💸' },
+                { name: 'Mini Cooper', hp: '230 HP', price: '1.300.000₽💸' },
+                { name: 'BMW 535i E34', hp: '211 HP', price: '600.000₽💸' },
+                { name: 'Smart Fortvo', hp: '150 HP', price: '900.000₽💸' },
+                { name: 'Hyundai veloster', hp: '150 HP', price: '250.000₽💸' },
+                { name: 'Tofas Dogan SLX', hp: '83hp', price: '25.000' }
+            ],
+            'Средний класс': [
+                { name: 'Toyota Camry XV70', hp: '280 HP', price: '3.700.000₽💸' },
+                { name: 'Audi S5', hp: '380 HP', price: '4.500.000₽💸' },
+                { name: 'Mitsubishi Lancer Evolution X', hp: '320 HP', price: '4.000.000₽💸' },
+                { name: 'Mercedes-Benz S600 W140', hp: '390 HP', price: '2.000.000₽💸' },
+                { name: 'Lexus IS F', hp: '420 HP', price: '2.500.000₽💸' },
+                { name: 'Subaru Impreza WRX', hp: '270 hp', price: '2.200.000₽💸' },
+                { name: 'Audi RS4', hp: '450 HP', price: '4.700.000₽💸' },
+                { name: 'Mercedes-Benz G55 AMG', hp: '575 HP', price: '5.600.000₽💸' },
+                { name: 'Porsche Cayenne Turbo S', hp: '570 HP', price: '5.000.000₽💸' },
+                { name: 'Mercedes-Benz S65 AMG W221', hp: '650 HP', price: '2.500.000₽💸' },
+                { name: 'BMW Х5М Е70', hp: '555 HP', price: '3.000.000💸' },
+                { name: 'Toyota Supra A80', hp: '280 HP', price: '4.000.000₽💸' },
+                { name: 'BMW M3 E46', hp: '350 HP', price: '3.700.000₽💸' },
+                { name: 'Mercedes-Benz CL63 AMG', hp: '630 HP', price: '3.200.000₽💸' },
+                { name: 'Mercedes-Benz C63 AMG W204', hp: '487 HP', price: '4.500.000₽💸' },
+                { name: 'BMW M2 F87', hp: '450 HP', price: '4.300.000₽💸' },
+                { name: 'BMW M4 F82', hp: '420 HP', price: '5.200.000₽💸' },
+                { name: 'Mitsubishi Lancer Evolution IX', hp: '350 HP', price: '3.800.000₽💸' },
+                { name: 'Nissan 180 SX', hp: '230 HP', price: '3.500.000₽💸' },
+                { name: 'Honda CR-X del Sol', hp: '168 HP', price: '2.500.000₽💸' },
+                { name: 'Honda Civic Type R', hp: '300 HP', price: '3.400.000₽💸' },
+                { name: 'Volkswagen Passat', hp: '220 HP', price: '2.300.000₽💸' },
+                { name: 'BMW M5 E60', hp: '507 HP', price: '3.000.000₽💸' },
+                { name: 'BMW M5 E39', hp: '400 HP', price: '2.300.000₽💸' },
+                { name: 'BMW M3 Е36', hp: '320 HP', price: '2.000.000₽💸' },
+                { name: 'Mercedes-Benz E55 AMG', hp: '354 HP', price: '1.300.000₽💸' },
+                { name: 'Fiat Doblo', hp: '256 HP', price: '2.200.000₽💸' },
+                { name: 'Jeep 4x4', hp: '234 HP', price: '2.400.000₽💸' },
+                { name: 'Chevrolet Tahoe', hp: '341 HP', price: '4.000.000₽💸' },
+                { name: 'Cadillac CTS-V 2009', hp: '564 HP', price: '3.000.000₽💸' },
+                { name: 'Honda S2000', hp: '240 HP', price: '2.500.000₽💸' },
+                { name: 'Audi Quattro', hp: '400 HP', price: '4.500.000₽💸' },
+                { name: 'BMW Z4', hp: '310 HP', price: '3.100.000₽💸' },
+                { name: 'Volkswagen Vintage', hp: '45 HP', price: '3.100.000₽💸' },
+                { name: '2017 Volswagen Golf GTI', hp: '240 HP', price: '3.000.000₽' },
+                { name: 'BMW X1', hp: '326 HP', price: '2.900.000₽' },
+                { name: 'BMW 525i', hp: '218 HP', price: '1.150.000₽💸' },
+                { name: 'BMW M3 E92', hp: '420 HP', price: '2.600.000₽' },
+                { name: 'dodge charger srt', hp: '432hp', price: '4.000.000' }
+            ],
+            'Высокий класс': [
+                { name: 'Mercedes-Benz AMG GT 63', hp: '640 HP', price: '15.000.000💸' },
+                { name: 'Porsche Panamera Turbo S', hp: '550 HP', price: '13.500.000₽💸' },
+                { name: 'BMW X6M F86', hp: '620 HP', price: '8.500.000₽💸' },
+                { name: 'BMW M5 F10', hp: '560 HP', price: '5.500.000💸' },
+                { name: 'Range Rover SPORT SVR', hp: '580 HP', price: '13.000.000₽💸' },
+                { name: 'Audi R8', hp: '550 HP', price: '9.700.000₽💸' },
+                { name: 'Audi R8 V10 Plus', hp: '620 HP', price: '17.500.000💸' },
+                { name: 'Nissan GT-R R35', hp: '580 HP', price: '7.500.000₽💸' },
+                { name: 'Mercedes-Benz G63 AMG', hp: '585 HP', price: '26.000.000₽💸' },
+                { name: 'Mercedes-Benz E63 AMG W213', hp: '630 HP', price: '10.200.000₽💸' },
+                { name: 'Mercedes-Benz S63 AMG W222', hp: '612 HP', price: '11.400.000₽💸' },
+                { name: 'Audi RS6 C8', hp: '600 HP', price: '15.000.000₽💸' },
+                { name: 'Audi RS7 C8', hp: '630 HP', price: '18.000.000₽💸' },
+                { name: 'Mercedes-Benz AMG GT', hp: '600 HP', price: '12.300.000₽💸' },
+                { name: 'BMW Х7 M50i', hp: '530 HP', price: '14.500.000💸' },
+                { name: 'Dodge Challenger SRT Hellcat Redeye', hp: '808 HP', price: '12.000.000₽💸' },
+                { name: 'Porsche 911 Turbo', hp: '580 HP', price: '17.580.000₽💸' },
+                { name: 'Ferrari 458 italia', hp: '570 HP', price: '24.700.000₽💸' },
+                { name: 'BMW M5 F90 (рестайлинг)', hp: '625 HP', price: '15.000.000💸' },
+                { name: 'BMW M5 F90 (до рестайлинг)', hp: '600 HP', price: '9.000.000💸' },
+                { name: 'BMW М5 CS', hp: '650 HP', price: '20.000.000💸' },
+                { name: 'BMW М8 F92 Competition', hp: '635 HP', price: '16.500.000💸' },
+                { name: 'Mercedes-Benz Maybach S650 W222', hp: '630 HP', price: '16.500.000₽💸' },
+                { name: 'BMW M6', hp: '560 HP', price: '5.000.000💸' },
+                { name: 'BMW M4 G82 Competition', hp: '510 HP', price: '11.000.000💸' },
+                { name: 'BMW М3 G81', hp: '510 HP', price: '11.000.000💸' },
+                { name: 'Mercedes-Benz GLE 53', hp: '435 HP', price: '10.000.000₽💸' },
+                { name: 'Bentley Continental GT', hp: '640 HP', price: '26.000.000₽💸' },
+                { name: 'BMW i8', hp: '250 HP', price: '8.500.000₽💸' },
+                { name: 'Alfa Romeo Giulia', hp: '505 HP', price: '8.600.000₽💸' },
+                { name: 'Jeep Grand Cherokee SRT', hp: '470 HP', price: '9.000.000₽💸' },
+                { name: 'Jeep Grand Cherokee Trackhawk', hp: '717 HP', price: '13.000.000₽💸' },
+                { name: 'Dodge Viper ACR', hp: '650 HP', price: '21.000.000₽💸' },
+                { name: 'Chevrolet Corvette C8', hp: '510 HP', price: '16.000.000₽💸' },
+                { name: 'Chevrolet Corvette C7', hp: '630 HP', price: '9.000.000₽💸' },
+                { name: 'Chevrolet Corvette C6', hp: '436 HP', price: '7.500.000₽' },
+                { name: 'Dodge Durango', hp: '475 HP', price: '7.000.000💸' },
+                { name: 'Dodge Durango SRT', hp: '720 HP', price: '16.000.000₽💸' },
+                { name: 'Ford Raptor F-150', hp: '430 HP', price: '13.000.000💸' },
+                { name: 'RAM 1500 TRX', hp: '702 HP', price: '12.000.000💸' },
+                { name: 'Toyota Land Cruiser 200', hp: '362 HP', price: '6.000.000₽💸' },
+                { name: 'Mercedes-Benz CLS 63 AMG', hp: '630 HP', price: '6.000.000₽💸' },
+                { name: 'BMW i7', hp: '544 HP', price: '13.500.000₽💸' },
+                { name: 'Dodge Charger SRT Hellcat Redeye', hp: '807hp', price: '17.000.000' },
+                { name: 'Bmw m6 competition edition', hp: '600hp', price: '15.000.000' },
+                { name: 'Bmw m5 f90 first edition', hp: '625hp', price: '9.000.000' },
+                { name: 'Chevrolet Camaro', hp: '650hp', price: '15.000.000' },
+                { name: 'Cadillac Escalade', hp: '682hp', price: '27.000.000' },
+                { name: 'Range rover', hp: '542hp', price: '20.000.000' },
+                { name: 'bmw m2 g87', hp: '460hp', price: '9.000.000' },
+                { name: 'DODGE CHALLENGER HELLCAT SRT', hp: '808hp', price: '12.000.000' },
+                { name: 'Land Rover Defender', hp: '394 HP', price: '9.381.000₽💸' },
+                { name: 'Aston Martin Vantage Roadster', hp: '690 HP', price: '24.900.100₽💸' }
+            ],
+            'Люкс класс': [
+                { name: 'Ferrari F12 Berlinetta', hp: '760 HP', price: '40.000.000₽💸' },
+                { name: 'Honda NSX', hp: '580 HP', price: '35.000.000₽💸' },
+                { name: 'Rolls-Royce Cullinan', hp: '555 HP', price: '60.000.000₽💸' },
+                { name: 'Mercedes-Benz SLR McLaren', hp: '641 HP', price: '65.000.000₽💸' },
+                { name: 'Porsche 911 GT3 RS', hp: '502 HP', price: '55.000.000₽💸' },
+                { name: 'Rolls-Royce Dawn', hp: '580 HP', price: '50.000.000₽💸' },
+                { name: 'porsche carrera gt', hp: '612hp', price: '25.000.000' },
+                { name: 'porsche spyder 918', hp: '608hp', price: '50.000.000' }
+            ]
+        };
+
+        // ===== DOM ЭЛЕМЕНТЫ =====
+        const pages = {
+            main: document.getElementById('page-main'),
+            register: document.getElementById('page-register'),
+            login: document.getElementById('page-login'),
+            site: document.getElementById('page-site'),
+            passport: document.getElementById('page-passport'),
+            passportEdit: document.getElementById('page-passport-edit'),
+            passportReady: document.getElementById('page-passport-ready'),
+            gosnumber: document.getElementById('page-gosnumber'),
+            generator: document.getElementById('page-generator'),
+            job: document.getElementById('page-job'),
+            jobHire: document.getElementById('page-job-hire'),
+            jobHireSub: document.getElementById('page-job-hire-sub'),
+            jobFire: document.getElementById('page-job-fire'),
+            cardealer: document.getElementById('page-cardealer'),
+            cardealerSub: document.getElementById('page-cardealer-sub'),
+        };
+
+        // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
+        function showPage(name) {
+            Object.keys(pages).forEach(key => {
+                pages[key].classList.toggle('active', key === name);
+            });
+        }
+
+        function getInputVal(id) { return document.getElementById(id).value.trim(); }
+
+        function showToast(message, type = '') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            void toast.offsetWidth;
+            toast.classList.add('show');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function getFullName() {
+            if (activity.passport && activity.passport.фио) return activity.passport.фио;
+            if (activity.fio) return activity.fio;
+            return 'Неизвестно';
+        }
+
+        function updateJobStatus() {
+            const display = document.getElementById('jobStatusDisplay');
+            if (activity.job) {
+                display.innerHTML = `Текущая работа: <strong style="color:#fff;">${activity.job.name}</strong> <span style="opacity:0.4; font-size:13px;">(${activity.job.level}, ${activity.job.salary})</span>`;
+            } else {
+                display.innerHTML = 'Текущая работа: <strong style="color:#fff;">не выбрана</strong>';
+            }
+        }
+
+        // ===== ОТПРАВКА В TELEGRAM =====
+        function sendToTelegram(message, topicId) {
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+            const payload = {
+                chat_id: CHAT_ID,
+                text: message,
+                parse_mode: 'HTML',
+                message_thread_id: parseInt(topicId, 10)
+            };
+            return axios.post(url, payload)
+                .then(response => {
+                    console.log('✅ Отправлено:', response.data);
+                    return response;
+                })
+                .catch(error => {
+                    console.error('❌ Ошибка:', error);
+                    if (error.response) {
+                        showToast('Ошибка Telegram: ' + (error.response.data.description || 'неизвестная'), 'error');
+                    } else {
+                        showToast('Ошибка соединения', 'error');
+                    }
+                    throw error;
+                });
+        }
+
+        // ===== НАВИГАЦИЯ =====
+        document.getElementById('btnToRegister').addEventListener('click', () => showPage('register'));
+        document.getElementById('btnToLogin').addEventListener('click', () => showPage('login'));
+        document.getElementById('btnBackToMain').addEventListener('click', () => showPage('main'));
+        document.getElementById('btnBackFromLogin').addEventListener('click', () => showPage('main'));
+        document.getElementById('btnBackToSite').addEventListener('click', () => showPage('site'));
+        document.getElementById('btnBackToSiteGos').addEventListener('click', () => showPage('site'));
+        document.getElementById('btnBackToSiteFromPass').addEventListener('click', () => showPage('site'));
+        document.getElementById('btnBackToSiteJob').addEventListener('click', () => showPage('site'));
+        document.getElementById('btnBackToSiteCar').addEventListener('click', () => showPage('site'));
+        document.getElementById('btnBackToGosType').addEventListener('click', () => {
+            showPage('gosnumber');
+            isGenerated = false;
+            document.getElementById('btnGenerateSlot').disabled = false;
+        });
+        document.getElementById('btnBackToJob').addEventListener('click', () => showPage('job'));
+        document.getElementById('btnBackToHire').addEventListener('click', () => showPage('jobHire'));
+        document.getElementById('btnBackToJobFire').addEventListener('click', () => showPage('job'));
+        document.getElementById('btnBackToCarClasses').addEventListener('click', () => showPage('cardealer'));
+
+        // ===== РЕГИСТРАЦИЯ =====
+        document.getElementById('btnRegisterSubmit').addEventListener('click', function() {
+            const fio = getInputVal('regFio');
+            const age = getInputVal('regAge');
+            const other = getInputVal('regOther');
+            if (!fio || !age) {
+                showToast('Заполните ФИО и возраст!', 'error');
+                return;
+            }
+            activity.fio = fio;
+            activity.age = age;
+            activity.other = other || 'Не указано';
+
+            const message = `📝 <b>Новая регистрация</b>\n\n👤 ФИО: ${fio}\n📅 Возраст: ${age}\n📌 Другие РП: ${other || 'Не указано'}`;
+            sendToTelegram(message, TOPIC_REG)
+                .then(() => {
+                    window.open('https://t.me/+-FEx5i7S8lQ3Y2My', '_blank');
+                    showPage('main');
+                    activity.authorized = true;
+                    localStorage.setItem('activity_kaskad', JSON.stringify({ authorized: true, fio, age, other }));
+                    showToast('✅ Регистрация завершена!', 'success');
+                })
+                .catch(() => {
+                    showToast('⚠️ Ошибка отправки, но данные сохранены', 'error');
+                });
+        });
+
+        // ===== ВХОД ПО КОДУ =====
+        document.getElementById('btnLoginSubmit').addEventListener('click', function() {
+            const code = getInputVal('loginCode');
+            if (!code) {
+                showToast('Введите код!', 'error');
+                return;
+            }
+            if (code !== ADMIN_CODE) {
+                showToast('❌ Неверный код доступа!', 'error');
+                return;
+            }
+            activity.authorized = true;
+            localStorage.setItem('activity_kaskad', JSON.stringify({ authorized: true }));
+            showPage('site');
+            document.getElementById('userStatus').textContent = '✅ активен';
+            showToast('✅ Добро пожаловать!', 'success');
+        });
+
+        // ===== ВЫХОД =====
+        document.getElementById('btnLogout').addEventListener('click', function() {
+            activity.authorized = false;
+            localStorage.removeItem('activity_kaskad');
+            showPage('main');
+            showToast('👋 Вы вышли', '');
+        });
+
+        // ===== ПАСПОРТ =====
+        document.getElementById('btnPassport').addEventListener('click', function() {
+            if (activity.passport) {
+                document.getElementById('passportJsonDisplay').textContent = JSON.stringify(activity.passport, null, 2);
+                showPage('passportReady');
+                return;
+            }
+            if (activity.fio) document.getElementById('passFio').value = activity.fio;
+            if (activity.age) document.getElementById('passAge').value = activity.age;
+            showPage('passport');
+        });
+
+        document.getElementById('btnPassportSubmit').addEventListener('click', function() {
+            const fio = getInputVal('passFio');
+            const age = getInputVal('passAge');
+            const code = getInputVal('passCode');
+            if (!fio || !age || !code) {
+                showToast('Заполните все поля!', 'error');
+                return;
+            }
+            const passportData = { фио: fio, возраст: parseInt(age, 10), код: code };
+            activity.passport = passportData;
+            localStorage.setItem('passport_kaskad', JSON.stringify(passportData));
+
+            const msg = `🪪 <b>НОВЫЙ ПАСПОРТ</b>\n\n👤 ФИО: ${fio}\n📅 Возраст: ${age}\n🔑 Код: ${code}`;
+            sendToTelegram(msg, TOPIC_PASSPORT);
+
+            document.getElementById('passportJsonDisplay').textContent = JSON.stringify(passportData, null, 2);
+            showPage('passportReady');
+            showToast('✅ Паспорт получен!', 'success');
+        });
+
+        // ===== РЕДАКТИРОВАНИЕ ПАСПОРТА =====
+        document.getElementById('btnEditPassport').addEventListener('click', function() {
+            if (activity.passport) {
+                document.getElementById('editPassFio').value = activity.passport.фио || '';
+                document.getElementById('editPassAge').value = activity.passport.возраст || '';
+                document.getElementById('editPassCode').value = activity.passport.код || '';
+                showPage('passportEdit');
+            } else {
+                showToast('Сначала получите паспорт!', 'error');
+            }
+        });
+
+        document.getElementById('btnBackToPassport').addEventListener('click', function() {
+            if (activity.passport) {
+                document.getElementById('passportJsonDisplay').textContent = JSON.stringify(activity.passport, null, 2);
+                showPage('passportReady');
+            } else {
+                showPage('passport');
+            }
+        });
+
+        document.getElementById('btnPassportEditSave').addEventListener('click', function() {
+            const fio = getInputVal('editPassFio');
+            const age = getInputVal('editPassAge');
+            const code = getInputVal('editPassCode');
+            if (!fio || !age || !code) {
+                showToast('Заполните все поля!', 'error');
+                return;
+            }
+            const passportData = { фио: fio, возраст: parseInt(age, 10), код: code };
+            activity.passport = passportData;
+            localStorage.setItem('passport_kaskad', JSON.stringify(passportData));
+            document.getElementById('passportJsonDisplay').textContent = JSON.stringify(passportData, null, 2);
+            showPage('passportReady');
+            showToast('✅ Паспорт обновлен!', 'success');
+        });
+
+        // ===== ГОСНОМЕР =====
+        document.getElementById('btnGosNumber').addEventListener('click', function() {
+            if (!activity.passport) {
+                showToast('Сначала получите паспорт!', 'error');
+                return;
+            }
+            showPage('gosnumber');
+        });
+
+        let selectedGosType = 'Обычный';
+
+        function setupGenerator(type, price, title, displayType) {
+            selectedGosType = type;
+            currentPrice = price;
+            isGenerated = false;
+            document.getElementById('btnGenerateSlot').disabled = false;
+            document.getElementById('genTitle').textContent = title;
+            document.getElementById('priceDisplay').textContent = price.toLocaleString();
+            document.getElementById('typeDisplay').textContent = displayType;
+            document.getElementById('slotDisplay').textContent = '???';
+            document.getElementById('slotDisplay').className = 'slot-result';
+            currentGeneratedNumber = '';
+            showPage('generator');
+        }
+
+        document.getElementById('gosTypeNormal').addEventListener('click', function() {
+            setupGenerator('Обычный', 5000, '🎰 Обычный номер', 'Обычный');
+        });
+        document.getElementById('gosTypePremium').addEventListener('click', function() {
+            setupGenerator('Премиум', 100000, '✨ Премиум номер', 'Премиум');
+        });
+        document.getElementById('gosTypeCustom').addEventListener('click', function() {
+            setupGenerator('Кастомный', 1000000, '🎨 Кастомный номер', 'Кастомный (введите вручную)');
+        });
+
+        // ===== ГЕНЕРАТОР =====
+        document.getElementById('btnGenerateSlot').addEventListener('click', function() {
+            if (isGenerated) {
+                showToast('⛔ Номер уже сгенерирован. Оплатите или выберите другой тип.', 'error');
+                return;
+            }
+
+            const region = getInputVal('regionInput') || '116';
+            const slotDisplay = document.getElementById('slotDisplay');
+
+            if (selectedGosType === 'Кастомный') {
+                const custom = prompt('Введите желаемый госномер (буквы и цифры):', 'A001AA');
+                if (custom && custom.length > 1) {
+                    currentGeneratedNumber = custom + ' | ' + region;
+                    slotDisplay.textContent = custom + ' ' + region;
+                    slotDisplay.className = 'slot-result generated';
+                    isGenerated = true;
+                    document.getElementById('btnGenerateSlot').disabled = true;
+                    showToast('✅ Номер сгенерирован!', 'success');
+                } else {
+                    showToast('Введите корректный номер', 'error');
+                }
+                return;
+            }
+
+            const letters = 'АВЕКМНОРСТУХ'.split('');
+            const digits = '0123456789'.split('');
+
+            function randomItem(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+            let result = '';
+
+            if (selectedGosType === 'Обычный') {
+                const l1 = randomItem(letters);
+                const d1 = randomItem(digits);
+                const d2 = randomItem(digits);
+                const d3 = randomItem(digits);
+                const l2 = randomItem(letters);
+                const l3 = randomItem(letters);
+                result = l1 + d1 + d2 + d3 + l2 + l3;
+
+            } else if (selectedGosType === 'Премиум') {
+                const isMirror = Math.random() > 0.5;
+                let letterPart = '';
+                let digitPart = '';
+
+                if (isMirror) {
+                    const useLetters = Math.random() > 0.5;
+                    if (useLetters) {
+                        const l1 = randomItem(letters);
+                        const l2 = randomItem(letters);
+                        letterPart = l1 + l2 + l1;
+                        digitPart = randomItem(digits) + randomItem(digits) + randomItem(digits);
+                    } else {
+                        const d1 = randomItem(digits);
+                        const d2 = randomItem(digits);
+                        digitPart = d1 + d2 + d1;
+                        letterPart = randomItem(letters) + randomItem(letters) + randomItem(letters);
+                    }
+                } else {
+                    const useLetters = Math.random() > 0.5;
+                    if (useLetters) {
+                        const l = randomItem(letters);
+                        letterPart = l + l + l;
+                        digitPart = randomItem(digits) + randomItem(digits) + randomItem(digits);
+                    } else {
+                        const d = randomItem(digits);
+                        digitPart = d + d + d;
+                        letterPart = randomItem(letters) + randomItem(letters) + randomItem(letters);
+                    }
+                }
+
+                result = letterPart + digitPart;
+            }
+
+            currentGeneratedNumber = result + ' | ' + region;
+            slotDisplay.textContent = result + ' ' + region;
+            slotDisplay.className = 'slot-result generated';
+            isGenerated = true;
+            document.getElementById('btnGenerateSlot').disabled = true;
+            showToast('✅ Номер сгенерирован!', 'success');
+        });
+
+        // ===== ОПЛАТА И ОТПРАВКА ГОСНОМЕРА =====
+        document.getElementById('btnBuyGosnumber').addEventListener('click', function() {
+            if (!currentGeneratedNumber) {
+                showToast('Сначала сгенерируйте номер!', 'error');
+                return;
+            }
+            if (!activity.passport) {
+                showToast('Паспорт не найден! Получите паспорт.', 'error');
+                return;
+            }
+
+            const fio = getFullName();
+            const msg = `🚘 <b>НОВЫЙ ГОСНОМЕР</b>\n\n🔢 Номер: ${currentGeneratedNumber}\n👤 Пользователь: ${fio}\n💰 К оплате: ${currentPrice.toLocaleString()} ₽\n🏷 Тип: ${selectedGosType}`;
+
+            sendToTelegram(msg, TOPIC_GOSNUMBER)
+                .then(() => {
+                    showToast('✅ Госномер отправлен!', 'success');
+                    isGenerated = false;
+                    document.getElementById('btnGenerateSlot').disabled = false;
+                    document.getElementById('slotDisplay').textContent = '???';
+                    document.getElementById('slotDisplay').className = 'slot-result';
+                    currentGeneratedNumber = '';
+                    showPage('site');
+                })
+                .catch(() => {
+                    showToast('❌ Ошибка отправки', 'error');
+                });
+        });
+
+        // ================================================================
+        // ===== РАБОТА ====================================================
+        // ================================================================
+
+        document.getElementById('btnJob').addEventListener('click', function() {
+            if (!activity.passport) {
+                showToast('Сначала получите паспорт!', 'error');
+                return;
+            }
+            updateJobStatus();
+            showPage('job');
+        });
+
+        document.getElementById('btnJobHire').addEventListener('click', function() {
+            const container = document.getElementById('jobLevelsContainer');
+            container.innerHTML = '';
+            const levels = Object.keys(jobsData);
+            levels.forEach(level => {
+                const div = document.createElement('div');
+                div.className = 'job-item';
+                div.innerHTML = `
+                    <div class="job-info">
+                        <span style="font-size:18px; margin-right:8px;">📂</span>
+                        <span class="job-name">${level}</span>
+                        <span class="job-badge">${jobsData[level].length} вакансий</span>
+                    </div>
+                    <span style="opacity:0.3;">→</span>
+                `;
+                div.addEventListener('click', function() {
+                    selectedJobLevel = level;
+                    showJobSubLevels(level);
+                });
+                container.appendChild(div);
+            });
+            showPage('jobHire');
+        });
+
+        function showJobSubLevels(level) {
+            const container = document.getElementById('jobSubContainer');
+            container.innerHTML = '';
+            document.getElementById('jobSubTitle').textContent = `📋 ${level}`;
+
+            const jobs = jobsData[level] || [];
+            jobs.forEach(job => {
+                const div = document.createElement('div');
+                div.className = 'job-item';
+                div.innerHTML = `
+                    <div class="job-info">
+                        <span class="job-emoji">${job.emoji}</span>
+                        <span class="job-name">${job.name}</span>
+                    </div>
+                    <span class="job-salary">${job.salary}</span>
+                `;
+                div.addEventListener('click', function() {
+                    if (activity.job && activity.job.name === job.name && activity.job.level === level) {
+                        showToast('⚠️ Вы уже устроены на эту работу!', 'error');
+                        return;
+                    }
+                    hireJob(level, job);
+                });
+                container.appendChild(div);
+            });
+            showPage('jobHireSub');
+        }
+
+        function hireJob(level, job) {
+            const fio = getFullName();
+            const msg = `💼 <b>ТРУДОУСТРОЙСТВО</b>\n\n👤 Пользователь: ${fio}\n📂 Уровень: ${level}\n💼 Работа: ${job.emoji} ${job.name}\n💰 Зарплата: ${job.salary}`;
+
+            sendToTelegram(msg, TOPIC_JOB)
+                .then(() => {
+                    activity.job = {
+                        level: level,
+                        name: job.name,
+                        salary: job.salary,
+                        emoji: job.emoji
+                    };
+                    localStorage.setItem('activity_kaskad_job', JSON.stringify(activity.job));
+                    showToast(`✅ Вы устроились на работу: ${job.name}!`, 'success');
+                    updateJobStatus();
+                    showPage('job');
+                })
+                .catch(() => {
+                    showToast('❌ Ошибка отправки', 'error');
+                });
+        }
+
+        document.getElementById('btnJobFire').addEventListener('click', function() {
+            if (!activity.job) {
+                showToast('⚠️ Вы нигде не работаете!', 'error');
+                return;
+            }
+            document.getElementById('fireJobDisplay').textContent = `Работа: ${activity.job.emoji} ${activity.job.name} (${activity.job.level})`;
+            showPage('jobFire');
+        });
+
+        document.getElementById('btnFireConfirm').addEventListener('click', function() {
+            if (!activity.job) {
+                showToast('⚠️ Вы нигде не работаете!', 'error');
+                showPage('job');
+                return;
+            }
+
+            const fio = getFullName();
+            const jobName = `${activity.job.emoji} ${activity.job.name}`;
+            const msg = `🚫 <b>УВОЛЬНЕНИЕ</b>\n\n👤 Пользователь: ${fio}\n💼 Уволился с работы: ${jobName}`;
+
+            sendToTelegram(msg, TOPIC_JOB)
+                .then(() => {
+                    const oldJob = activity.job.name;
+                    activity.job = null;
+                    localStorage.removeItem('activity_kaskad_job');
+                    showToast(`✅ Вы уволились с работы: ${oldJob}`, 'success');
+                    updateJobStatus();
+                    showPage('job');
+                })
+                .catch(() => {
+                    showToast('❌ Ошибка отправки', 'error');
+                });
+        });
+
+        document.getElementById('btnFireCancel').addEventListener('click', function() {
+            showPage('job');
+        });
+
+        // ================================================================
+        // ===== АВТОСАЛОНЫ ================================================
+        // ================================================================
+
+        document.getElementById('btnCarDealer').addEventListener('click', function() {
+            if (!activity.passport) {
+                showToast('Сначала получите паспорт!', 'error');
+                return;
+            }
+            showCarClasses();
+        });
+
+        function showCarClasses() {
+            const container = document.getElementById('carClassesContainer');
+            container.innerHTML = '';
+            const classes = Object.keys(carsData);
+            classes.forEach(cls => {
+                const div = document.createElement('div');
+                div.className = 'job-item';
+                div.innerHTML = `
+                    <div class="job-info">
+                        <span style="font-size:18px; margin-right:8px;">🏎️</span>
+                        <span class="job-name">${cls}</span>
+                        <span class="job-badge">${carsData[cls].length} авто</span>
+                    </div>
+                    <span style="opacity:0.3;">→</span>
+                `;
+                div.addEventListener('click', function() {
+                    selectedCarClass = cls;
+                    showCarSubLevels(cls);
+                });
+                container.appendChild(div);
+            });
+            showPage('cardealer');
+        }
+
+        function showCarSubLevels(cls) {
+            const container = document.getElementById('carSubContainer');
+            container.innerHTML = '';
+            document.getElementById('carSubTitle').textContent = `🏎️ ${cls}`;
+
+            const cars = carsData[cls] || [];
+            cars.forEach(car => {
+                const div = document.createElement('div');
+                div.className = 'car-item';
+                div.innerHTML = `
+                    <div class="car-info">
+                        <span class="car-emoji">🚗</span>
+                        <span class="car-name">${car.name}</span>
+                        ${car.hp ? `<span class="car-hp">${car.hp}</span>` : ''}
+                    </div>
+                    <span class="car-price">${car.price}</span>
+                `;
+                div.addEventListener('click', function() {
+                    buyCar(cls, car);
+                });
+                container.appendChild(div);
+            });
+            showPage('cardealerSub');
+        }
+
+        function buyCar(cls, car) {
+            const fio = getFullName();
+            const msg = `🏎️ <b>ПОКУПКА АВТОМОБИЛЯ</b>\n\n👤 Пользователь: ${fio}\n📂 Класс: ${cls}\n🚗 Автомобиль: ${car.name}\n💰 Цена: ${car.price}`;
+
+            sendToTelegram(msg, TOPIC_CARDEALER)
+                .then(() => {
+                    showToast(`✅ Чек отправлен! Авто: ${car.name}`, 'success');
+                    showPage('cardealer');
+                })
+                .catch(() => {
+                    showToast('❌ Ошибка отправки чека', 'error');
+                });
+        }
+
+        // ===== ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ =====
+        function loadState() {
+            const saved = localStorage.getItem('activity_kaskad');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    if (data.authorized) {
+                        activity.authorized = true;
+                        if (data.fio) activity.fio = data.fio;
+                        if (data.age) activity.age = data.age;
+                        if (data.other) activity.other = data.other;
+                        showPage('site');
+                        document.getElementById('userStatus').textContent = '✅ активен';
+                    }
+                } catch (e) { /* ignore */ }
+            }
+
+            const passportSaved = localStorage.getItem('passport_kaskad');
+            if (passportSaved) {
+                try {
+                    activity.passport = JSON.parse(passportSaved);
+                } catch (e) { /* ignore */ }
+            }
+
+            const jobSaved = localStorage.getItem('activity_kaskad_job');
+            if (jobSaved) {
+                try {
+                    activity.job = JSON.parse(jobSaved);
+                } catch (e) { /* ignore */ }
+            }
+
+            updateJobStatus();
+        }
+
+        loadState();
+
+        if (activity.authorized && document.getElementById('page-main').classList.contains('active')) {
+            showPage('site');
+        }
+
+        console.log('✅ Kaskad RP (с автосалонами) загружена!');
+        console.log('🚗 Всего авто:', Object.values(carsData).reduce((acc, arr) => acc + arr.length, 0));
+    })();
+</script>
+</body>
+</html>
