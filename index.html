@@ -265,7 +265,7 @@
             font-weight: 400;
         }
 
-        .job-item, .car-item {
+        .job-item, .car-item, .pts-item {
             padding: 12px 16px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 16px;
@@ -277,15 +277,15 @@
             justify-content: space-between;
             align-items: center;
         }
-        .job-item:active, .car-item:active {
+        .job-item:active, .car-item:active, .pts-item:active {
             background: rgba(255, 255, 255, 0.08);
             transform: scale(0.98);
         }
-        .job-item .job-name, .car-item .car-name {
+        .job-item .job-name, .car-item .car-name, .pts-item .car-name {
             font-weight: 500;
             font-size: 14px;
         }
-        .job-item .job-salary, .car-item .car-price {
+        .job-item .job-salary, .car-item .car-price, .pts-item .car-class {
             opacity: 0.5;
             font-size: 13px;
         }
@@ -305,6 +305,26 @@
             background: rgba(255,255,255,0.05);
             padding: 2px 10px;
             border-radius: 40px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-color);
+            border-radius: 40px;
+            color: #ffffff;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+            margin-bottom: 12px;
+        }
+        .search-input:focus {
+            border-color: var(--border-active);
+            background: rgba(255,255,255,0.06);
+        }
+        .search-input::placeholder {
+            color: rgba(255,255,255,0.2);
         }
 
         .toast {
@@ -360,8 +380,8 @@
             .app { padding: 16px 12px; }
             .btn { font-size: 14px; padding: 12px 16px; }
             .slot-result { font-size: 26px; padding: 16px 8px; min-height: 60px; }
-            .job-item, .car-item { padding: 10px 14px; }
-            .job-item .job-name, .car-item .car-name { font-size: 13px; }
+            .job-item, .car-item, .pts-item { padding: 10px 14px; }
+            .job-item .job-name, .car-item .car-name, .pts-item .car-name { font-size: 13px; }
         }
     </style>
 </head>
@@ -432,6 +452,7 @@
             <button class="btn btn-secondary" id="btnGosNumber">🚘 Госномер</button>
             <button class="btn btn-secondary" id="btnJob">💼 Работа</button>
             <button class="btn btn-secondary" id="btnCarDealer">🏎️ Автосалоны</button>
+            <button class="btn btn-secondary" id="btnPTS">📄 Получить ПТС</button>
         </div>
         <a href="https://t.me/+-FEx5i7S8lQ3Y2My" target="_blank" class="btn btn-primary">📲 Перейти в проект</a>
         <button class="btn btn-secondary btn-block" id="btnLogout" style="opacity:0.4;">Выйти</button>
@@ -579,9 +600,7 @@
         <button class="btn btn-secondary btn-block" id="btnBackToJobFire">← Назад</button>
     </div>
 
-    <!-- ================================================================ -->
     <!-- ===== СТРАНИЦА 10: АВТОСАЛОНЫ (ВЫБОР КЛАССА) ===== -->
-    <!-- ================================================================ -->
     <div id="page-cardealer" class="page">
         <h2 style="font-weight: 300; letter-spacing: 1px;">🏎️ Автосалоны</h2>
         <div class="card" id="carClassesContainer">
@@ -599,6 +618,18 @@
         <button class="btn btn-secondary btn-block" id="btnBackToCarClasses">← Назад к классам</button>
     </div>
 
+    <!-- ===== СТРАНИЦА 11: ПОЛУЧЕНИЕ ПТС (ВЫБОР АВТО) ===== -->
+    <div id="page-pts" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">📄 Получить ПТС</h2>
+        <div class="card">
+            <input type="text" class="search-input" id="ptsSearch" placeholder="🔍 Поиск по авто...">
+            <div id="ptsContainer">
+                <!-- Автомобили вставляются скриптом -->
+            </div>
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToSitePTS">← Назад</button>
+    </div>
+
 </div>
 
 <script>
@@ -613,7 +644,8 @@
         const TOPIC_PASSPORT = '389';
         const TOPIC_GOSNUMBER = '399';
         const TOPIC_JOB = '441';
-        const TOPIC_CARDEALER = '24'; // Ветка для автосалонов
+        const TOPIC_CARDEALER = '441';
+        const TOPIC_PTS = '1089'; // Ветка для ПТС
         const ADMIN_CODE = 'kaskadRP109287codeA';
         // =================================================================
 
@@ -845,6 +877,7 @@
             jobFire: document.getElementById('page-job-fire'),
             cardealer: document.getElementById('page-cardealer'),
             cardealerSub: document.getElementById('page-cardealer-sub'),
+            pts: document.getElementById('page-pts'),
         };
 
         // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
@@ -883,6 +916,30 @@
             }
         }
 
+        // ===== ГЕНЕРАЦИЯ СЛУЧАЙНЫХ ДАННЫХ ДЛЯ ПТС =====
+        function generateRandomVIN() {
+            const chars = 'ABCDEFGHJKLMNPRSTUVWXYZ1234567890';
+            let vin = '';
+            for (let i = 0; i < 17; i++) {
+                vin += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return vin;
+        }
+
+        function generateRandomYear() {
+            const currentYear = new Date().getFullYear();
+            const year = currentYear - Math.floor(Math.random() * 30);
+            return year;
+        }
+
+        function generateRandomDate() {
+            const now = new Date();
+            const day = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');
+            const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+            const year = now.getFullYear() - Math.floor(Math.random() * 5);
+            return `${day}.${month}.${year}`;
+        }
+
         // ===== ОТПРАВКА В TELEGRAM =====
         function sendToTelegram(message, topicId) {
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
@@ -918,6 +975,7 @@
         document.getElementById('btnBackToSiteFromPass').addEventListener('click', () => showPage('site'));
         document.getElementById('btnBackToSiteJob').addEventListener('click', () => showPage('site'));
         document.getElementById('btnBackToSiteCar').addEventListener('click', () => showPage('site'));
+        document.getElementById('btnBackToSitePTS').addEventListener('click', () => showPage('site'));
         document.getElementById('btnBackToGosType').addEventListener('click', () => {
             showPage('gosnumber');
             isGenerated = false;
@@ -1397,6 +1455,112 @@
                 });
         }
 
+        // ================================================================
+        // ===== ПОЛУЧИТЬ ПТС ==============================================
+        // ================================================================
+
+        // Собираем все авто из всех классов в один массив для ПТС
+        function getAllCarsForPTS() {
+            const allCars = [];
+            Object.keys(carsData).forEach(cls => {
+                carsData[cls].forEach(car => {
+                    allCars.push({
+                        class: cls,
+                        name: car.name,
+                        hp: car.hp || 'N/A',
+                        price: car.price
+                    });
+                });
+            });
+            return allCars;
+        }
+
+        let allCarsList = getAllCarsForPTS();
+
+        function renderPTSList(filter = '') {
+            const container = document.getElementById('ptsContainer');
+            container.innerHTML = '';
+            
+            const filtered = allCarsList.filter(car => 
+                car.name.toLowerCase().includes(filter.toLowerCase())
+            );
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div style="text-align:center; opacity:0.4; padding:20px;">🚫 Автомобили не найдены</div>`;
+                return;
+            }
+
+            filtered.forEach(car => {
+                const div = document.createElement('div');
+                div.className = 'pts-item';
+                div.innerHTML = `
+                    <div class="car-info">
+                        <span style="font-size:18px; margin-right:8px;">🚗</span>
+                        <span class="car-name">${car.name}</span>
+                        <span class="car-hp">${car.hp}</span>
+                    </div>
+                    <span class="car-class">${car.class}</span>
+                `;
+                div.addEventListener('click', function() {
+                    sendPTS(car);
+                });
+                container.appendChild(div);
+            });
+        }
+
+        function sendPTS(car) {
+            if (!activity.passport) {
+                showToast('Сначала получите паспорт!', 'error');
+                return;
+            }
+
+            const fio = getFullName();
+            const vin = generateRandomVIN();
+            const year = generateRandomYear();
+            const date = generateRandomDate();
+
+            // Разбиваем название на марку и модель (упрощенно)
+            let brand = car.name;
+            let model = '';
+            
+            // Пытаемся разделить на марку и модель по пробелу
+            const parts = car.name.split(' ');
+            if (parts.length > 1) {
+                // Первое слово — марка, остальное — модель
+                brand = parts[0];
+                model = parts.slice(1).join(' ');
+            } else {
+                model = car.name;
+            }
+
+            const msg = `📄 <b>ПТС</b>\n\n👤 Пользователь: ${fio}\n🚗 Марка: ${brand}\n🚙 Модель: ${model}\n📅 Год выпуска: ${year}\n🔑 VIN: ${vin}\n📆 Дата выдачи: ${date}`;
+
+            sendToTelegram(msg, TOPIC_PTS)
+                .then(() => {
+                    showToast(`✅ ПТС отправлен для: ${car.name}`, 'success');
+                    showPage('site');
+                })
+                .catch(() => {
+                    showToast('❌ Ошибка отправки ПТС', 'error');
+                });
+        }
+
+        document.getElementById('btnPTS').addEventListener('click', function() {
+            if (!activity.passport) {
+                showToast('Сначала получите паспорт!', 'error');
+                return;
+            }
+            allCarsList = getAllCarsForPTS();
+            renderPTSList();
+            showPage('pts');
+        });
+
+        // Поиск по авто в ПТС
+        document.getElementById('ptsSearch').addEventListener('input', function() {
+            const filter = this.value;
+            renderPTSList(filter);
+        });
+
         // ===== ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ =====
         function loadState() {
             const saved = localStorage.getItem('activity_kaskad');
@@ -1437,9 +1601,9 @@
             showPage('site');
         }
 
-        console.log('✅ Kaskad RP (с автосалонами) загружена!');
-        console.log('🚗 Всего авто:', Object.values(carsData).reduce((acc, arr) => acc + arr.length, 0));
+        console.log('✅ Kaskad RP (с ПТС) загружена!');
+        console.log('🚗 Всего авто для ПТС:', allCarsList.length);
     })();
 </script>
 </body>
-</html>
+    </html>
