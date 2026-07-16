@@ -265,7 +265,7 @@
             font-weight: 400;
         }
 
-        .job-item {
+        .job-item, .car-item {
             padding: 12px 16px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 16px;
@@ -277,43 +277,34 @@
             justify-content: space-between;
             align-items: center;
         }
-        .job-item:active {
+        .job-item:active, .car-item:active {
             background: rgba(255, 255, 255, 0.08);
             transform: scale(0.98);
         }
-        .job-item .job-name {
+        .job-item .job-name, .car-item .car-name {
             font-weight: 500;
             font-size: 14px;
         }
-        .job-item .job-salary {
+        .job-item .job-salary, .car-item .car-price {
             opacity: 0.5;
             font-size: 13px;
         }
-        .job-item .job-emoji {
+        .job-item .job-emoji, .car-item .car-emoji {
             font-size: 20px;
             margin-right: 10px;
         }
-        .job-item .job-info {
+        .job-item .job-info, .car-item .car-info {
             display: flex;
             align-items: center;
             gap: 8px;
             flex: 1;
         }
-        .job-item .job-badge {
+        .job-item .job-badge, .car-item .car-hp {
             font-size: 11px;
             opacity: 0.3;
             background: rgba(255,255,255,0.05);
             padding: 2px 10px;
             border-radius: 40px;
-        }
-
-        .job-level-title {
-            font-size: 16px;
-            font-weight: 600;
-            padding: 8px 0 4px 0;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 10px;
-            opacity: 0.8;
         }
 
         .toast {
@@ -356,12 +347,21 @@
             margin-bottom: 12px;
         }
 
+        .car-class-title {
+            font-size: 16px;
+            font-weight: 600;
+            padding: 8px 0 4px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
         @media (max-width: 400px) {
             .app { padding: 16px 12px; }
             .btn { font-size: 14px; padding: 12px 16px; }
             .slot-result { font-size: 26px; padding: 16px 8px; min-height: 60px; }
-            .job-item { padding: 10px 14px; }
-            .job-item .job-name { font-size: 13px; }
+            .job-item, .car-item { padding: 10px 14px; }
+            .job-item .job-name, .car-item .car-name { font-size: 13px; }
         }
     </style>
 </head>
@@ -431,6 +431,7 @@
             <button class="btn btn-secondary" id="btnPassport">🪪 Паспорт</button>
             <button class="btn btn-secondary" id="btnGosNumber">🚘 Госномер</button>
             <button class="btn btn-secondary" id="btnJob">💼 Работа</button>
+            <button class="btn btn-secondary" id="btnCarDealer">🏎️ Автосалоны</button>
         </div>
         <a href="https://t.me/+-FEx5i7S8lQ3Y2My" target="_blank" class="btn btn-primary">📲 Перейти в проект</a>
         <button class="btn btn-secondary btn-block" id="btnLogout" style="opacity:0.4;">Выйти</button>
@@ -578,6 +579,26 @@
         <button class="btn btn-secondary btn-block" id="btnBackToJobFire">← Назад</button>
     </div>
 
+    <!-- ================================================================ -->
+    <!-- ===== СТРАНИЦА 10: АВТОСАЛОНЫ (ВЫБОР КЛАССА) ===== -->
+    <!-- ================================================================ -->
+    <div id="page-cardealer" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">🏎️ Автосалоны</h2>
+        <div class="card" id="carClassesContainer">
+            <!-- Классы вставляются скриптом -->
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToSiteCar">← Назад</button>
+    </div>
+
+    <!-- ===== СТРАНИЦА 10.1: АВТОСАЛОН (АВТОМОБИЛИ) ===== -->
+    <div id="page-cardealer-sub" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;" id="carSubTitle">Выберите авто</h2>
+        <div class="card" id="carSubContainer">
+            <!-- Автомобили вставляются скриптом -->
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToCarClasses">← Назад к классам</button>
+    </div>
+
 </div>
 
 <script>
@@ -592,6 +613,7 @@
         const TOPIC_PASSPORT = '389';
         const TOPIC_GOSNUMBER = '399';
         const TOPIC_JOB = '441';
+        const TOPIC_CARDEALER = '441'; // Ветка для автосалонов
         const ADMIN_CODE = 'kaskadRP109287codeA';
         // =================================================================
 
@@ -614,7 +636,10 @@
         // ===== ДАННЫЕ ДЛЯ РАБОТЫ =====
         let selectedJobLevel = '';
 
-        // ===== ВСЕ РАБОТЫ ПО УРОВНЯМ (чистые названия, без (0/1) и т.п.) =====
+        // ===== ДАННЫЕ ДЛЯ АВТОСАЛОНА =====
+        let selectedCarClass = '';
+
+        // ===== ВСЕ РАБОТЫ ПО УРОВНЯМ =====
         const jobsData = {
             '1 уровень': [
                 { emoji: '🍟', name: 'Продавец в Макдональдсе/магазине', salary: '60.000₽' },
@@ -667,541 +692,4 @@
             ],
             '5 уровень': [
                 { emoji: '🪨', name: 'Начальник шахты', salary: '350.000₽' },
-                { emoji: '💸', name: 'Директор ТЦ', salary: '340.000₽' },
-                { emoji: '🚗', name: 'Директор СТО', salary: '330.000₽' }
-            ],
-            '6 уровень': [
-                { emoji: '💸', name: 'Директор Т-Банка', salary: '500.000₽' },
-                { emoji: '💸', name: 'Директор Сбербанка', salary: '480.000₽' },
-                { emoji: '💸', name: 'Директор Альфа-Банка', salary: '455.000₽' }
-            ]
-        };
-
-        // ===== DOM ЭЛЕМЕНТЫ =====
-        const pages = {
-            main: document.getElementById('page-main'),
-            register: document.getElementById('page-register'),
-            login: document.getElementById('page-login'),
-            site: document.getElementById('page-site'),
-            passport: document.getElementById('page-passport'),
-            passportEdit: document.getElementById('page-passport-edit'),
-            passportReady: document.getElementById('page-passport-ready'),
-            gosnumber: document.getElementById('page-gosnumber'),
-            generator: document.getElementById('page-generator'),
-            job: document.getElementById('page-job'),
-            jobHire: document.getElementById('page-job-hire'),
-            jobHireSub: document.getElementById('page-job-hire-sub'),
-            jobFire: document.getElementById('page-job-fire'),
-        };
-
-        // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
-        function showPage(name) {
-            Object.keys(pages).forEach(key => {
-                pages[key].classList.toggle('active', key === name);
-            });
-        }
-
-        function getInputVal(id) { return document.getElementById(id).value.trim(); }
-
-        function showToast(message, type = '') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast ' + type;
-            void toast.offsetWidth;
-            toast.classList.add('show');
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        function getFullName() {
-            if (activity.passport && activity.passport.фио) return activity.passport.фио;
-            if (activity.fio) return activity.fio;
-            return 'Неизвестно';
-        }
-
-        function updateJobStatus() {
-            const display = document.getElementById('jobStatusDisplay');
-            if (activity.job) {
-                display.innerHTML = `Текущая работа: <strong style="color:#fff;">${activity.job.name}</strong> <span style="opacity:0.4; font-size:13px;">(${activity.job.level}, ${activity.job.salary})</span>`;
-            } else {
-                display.innerHTML = 'Текущая работа: <strong style="color:#fff;">не выбрана</strong>';
-            }
-        }
-
-        // ===== ОТПРАВКА В TELEGRAM =====
-        function sendToTelegram(message, topicId) {
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-            const payload = {
-                chat_id: CHAT_ID,
-                text: message,
-                parse_mode: 'HTML',
-                message_thread_id: parseInt(topicId, 10)
-            };
-            return axios.post(url, payload)
-                .then(response => {
-                    console.log('✅ Отправлено:', response.data);
-                    return response;
-                })
-                .catch(error => {
-                    console.error('❌ Ошибка:', error);
-                    if (error.response) {
-                        showToast('Ошибка Telegram: ' + (error.response.data.description || 'неизвестная'), 'error');
-                    } else {
-                        showToast('Ошибка соединения', 'error');
-                    }
-                    throw error;
-                });
-        }
-
-        // ===== НАВИГАЦИЯ =====
-        document.getElementById('btnToRegister').addEventListener('click', () => showPage('register'));
-        document.getElementById('btnToLogin').addEventListener('click', () => showPage('login'));
-        document.getElementById('btnBackToMain').addEventListener('click', () => showPage('main'));
-        document.getElementById('btnBackFromLogin').addEventListener('click', () => showPage('main'));
-        document.getElementById('btnBackToSite').addEventListener('click', () => showPage('site'));
-        document.getElementById('btnBackToSiteGos').addEventListener('click', () => showPage('site'));
-        document.getElementById('btnBackToSiteFromPass').addEventListener('click', () => showPage('site'));
-        document.getElementById('btnBackToSiteJob').addEventListener('click', () => showPage('site'));
-        document.getElementById('btnBackToGosType').addEventListener('click', () => {
-            showPage('gosnumber');
-            isGenerated = false;
-            document.getElementById('btnGenerateSlot').disabled = false;
-        });
-        document.getElementById('btnBackToJob').addEventListener('click', () => showPage('job'));
-        document.getElementById('btnBackToHire').addEventListener('click', () => showPage('jobHire'));
-        document.getElementById('btnBackToJobFire').addEventListener('click', () => showPage('job'));
-
-        // ===== РЕГИСТРАЦИЯ =====
-        document.getElementById('btnRegisterSubmit').addEventListener('click', function() {
-            const fio = getInputVal('regFio');
-            const age = getInputVal('regAge');
-            const other = getInputVal('regOther');
-            if (!fio || !age) {
-                showToast('Заполните ФИО и возраст!', 'error');
-                return;
-            }
-            activity.fio = fio;
-            activity.age = age;
-            activity.other = other || 'Не указано';
-
-            const message = `📝 <b>Новая регистрация</b>\n\n👤 ФИО: ${fio}\n📅 Возраст: ${age}\n📌 Другие РП: ${other || 'Не указано'}`;
-            sendToTelegram(message, TOPIC_REG)
-                .then(() => {
-                    window.open('https://t.me/+-FEx5i7S8lQ3Y2My', '_blank');
-                    showPage('main');
-                    activity.authorized = true;
-                    localStorage.setItem('activity_kaskad', JSON.stringify({ authorized: true, fio, age, other }));
-                    showToast('✅ Регистрация завершена!', 'success');
-                })
-                .catch(() => {
-                    showToast('⚠️ Ошибка отправки, но данные сохранены', 'error');
-                });
-        });
-
-        // ===== ВХОД ПО КОДУ =====
-        document.getElementById('btnLoginSubmit').addEventListener('click', function() {
-            const code = getInputVal('loginCode');
-            if (!code) {
-                showToast('Введите код!', 'error');
-                return;
-            }
-            if (code !== ADMIN_CODE) {
-                showToast('❌ Неверный код доступа!', 'error');
-                return;
-            }
-            activity.authorized = true;
-            localStorage.setItem('activity_kaskad', JSON.stringify({ authorized: true }));
-            showPage('site');
-            document.getElementById('userStatus').textContent = '✅ активен';
-            showToast('✅ Добро пожаловать!', 'success');
-        });
-
-        // ===== ВЫХОД =====
-        document.getElementById('btnLogout').addEventListener('click', function() {
-            activity.authorized = false;
-            localStorage.removeItem('activity_kaskad');
-            showPage('main');
-            showToast('👋 Вы вышли', '');
-        });
-
-        // ===== ПАСПОРТ =====
-        document.getElementById('btnPassport').addEventListener('click', function() {
-            if (activity.passport) {
-                document.getElementById('passportJsonDisplay').textContent = JSON.stringify(activity.passport, null, 2);
-                showPage('passportReady');
-                return;
-            }
-            if (activity.fio) document.getElementById('passFio').value = activity.fio;
-            if (activity.age) document.getElementById('passAge').value = activity.age;
-            showPage('passport');
-        });
-
-        document.getElementById('btnPassportSubmit').addEventListener('click', function() {
-            const fio = getInputVal('passFio');
-            const age = getInputVal('passAge');
-            const code = getInputVal('passCode');
-            if (!fio || !age || !code) {
-                showToast('Заполните все поля!', 'error');
-                return;
-            }
-            const passportData = { фио: fio, возраст: parseInt(age, 10), код: code };
-            activity.passport = passportData;
-            localStorage.setItem('passport_kaskad', JSON.stringify(passportData));
-
-            const msg = `🪪 <b>НОВЫЙ ПАСПОРТ</b>\n\n👤 ФИО: ${fio}\n📅 Возраст: ${age}\n🔑 Код: ${code}`;
-            sendToTelegram(msg, TOPIC_PASSPORT);
-
-            document.getElementById('passportJsonDisplay').textContent = JSON.stringify(passportData, null, 2);
-            showPage('passportReady');
-            showToast('✅ Паспорт получен!', 'success');
-        });
-
-        // ===== РЕДАКТИРОВАНИЕ ПАСПОРТА =====
-        document.getElementById('btnEditPassport').addEventListener('click', function() {
-            if (activity.passport) {
-                document.getElementById('editPassFio').value = activity.passport.фио || '';
-                document.getElementById('editPassAge').value = activity.passport.возраст || '';
-                document.getElementById('editPassCode').value = activity.passport.код || '';
-                showPage('passportEdit');
-            } else {
-                showToast('Сначала получите паспорт!', 'error');
-            }
-        });
-
-        document.getElementById('btnBackToPassport').addEventListener('click', function() {
-            if (activity.passport) {
-                document.getElementById('passportJsonDisplay').textContent = JSON.stringify(activity.passport, null, 2);
-                showPage('passportReady');
-            } else {
-                showPage('passport');
-            }
-        });
-
-        document.getElementById('btnPassportEditSave').addEventListener('click', function() {
-            const fio = getInputVal('editPassFio');
-            const age = getInputVal('editPassAge');
-            const code = getInputVal('editPassCode');
-            if (!fio || !age || !code) {
-                showToast('Заполните все поля!', 'error');
-                return;
-            }
-            const passportData = { фио: fio, возраст: parseInt(age, 10), код: code };
-            activity.passport = passportData;
-            localStorage.setItem('passport_kaskad', JSON.stringify(passportData));
-            document.getElementById('passportJsonDisplay').textContent = JSON.stringify(passportData, null, 2);
-            showPage('passportReady');
-            showToast('✅ Паспорт обновлен!', 'success');
-        });
-
-        // ===== ГОСНОМЕР =====
-        document.getElementById('btnGosNumber').addEventListener('click', function() {
-            if (!activity.passport) {
-                showToast('Сначала получите паспорт!', 'error');
-                return;
-            }
-            showPage('gosnumber');
-        });
-
-        let selectedGosType = 'Обычный';
-
-        function setupGenerator(type, price, title, displayType) {
-            selectedGosType = type;
-            currentPrice = price;
-            isGenerated = false;
-            document.getElementById('btnGenerateSlot').disabled = false;
-            document.getElementById('genTitle').textContent = title;
-            document.getElementById('priceDisplay').textContent = price.toLocaleString();
-            document.getElementById('typeDisplay').textContent = displayType;
-            document.getElementById('slotDisplay').textContent = '???';
-            document.getElementById('slotDisplay').className = 'slot-result';
-            currentGeneratedNumber = '';
-            showPage('generator');
-        }
-
-        document.getElementById('gosTypeNormal').addEventListener('click', function() {
-            setupGenerator('Обычный', 5000, '🎰 Обычный номер', 'Обычный');
-        });
-        document.getElementById('gosTypePremium').addEventListener('click', function() {
-            setupGenerator('Премиум', 100000, '✨ Премиум номер', 'Премиум');
-        });
-        document.getElementById('gosTypeCustom').addEventListener('click', function() {
-            setupGenerator('Кастомный', 1000000, '🎨 Кастомный номер', 'Кастомный (введите вручную)');
-        });
-
-        // ===== ГЕНЕРАТОР =====
-        document.getElementById('btnGenerateSlot').addEventListener('click', function() {
-            if (isGenerated) {
-                showToast('⛔ Номер уже сгенерирован. Оплатите или выберите другой тип.', 'error');
-                return;
-            }
-
-            const region = getInputVal('regionInput') || '116';
-            const slotDisplay = document.getElementById('slotDisplay');
-
-            if (selectedGosType === 'Кастомный') {
-                const custom = prompt('Введите желаемый госномер (буквы и цифры):', 'A001AA');
-                if (custom && custom.length > 1) {
-                    currentGeneratedNumber = custom + ' | ' + region;
-                    slotDisplay.textContent = custom + ' ' + region;
-                    slotDisplay.className = 'slot-result generated';
-                    isGenerated = true;
-                    document.getElementById('btnGenerateSlot').disabled = true;
-                    showToast('✅ Номер сгенерирован!', 'success');
-                } else {
-                    showToast('Введите корректный номер', 'error');
-                }
-                return;
-            }
-
-            const letters = 'АВЕКМНОРСТУХ'.split('');
-            const digits = '0123456789'.split('');
-
-            function randomItem(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
-            let result = '';
-            if (selectedGosType === 'Обычный') {
-                const l1 = randomItem(letters);
-                const d1 = randomItem(digits);
-                const d2 = randomItem(digits);
-                const d3 = randomItem(digits);
-                const l2 = randomItem(letters);
-                const l3 = randomItem(letters);
-                result = l1 + d1 + d2 + d3 + l2 + l3;
-            } else if (selectedGosType === 'Премиум') {
-                const isMirror = Math.random() > 0.5;
-                if (isMirror) {
-                    const isLetter = Math.random() > 0.5;
-                    if (isLetter) {
-                        const l = randomItem(letters);
-                        const l2 = randomItem(letters);
-                        result = l + l2 + l;
-                    } else {
-                        const d = randomItem(digits);
-                        const d2 = randomItem(digits);
-                        result = d + d2 + d;
-                    }
-                } else {
-                    const isLetter = Math.random() > 0.5;
-                    if (isLetter) {
-                        const l = randomItem(letters);
-                        result = l + l + l;
-                    } else {
-                        const d = randomItem(digits);
-                        result = d + d + d;
-                    }
-                }
-            }
-
-            currentGeneratedNumber = result + ' | ' + region;
-            slotDisplay.textContent = result + ' ' + region;
-            slotDisplay.className = 'slot-result generated';
-            isGenerated = true;
-            document.getElementById('btnGenerateSlot').disabled = true;
-            showToast('✅ Номер сгенерирован!', 'success');
-        });
-
-        // ===== ОПЛАТА И ОТПРАВКА ГОСНОМЕРА =====
-        document.getElementById('btnBuyGosnumber').addEventListener('click', function() {
-            if (!currentGeneratedNumber) {
-                showToast('Сначала сгенерируйте номер!', 'error');
-                return;
-            }
-            if (!activity.passport) {
-                showToast('Паспорт не найден! Получите паспорт.', 'error');
-                return;
-            }
-
-            const fio = getFullName();
-            const msg = `🚘 <b>НОВЫЙ ГОСНОМЕР</b>\n\n🔢 Номер: ${currentGeneratedNumber}\n👤 Пользователь: ${fio}\n💰 К оплате: ${currentPrice.toLocaleString()} ₽\n🏷 Тип: ${selectedGosType}`;
-
-            sendToTelegram(msg, TOPIC_GOSNUMBER)
-                .then(() => {
-                    showToast('✅ Госномер отправлен!', 'success');
-                    isGenerated = false;
-                    document.getElementById('btnGenerateSlot').disabled = false;
-                    document.getElementById('slotDisplay').textContent = '???';
-                    document.getElementById('slotDisplay').className = 'slot-result';
-                    currentGeneratedNumber = '';
-                    showPage('site');
-                })
-                .catch(() => {
-                    showToast('❌ Ошибка отправки', 'error');
-                });
-        });
-
-        // ================================================================
-        // ===== РАБОТА ====================================================
-        // ================================================================
-
-        document.getElementById('btnJob').addEventListener('click', function() {
-            if (!activity.passport) {
-                showToast('Сначала получите паспорт!', 'error');
-                return;
-            }
-            updateJobStatus();
-            showPage('job');
-        });
-
-        // ===== УСТРОИТЬСЯ (показываем уровни) =====
-        document.getElementById('btnJobHire').addEventListener('click', function() {
-            const container = document.getElementById('jobLevelsContainer');
-            container.innerHTML = '';
-            const levels = Object.keys(jobsData);
-            levels.forEach(level => {
-                const div = document.createElement('div');
-                div.className = 'job-item';
-                div.innerHTML = `
-                    <div class="job-info">
-                        <span style="font-size:18px; margin-right:8px;">📂</span>
-                        <span class="job-name">${level}</span>
-                        <span class="job-badge">${jobsData[level].length} вакансий</span>
-                    </div>
-                    <span style="opacity:0.3;">→</span>
-                `;
-                div.addEventListener('click', function() {
-                    selectedJobLevel = level;
-                    showJobSubLevels(level);
-                });
-                container.appendChild(div);
-            });
-            showPage('jobHire');
-        });
-
-        // ===== ПОКАЗАТЬ РАБОТЫ ВЫБРАННОГО УРОВНЯ =====
-        function showJobSubLevels(level) {
-            const container = document.getElementById('jobSubContainer');
-            container.innerHTML = '';
-            document.getElementById('jobSubTitle').textContent = `📋 ${level}`;
-
-            const jobs = jobsData[level] || [];
-            jobs.forEach(job => {
-                const div = document.createElement('div');
-                div.className = 'job-item';
-                div.innerHTML = `
-                    <div class="job-info">
-                        <span class="job-emoji">${job.emoji}</span>
-                        <span class="job-name">${job.name}</span>
-                    </div>
-                    <span class="job-salary">${job.salary}</span>
-                `;
-                div.addEventListener('click', function() {
-                    if (activity.job && activity.job.name === job.name && activity.job.level === level) {
-                        showToast('⚠️ Вы уже устроены на эту работу!', 'error');
-                        return;
-                    }
-                    hireJob(level, job);
-                });
-                container.appendChild(div);
-            });
-            showPage('jobHireSub');
-        }
-
-        // ===== НАНЯТЬСЯ НА РАБОТУ =====
-        function hireJob(level, job) {
-            const fio = getFullName();
-            const msg = `💼 <b>ТРУДОУСТРОЙСТВО</b>\n\n👤 Пользователь: ${fio}\n📂 Уровень: ${level}\n💼 Работа: ${job.emoji} ${job.name}\n💰 Зарплата: ${job.salary}`;
-
-            sendToTelegram(msg, TOPIC_JOB)
-                .then(() => {
-                    activity.job = {
-                        level: level,
-                        name: job.name,
-                        salary: job.salary,
-                        emoji: job.emoji
-                    };
-                    localStorage.setItem('activity_kaskad_job', JSON.stringify(activity.job));
-                    showToast(`✅ Вы устроились на работу: ${job.name}!`, 'success');
-                    updateJobStatus();
-                    showPage('job');
-                })
-                .catch(() => {
-                    showToast('❌ Ошибка отправки', 'error');
-                });
-        }
-
-        // ===== УВОЛИТЬСЯ =====
-        document.getElementById('btnJobFire').addEventListener('click', function() {
-            if (!activity.job) {
-                showToast('⚠️ Вы нигде не работаете!', 'error');
-                return;
-            }
-            document.getElementById('fireJobDisplay').textContent = `Работа: ${activity.job.emoji} ${activity.job.name} (${activity.job.level})`;
-            showPage('jobFire');
-        });
-
-        document.getElementById('btnFireConfirm').addEventListener('click', function() {
-            if (!activity.job) {
-                showToast('⚠️ Вы нигде не работаете!', 'error');
-                showPage('job');
-                return;
-            }
-
-            const fio = getFullName();
-            const jobName = `${activity.job.emoji} ${activity.job.name}`;
-            const msg = `🚫 <b>УВОЛЬНЕНИЕ</b>\n\n👤 Пользователь: ${fio}\n💼 Уволился с работы: ${jobName}`;
-
-            sendToTelegram(msg, TOPIC_JOB)
-                .then(() => {
-                    const oldJob = activity.job.name;
-                    activity.job = null;
-                    localStorage.removeItem('activity_kaskad_job');
-                    showToast(`✅ Вы уволились с работы: ${oldJob}`, 'success');
-                    updateJobStatus();
-                    showPage('job');
-                })
-                .catch(() => {
-                    showToast('❌ Ошибка отправки', 'error');
-                });
-        });
-
-        document.getElementById('btnFireCancel').addEventListener('click', function() {
-            showPage('job');
-        });
-
-        // ===== ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ =====
-        function loadState() {
-            const saved = localStorage.getItem('activity_kaskad');
-            if (saved) {
-                try {
-                    const data = JSON.parse(saved);
-                    if (data.authorized) {
-                        activity.authorized = true;
-                        if (data.fio) activity.fio = data.fio;
-                        if (data.age) activity.age = data.age;
-                        if (data.other) activity.other = data.other;
-                        showPage('site');
-                        document.getElementById('userStatus').textContent = '✅ активен';
-                    }
-                } catch (e) { /* ignore */ }
-            }
-
-            const passportSaved = localStorage.getItem('passport_kaskad');
-            if (passportSaved) {
-                try {
-                    activity.passport = JSON.parse(passportSaved);
-                } catch (e) { /* ignore */ }
-            }
-
-            const jobSaved = localStorage.getItem('activity_kaskad_job');
-            if (jobSaved) {
-                try {
-                    activity.job = JSON.parse(jobSaved);
-                } catch (e) { /* ignore */ }
-            }
-
-            updateJobStatus();
-        }
-
-        loadState();
-
-        if (activity.authorized && document.getElementById('page-main').classList.contains('active')) {
-            showPage('site');
-        }
-
-        console.log('✅ Kaskad RP (чистые названия работ) загружена!');
-    })();
-</script>
-</body>
-</html>
+                { emoji: '💸', name: 'Директор ТЦ', salary:
