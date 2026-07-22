@@ -637,8 +637,11 @@
     <!-- ===== СТРАНИЦА 10.1: АВТОСАЛОН (АВТОМОБИЛИ) ===== -->
     <div id="page-cardealer-sub" class="page">
         <h2 style="font-weight: 300; letter-spacing: 1px;" id="carSubTitle">Выберите авто</h2>
-        <div class="card" id="carSubContainer">
-            <!-- Автомобили вставляются скриптом -->
+        <div class="card">
+            <input type="text" class="search-input" id="carSearch" placeholder="🔍 Поиск по авто...">
+            <div id="carSubContainer">
+                <!-- Автомобили вставляются скриптом -->
+            </div>
         </div>
         <button class="btn btn-secondary btn-block" id="btnBackToCarClasses">← Назад к классам</button>
     </div>
@@ -687,9 +690,9 @@
         const TOPIC_PASSPORT = '389';
         const TOPIC_GOSNUMBER = '399';
         const TOPIC_JOB = '441';
-        const TOPIC_CARDEALER = '24'; // Ветка для автосалонов
+        const TOPIC_CARDEALER = '24';
         const TOPIC_PTS = '1089';
-        const TOPIC_TUNING = '1633'; // Ветка для тюнинга
+        const TOPIC_TUNING = '1633';
         const ADMIN_CODE = 'kaskadRP109287codeA';
         // =================================================================
 
@@ -799,23 +802,25 @@
             ]
         };
 
-        // ===== ВСЕ АВТОМОБИЛИ ПО КЛАССАМ =====
+        // ===== ВСЕ АВТОМОБИЛИ ПО КЛАССАМ (ОБНОВЛЕННЫЕ) =====
         const carsData = {
             'Низкий класс': [
-                { name: 'BMW M5 E28', hp: '', price: '500.000💸' },
-                { name: 'Volkswagen GOLF GTI 2', hp: '', price: '200.000💸' },
-                { name: 'Honda Civic', hp: '', price: '800.000💸' },
+                { name: 'BMW M5 E28', hp: '286 HP', price: '500.000💸' },
+                { name: 'Volkswagen GOLF GTI 2', hp: '150 HP', price: '200.000💸' },
+                { name: 'Honda Civic', hp: '150 HP', price: '800.000💸' },
                 { name: 'ВАЗ 2107', hp: '110 HP', price: '150.000₽💸' },
                 { name: 'Mercedes-Benz W210 E430', hp: '280 HP', price: '850.000₽💸' },
                 { name: 'LADA Niva 4х4 Urban', hp: '130 HP', price: '550.000💸' },
                 { name: 'Mercedes-Benz 190e', hp: '220 HP', price: '250.000₽💸' },
                 { name: 'ВАЗ 2114', hp: '100 HP', price: '170.000₽💸' },
-                { name: 'Лада Приора', hp: '140 HP', price: '600.000₽💸' },
+                { name: 'Лада Приора', hp: '140 HP', price: '500.000₽💸' },
                 { name: 'Mini Cooper', hp: '230 HP', price: '1.300.000₽💸' },
                 { name: 'BMW 535i E34', hp: '211 HP', price: '600.000₽💸' },
                 { name: 'Smart Fortvo', hp: '150 HP', price: '900.000₽💸' },
                 { name: 'Hyundai veloster', hp: '150 HP', price: '250.000₽💸' },
-                { name: 'Tofas Dogan SLX', hp: '83hp', price: '25.000' }
+                { name: 'Tofas Dogan SLX', hp: '83hp', price: '25.000' },
+                { name: 'Dacia Logan', hp: '74 HP', price: '380.000₽' },
+                { name: 'Peugeot 406', hp: '207 HP', price: '300.000₽' }
             ],
             'Средний класс': [
                 { name: 'Toyota Camry XV70', hp: '280 HP', price: '3.700.000₽💸' },
@@ -852,11 +857,16 @@
                 { name: 'Audi Quattro', hp: '400 HP', price: '4.500.000₽💸' },
                 { name: 'BMW Z4', hp: '310 HP', price: '3.100.000₽💸' },
                 { name: 'Volkswagen Vintage', hp: '45 HP', price: '3.100.000₽💸' },
-                { name: '2017 Volswagen Golf GTI', hp: '240 HP', price: '3.000.000₽' },
+                { name: 'Volswagen Golf GTI', hp: '240 HP', price: '3.000.000₽' },
                 { name: 'BMW X1', hp: '326 HP', price: '2.900.000₽' },
                 { name: 'BMW 525i', hp: '218 HP', price: '1.150.000₽💸' },
                 { name: 'BMW M3 E92', hp: '420 HP', price: '2.600.000₽' },
-                { name: 'dodge charger srt', hp: '432hp', price: '4.000.000' }
+                { name: 'dodge charger srt', hp: '432hp', price: '4.000.000' },
+                { name: 'Volkswagen Scirocco', hp: '250 HP', price: '950.000₽' },
+                { name: 'Audi TT', hp: '230 HP', price: '1.300.000₽' },
+                { name: 'Mazda rx7', hp: '550 HP', price: '5.000.000₽' },
+                { name: 'mercedes cls63', hp: '578hp', price: '3.600.000' },
+                { name: 'Skoda Octavia A8', hp: '190hp', price: '2.700.000' }
             ],
             'Высокий класс': [
                 { name: 'Mercedes-Benz AMG GT 63', hp: '640 HP', price: '15.000.000💸' },
@@ -900,18 +910,20 @@
                 { name: 'Ford Raptor F-150', hp: '430 HP', price: '13.000.000💸' },
                 { name: 'RAM 1500 TRX', hp: '702 HP', price: '12.000.000💸' },
                 { name: 'Toyota Land Cruiser 200', hp: '362 HP', price: '6.000.000₽💸' },
-                { name: 'Mercedes-Benz CLS 63 AMG', hp: '630 HP', price: '6.000.000₽💸' },
                 { name: 'BMW i7', hp: '544 HP', price: '13.500.000₽💸' },
                 { name: 'Dodge Charger SRT Hellcat Redeye', hp: '807hp', price: '17.000.000' },
                 { name: 'Bmw m6 competition edition', hp: '600hp', price: '15.000.000' },
-                { name: 'Bmw m5 f90 first edition', hp: '625hp', price: '9.000.000' },
                 { name: 'Chevrolet Camaro', hp: '650hp', price: '15.000.000' },
                 { name: 'Cadillac Escalade', hp: '682hp', price: '27.000.000' },
                 { name: 'Range rover', hp: '542hp', price: '20.000.000' },
                 { name: 'bmw m2 g87', hp: '460hp', price: '9.000.000' },
                 { name: 'DODGE CHALLENGER HELLCAT SRT', hp: '808hp', price: '12.000.000' },
                 { name: 'Land Rover Defender', hp: '394 HP', price: '9.381.000₽💸' },
-                { name: 'Aston Martin Vantage Roadster', hp: '690 HP', price: '24.900.100₽💸' }
+                { name: 'Aston Martin Vantage Roadster', hp: '690 HP', price: '24.900.100₽💸' },
+                { name: 'BMW M5 G90', hp: '585 HP', price: '20.000.000₽' },
+                { name: 'Mercedes-Benz W223 S63E Performance', hp: '612 HP', price: '22.000.000₽' },
+                { name: 'Mercedes-Benz W223 Maybach S680', hp: '612 HP', price: '30.000.000₽' },
+                { name: 'bmw m5 f10 competition', hp: '600hp', price: '6.500.000' }
             ],
             'Люкс класс': [
                 { name: 'Ferrari F12 Berlinetta', hp: '760 HP', price: '40.000.000₽💸' },
@@ -921,7 +933,15 @@
                 { name: 'Porsche 911 GT3 RS', hp: '502 HP', price: '55.000.000₽💸' },
                 { name: 'Rolls-Royce Dawn', hp: '580 HP', price: '50.000.000₽💸' },
                 { name: 'porsche carrera gt', hp: '612hp', price: '25.000.000' },
-                { name: 'porsche spyder 918', hp: '608hp', price: '50.000.000' }
+                { name: 'porsche spyder 918', hp: '608hp', price: '50.000.000' },
+                { name: 'Bugatti Veyron', hp: '1001 HP', price: '170.000.000₽' },
+                { name: 'Bugatti Chiron', hp: '1500 HP', price: '350.000.000₽' },
+                { name: 'Mercedes-Benz CLK GTR AMG', hp: '660 HP', price: '280.000.000₽' },
+                { name: 'McLaren 720S', hp: '710 HP', price: '27.000.000₽' },
+                { name: 'Mercedes-Benz AMG ONE', hp: '1049 HP', price: '350.000.000₽' },
+                { name: 'Lexus LFA', hp: '540 HP', price: '90.000.000₽' },
+                { name: 'Ferrari F40', hp: '478 HP', price: '70.000.000₽' },
+                { name: 'Pagani Zonda F', hp: '764 HP', price: '200.000.000₽' }
             ]
         };
 
@@ -1482,13 +1502,33 @@
             showPage('cardealer');
         }
 
+        let currentCarFilter = '';
+
         function showCarSubLevels(cls) {
             const container = document.getElementById('carSubContainer');
             container.innerHTML = '';
             document.getElementById('carSubTitle').textContent = `🏎️ ${cls}`;
+            currentCarFilter = '';
+            document.getElementById('carSearch').value = '';
+            renderCars(cls);
+            showPage('cardealerSub');
+        }
 
+        function renderCars(cls, filter = '') {
+            const container = document.getElementById('carSubContainer');
+            container.innerHTML = '';
+            
             const cars = carsData[cls] || [];
-            cars.forEach(car => {
+            const filtered = cars.filter(car => 
+                car.name.toLowerCase().includes(filter.toLowerCase())
+            );
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div style="text-align:center; opacity:0.4; padding:20px;">🚫 Автомобили не найдены</div>`;
+                return;
+            }
+
+            filtered.forEach(car => {
                 const div = document.createElement('div');
                 div.className = 'car-item';
                 div.innerHTML = `
@@ -1504,8 +1544,14 @@
                 });
                 container.appendChild(div);
             });
-            showPage('cardealerSub');
         }
+
+        // Поиск в автосалоне
+        document.getElementById('carSearch').addEventListener('input', function() {
+            const filter = this.value;
+            const cls = selectedCarClass;
+            renderCars(cls, filter);
+        });
 
         function buyCar(cls, car) {
             const fio = getFullName();
@@ -1643,7 +1689,6 @@
         }
 
         function addToCart(part) {
-            // Проверяем, есть ли уже такая деталь в корзине
             const existing = tuningCart.find(item => item.name === part.name);
             if (existing) {
                 existing.quantity += 1;
@@ -1776,10 +1821,10 @@
             showPage('site');
         }
 
-        console.log('✅ Kaskad RP (с Turbo Tuning) загружена!');
-        console.log('🚗 Всего авто для ПТС:', allCarsList.length);
-        console.log('🔧 Доступно запчастей:', tuningParts.length);
+        console.log('✅ Kaskad RP (обновленные автосалоны) загружена!');
+        console.log('🚗 Всего авто в автосалонах:', Object.values(carsData).reduce((acc, arr) => acc + arr.length, 0));
+        console.log('🚗 Всего авто для ПТС:', getAllCarsForPTS().length);
     })();
 </script>
 </body>
-                </html>
+</html>
