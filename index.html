@@ -802,7 +802,7 @@
             ]
         };
 
-        // ===== ВСЕ АВТОМОБИЛИ ПО КЛАССАМ (ОБНОВЛЕННЫЕ) =====
+        // ===== ВСЕ АВТОМОБИЛИ ПО КЛАССАМ =====
         const carsData = {
             'Низкий класс': [
                 { name: 'BMW M5 E28', hp: '286 HP', price: '500.000💸' },
@@ -842,6 +842,7 @@
                 { name: 'BMW M4 F82', hp: '420 HP', price: '5.200.000₽💸' },
                 { name: 'Mitsubishi Lancer Evolution IX', hp: '350 HP', price: '3.800.000₽💸' },
                 { name: 'Nissan 180 SX', hp: '230 HP', price: '3.500.000₽💸' },
+                { name: 'Nissan 150SX', hp: '230 hp', price: '4.500.000' },
                 { name: 'Honda CR-X del Sol', hp: '168 HP', price: '2.500.000₽💸' },
                 { name: 'Honda Civic Type R', hp: '300 HP', price: '3.400.000₽💸' },
                 { name: 'Volkswagen Passat', hp: '220 HP', price: '2.300.000₽💸' },
@@ -1546,7 +1547,6 @@
             });
         }
 
-        // Поиск в автосалоне
         document.getElementById('carSearch').addEventListener('input', function() {
             const filter = this.value;
             const cls = selectedCarClass;
@@ -1821,10 +1821,11 @@
             showPage('site');
         }
 
-        console.log('✅ Kaskad RP (обновленные автосалоны) загружена!');
+        console.log('✅ Kaskad RP загружена!');
         console.log('🚗 Всего авто в автосалонах:', Object.values(carsData).reduce((acc, arr) => acc + arr.length, 0));
         console.log('🚗 Всего авто для ПТС:', getAllCarsForPTS().length);
+        console.log('🔧 Доступно запчастей:', tuningParts.length);
     })();
 </script>
 </body>
-</html>
+    </html>
