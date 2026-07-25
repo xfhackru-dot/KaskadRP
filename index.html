@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kaskad RP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="components.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<div class="app" id="app">
+    <div class="project-title">KASKAD <span>RP</span></div>
+    <div class="subhead">✦ car parking multiplayer ✦</div>
+
+    <!-- СТРАНИЦА 1: ГЛАВНАЯ -->
+    <div id="page-main" class="page active">
+        <div class="card card-highlight">
+            <div class="about-text">
+                <p><strong>Kaskad RP</strong> — ролевой проект по игре <strong>Car Parking Multiplayer</strong>.</p>
+                <p style="margin-top: 10px;">🚗 Вход всем желающим! Пройдите регистрацию ниже.</p>
+            </div>
+        </div>
+        <button class="btn btn-primary" id="btnToRegister">📝 Зарегистрироваться</button>
+        <button class="btn btn-secondary" id="btnToLogin">🔑 Вход по коду</button>
+        <div style="font-size: 12px; text-align: center; opacity: 0.3; margin-top: -4px;">Уже есть код? Войдите</div>
+    </div>
+
+    <!-- СТРАНИЦА 2: РЕГИСТРАЦИЯ -->
+    <div id="page-register" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">📋 Регистрация</h2>
+        <div class="card">
+            <div class="input-group">
+                <label>РП ФИО</label>
+                <input type="text" id="regFio" placeholder="Иван Петров">
+            </div>
+            <div class="input-group">
+                <label>РП Возраст</label>
+                <input type="number" id="regAge" placeholder="25">
+            </div>
+            <div class="input-group">
+                <label>Был ли в других проектах?</label>
+                <input type="text" id="regOther" placeholder="Да / Нет / Название">
+            </div>
+        </div>
+        <button class="btn btn-success" id="btnRegisterSubmit">✅ Готово</button>
+        <button class="btn btn-secondary btn-block" id="btnBackToMain">← Назад</button>
+    </div>
+
+    <!-- СТРАНИЦА 3: ВХОД ПО КОДУ -->
+    <div id="page-login" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">🔐 Вход по коду</h2>
+        <div class="card">
+            <div class="input-group">
+                <label>Введите код доступа</label>
+                <input type="text" id="loginCode" placeholder="Введите код">
+            </div>
+        </div>
+        <button class="btn btn-primary" id="btnLoginSubmit">🚪 Войти</button>
+        <button class="btn btn-secondary btn-block" id="btnBackFromLogin">← Назад</button>
+    </div>
+
+    <!-- СТРАНИЦА 4: ОСНОВНАЯ ПАНЕЛЬ -->
+    <div id="page-site" class="page">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 style="font-weight: 300; letter-spacing: 1px;">🏠 Панель</h2>
+            <span class="status-badge" id="userStatus">online</span>
+        </div>
+        <div class="flex-buttons">
+            <button class="btn btn-secondary" id="btnPassport">🪪 Паспорт</button>
+            <button class="btn btn-secondary" id="btnGosNumber">🚘 Госномер</button>
+            <button class="btn btn-secondary" id="btnJob">💼 Работа</button>
+            <button class="btn btn-secondary" id="btnCarDealer">🏎️ Автосалоны</button>
+            <button class="btn btn-secondary" id="btnPTS">📄 Получить ПТС</button>
+            <button class="btn btn-secondary" id="btnTuning">🔧 Turbo Tuning</button>
+        </div>
+        <a href="https://t.me/+-FEx5i7S8lQ3Y2My" target="_blank" class="btn btn-primary">📲 Перейти в проект</a>
+        <button class="btn btn-secondary btn-block" id="btnLogout" style="opacity:0.4;">Выйти</button>
+    </div>
+
+    <!-- СТРАНИЦА 5: ПАСПОРТ -->
+    <div id="page-passport" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">🪪 Оформление паспорта</h2>
+        <div class="card">
+            <div class="input-group">
+                <label>ФИО</label>
+                <input type="text" id="passFio" placeholder="Иван Петров">
+            </div>
+            <div class="input-group">
+                <label>Возраст</label>
+                <input type="number" id="passAge" placeholder="25">
+            </div>
+            <div class="input-group">
+                <label>Уникальный код (от админа)</label>
+                <input type="text" id="passCode" placeholder="KASKAD-XXXX">
+            </div>
+        </div>
+        <button class="btn btn-success" id="btnPassportSubmit">✅ Получить паспорт</button>
+        <button class="btn btn-secondary btn-block" id="btnBackToSite">← Назад</button>
+    </div>
+
+    <!-- СТРАНИЦА 5.1: РЕДАКТОР ПАСПОРТА -->
+    <div id="page-passport-edit" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">✏️ Редактировать паспорт</h2>
+        <div class="card">
+            <div class="input-group">
+                <label>ФИО</label>
+                <input type="text" id="editPassFio" placeholder="Иван Петров">
+            </div>
+            <div class="input-group">
+                <label>Возраст</label>
+                <input type="number" id="editPassAge" placeholder="25">
+            </div>
+            <div class="input-group">
+                <label>Уникальный код</label>
+                <input type="text" id="editPassCode" placeholder="KASKAD-XXXX">
+            </div>
+        </div>
+        <button class="btn btn-success" id="btnPassportEditSave">💾 Сохранить изменения</button>
+        <button class="btn btn-secondary btn-block" id="btnBackToPassport">← Назад к паспорту</button>
+    </div>
+
+    <!-- СТРАНИЦА 6: ПАСПОРТ ГОТОВ -->
+    <div id="page-passport-ready" class="page">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 style="font-weight: 300; letter-spacing: 1px;">✅ Паспорт</h2>
+            <button class="btn btn-secondary" id="btnEditPassport" style="width: auto; padding: 8px 18px; font-size: 13px;">✏️ Редактировать</button>
+        </div>
+        <div class="card passport-preview" id="passportJsonDisplay">{
+            "фио": "Иван Петров",
+            "возраст": 25,
+            "код": "KASKAD-XXXX"
+        }</div>
+        <button class="btn btn-secondary btn-block" id="btnBackToSiteFromPass">← На главную</button>
+    </div>
+
+    <!-- СТРАНИЦА 7: ГОСНОМЕР -->
+    <div id="page-gosnumber" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">🚘 Госномер</h2>
+        <div class="card">
+            <label style="display: block; margin-bottom: 14px; opacity:0.5; font-size:13px; text-transform:uppercase; letter-spacing:1px;">Выберите тип:</label>
+            <div class="flex-buttons">
+                <button class="btn btn-secondary" id="gosTypeNormal">Обычный</button>
+                <button class="btn btn-secondary" id="gosTypePremium">Премиум</button>
+                <button class="btn btn-secondary" id="gosTypeCustom">Кастомный</button>
+            </div>
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToSiteGos">← Назад</button>
+    </div>
+
+    <!-- СТРАНИЦА 8: ГЕНЕРАТОР -->
+    <div id="page-generator" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;" id="genTitle">🎰 Генератор</h2>
+        <div class="card slot-machine">
+            <div class="slot-result" id="slotDisplay">???</div>
+            <div class="slot-region-select">
+                <div class="input-group">
+                    <label>Регион (код региона)</label>
+                    <input type="text" id="regionInput" placeholder="116, 777, 01..." value="116">
+                </div>
+            </div>
+            <button class="btn btn-primary" id="btnGenerateSlot">🎲 Сгенерировать</button>
+        </div>
+        <div class="card" style="background: #050505;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="opacity:0.4; font-size:13px;">Цена</span>
+                <span class="price-tag"><span id="priceDisplay">5 000</span> <span class="currency">₽</span></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                <span style="opacity:0.4; font-size:13px;">Тип</span>
+                <span id="typeDisplay" style="font-weight:500;">Обычный</span>
+            </div>
+        </div>
+        <button class="btn btn-success" id="btnBuyGosnumber">💳 Оплатить и отправить</button>
+        <button class="btn btn-secondary btn-block" id="btnBackToGosType">← Назад к типам</button>
+    </div>
+
+    <!-- СТРАНИЦА 9: РАБОТА -->
+    <div id="page-job" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">💼 Работа</h2>
+        <div class="card" style="text-align: center; opacity:0.6; font-size:14px;" id="jobStatusDisplay">
+            Текущая работа: <strong style="color:#fff;">не выбрана</strong>
+        </div>
+        <div class="flex-buttons">
+            <button class="btn btn-primary" id="btnJobHire">📋 Устроиться</button>
+            <button class="btn btn-danger" id="btnJobFire">🚫 Уволиться</button>
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToSiteJob">← Назад</button>
+    </div>
+
+    <!-- СТРАНИЦА 9.1: УСТРОИТЬСЯ (УРОВНИ) -->
+    <div id="page-job-hire" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">📋 Выберите уровень</h2>
+        <div class="card" id="jobLevelsContainer"></div>
+        <button class="btn btn-secondary btn-block" id="btnBackToJob">← Назад</button>
+    </div>
+
+    <!-- СТРАНИЦА 9.2: УСТРОИТЬСЯ (РАБОТЫ) -->
+    <div id="page-job-hire-sub" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;" id="jobSubTitle">Выберите работу</h2>
+        <div class="card" id="jobSubContainer"></div>
+        <button class="btn btn-secondary btn-block" id="btnBackToHire">← Назад к уровням</button>
+    </div>
+
+    <!-- СТРАНИЦА 9.3: УВОЛИТЬСЯ -->
+    <div id="page-job-fire" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">🚫 Увольнение</h2>
+        <div class="card confirm-box">
+            <p>⚠️ Вы уверены, что хотите уволиться?</p>
+            <p style="font-size: 13px; opacity: 0.5;" id="fireJobDisplay">Работа: не выбрана</p>
+        </div>
+        <div class="flex-buttons">
+            <button class="btn btn-danger" id="btnFireConfirm">✅ Да, уволить</button>
+            <button class="btn btn-secondary" id="btnFireCancel">❌ Отмена</button>
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToJobFire">← Назад</button>
+    </div>
+
+    <!-- СТРАНИЦА 10: АВТОСАЛОНЫ -->
+    <div id="page-cardealer" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">🏎️ Автосалоны</h2>
+        <div class="card" id="carClassesContainer"></div>
+        <button class="btn btn-secondary btn-block" id="btnBackToSiteCar">← Назад</button>
+    </div>
+
+    <!-- СТРАНИЦА 10.1: АВТОСАЛОН (АВТОМОБИЛИ) -->
+    <div id="page-cardealer-sub" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;" id="carSubTitle">Выберите авто</h2>
+        <div class="card">
+            <input type="text" class="search-input" id="carSearch" placeholder="🔍 Поиск по авто...">
+            <div id="carSubContainer"></div>
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToCarClasses">← Назад к классам</button>
+    </div>
+
+    <!-- СТРАНИЦА 11: ПТС -->
+    <div id="page-pts" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">📄 Получить ПТС</h2>
+        <div class="card">
+            <input type="text" class="search-input" id="ptsSearch" placeholder="🔍 Поиск по авто...">
+            <div id="ptsContainer"></div>
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToSitePTS">← Назад</button>
+    </div>
+
+    <!-- СТРАНИЦА 12: ТЮНИНГ -->
+    <div id="page-tuning" class="page">
+        <h2 style="font-weight: 300; letter-spacing: 1px;">🔧 Turbo Tuning</h2>
+        <div class="card">
+            <div id="tuningPartsContainer"></div>
+        </div>
+        <div class="card tuning-cart" id="tuningCart">
+            <div class="empty-cart">🛒 Корзина пуста</div>
+        </div>
+        <div class="flex-buttons">
+            <button class="btn btn-success" id="btnTuningSubmit">✅ Готово</button>
+            <button class="btn btn-secondary" id="btnTuningClear">🗑️ Очистить</button>
+        </div>
+        <button class="btn btn-secondary btn-block" id="btnBackToSiteTuning">← Назад</button>
+    </div>
+</div>
+
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script src="pages.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
