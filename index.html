@@ -6,7 +6,7 @@
 <title>Kaskad RP</title>
 <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 <style>
-    /* --- Базовые настройки и общий стиль мобильного экрана --- */
+    /* --- Базовые настройки --- */
     * {
         box-sizing: border-box;
         margin: 0;
@@ -25,7 +25,6 @@
         justify-content: center;
     }
 
-    /* Имитация экрана телефона */
     .phone-screen {
         width: 100%;
         max-width: 375px;
@@ -36,29 +35,30 @@
         flex-direction: column;
         align-items: center;
         position: relative;
-        min-height: 650px;
+        min-height: 620px;
     }
 
     .phone-screen.hidden {
         display: none;
     }
 
-    /* --- ОБЩИЕ СТИЛИ ДЛЯ ЭЛЕМЕНТОВ --- */
+    /* --- ОБЩИЕ СТИЛИ --- */
     .btn {
         display: flex;
         justify-content: center;
         align-items: center;
         background: transparent;
         color: #fff;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 500;
         width: 100%;
-        padding: 15px;
+        padding: 14px;
         cursor: pointer;
         border: 2px solid #e74c3c;
         text-transform: lowercase;
-        transition: all 0.2s;
+        transition: all 0.15s;
         user-select: none;
+        letter-spacing: 0.5px;
     }
     .btn:active {
         transform: scale(0.96);
@@ -68,13 +68,36 @@
     .btn-blue {
         border-color: #3498db;
     }
-
     .btn-green {
         border-color: #2ecc71;
     }
-
     .btn-red {
         border-color: #e74c3c;
+    }
+    .btn-white {
+        border-color: #fff;
+    }
+
+    .btn-back {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e74c3c;
+        color: #fff;
+        font-size: 16px;
+        text-align: center;
+        cursor: pointer;
+        background: transparent;
+        transition: 0.15s;
+        text-transform: lowercase;
+        margin-top: 6px;
+        letter-spacing: 0.5px;
+    }
+    .btn-back:active {
+        transform: scale(0.96);
+        opacity: 0.7;
+    }
+    .btn-back.blue {
+        border-color: #3498db;
     }
 
     .text-white {
@@ -82,48 +105,45 @@
         font-size: 18px;
         text-align: center;
     }
-
     .text-muted {
         color: rgba(255,255,255,0.4);
         font-size: 14px;
     }
 
-    /* --- ЭКРАН 1: Вход и Регистрация --- */
+    /* --- ЭКРАН 1: ВХОД --- */
     .screen-1 {
         justify-content: center;
-        gap: 30px;
+        gap: 28px;
     }
     .screen-1 .logo-title {
         font-size: 40px;
         font-weight: bold;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
     }
     .screen-1 .logo-title .blue { color: #3498db; }
     .screen-1 .logo-title .red { color: #e74c3c; }
 
-    /* --- ЭКРАН 2: Главное меню (Kaskad RP) --- */
+    /* --- ЭКРАН 2: ГЛАВНОЕ МЕНЮ --- */
     .screen-2 {
         justify-content: space-between;
-        gap: 10px;
+        gap: 8px;
     }
-
     .header {
         width: 100%;
         border-bottom: 2px solid #e74c3c;
-        padding-bottom: 15px;
+        padding-bottom: 14px;
         margin-bottom: 10px;
         text-align: center;
     }
-
     .header-name {
         color: #fff;
-        font-size: 16px;
-        margin-bottom: 8px;
+        font-size: 15px;
+        margin-bottom: 6px;
         opacity: 0.8;
+        letter-spacing: 0.5px;
     }
-
     .logo-title {
-        font-size: 32px;
+        font-size: 30px;
         font-weight: bold;
         margin: 0;
     }
@@ -131,9 +151,9 @@
     .logo-title .red { color: #e74c3c; }
     .logo-subtitle {
         color: #fff;
-        font-size: 12px;
+        font-size: 11px;
         margin-top: 4px;
-        opacity: 0.5;
+        opacity: 0.4;
         letter-spacing: 1px;
         text-transform: uppercase;
     }
@@ -144,12 +164,12 @@
         gap: 12px;
         width: 100%;
     }
-    
     .grid-menu .btn {
-        font-size: 16px;
-        padding: 18px 10px;
-        min-height: 60px;
+        font-size: 15px;
+        padding: 16px 8px;
+        min-height: 56px;
         border-color: #e74c3c;
+        letter-spacing: 0.5px;
     }
     .grid-menu .btn:nth-child(odd) {
         border-color: #3498db;
@@ -158,110 +178,94 @@
     .bottom-actions {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
         width: 100%;
         margin-top: 10px;
     }
-
     .bottom-actions .btn {
-        font-size: 18px;
-        padding: 14px;
+        font-size: 17px;
+        padding: 13px;
     }
 
-    /* --- ЭКРАН 3: Анкета (Регистрация) --- */
+    /* --- ЭКРАН 3: РЕГИСТРАЦИЯ --- */
     .screen-3 {
         justify-content: center;
-        gap: 20px;
+        gap: 18px;
     }
-    .screen-3 .form-title {
+    .form-title {
         color: #fff;
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 300;
         letter-spacing: 1px;
-        margin-bottom: 10px;
         border-bottom: 2px solid #e74c3c;
         padding-bottom: 10px;
         width: 100%;
         text-align: center;
+        margin-bottom: 4px;
     }
-
+    .form-title.blue {
+        border-color: #3498db;
+    }
     .form-wrapper {
         width: 100%;
         border: 2px solid #3498db;
-        padding: 25px 18px;
+        padding: 22px 16px;
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 18px;
     }
-
     .form-group {
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 5px;
     }
-
     .form-label {
         color: #fff;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 400;
-        opacity: 0.7;
+        opacity: 0.6;
         text-transform: lowercase;
         letter-spacing: 0.5px;
     }
-
     .form-input {
         background: transparent;
         border: 2px solid #3498db;
         color: #fff;
-        padding: 14px 16px;
-        font-size: 16px;
+        padding: 13px 16px;
+        font-size: 15px;
         outline: none;
         width: 100%;
         transition: 0.2s;
     }
     .form-input:focus {
-        background: rgba(52, 152, 219, 0.1);
+        background: rgba(52, 152, 219, 0.08);
         border-color: #e74c3c;
     }
     .form-input::placeholder {
         color: rgba(255,255,255,0.2);
     }
 
-    .screen-3 .btn {
-        margin-top: 10px;
-    }
-
     /* --- ЭКРАН 4: ПАСПОРТ (оформление) --- */
     .screen-4 {
         justify-content: center;
-        gap: 15px;
-    }
-    .screen-4 .form-title {
-        color: #fff;
-        font-size: 24px;
-        font-weight: 300;
-        letter-spacing: 1px;
-        border-bottom: 2px solid #3498db;
-        padding-bottom: 10px;
-        width: 100%;
-        text-align: center;
+        gap: 14px;
     }
 
     /* --- ЭКРАН 5: ПАСПОРТ ГОТОВ --- */
     .screen-5 {
         justify-content: center;
-        gap: 20px;
+        gap: 18px;
     }
     .passport-card {
         width: 100%;
         border: 2px solid #3498db;
-        padding: 20px;
-        background: rgba(52,152,219,0.05);
+        padding: 18px;
+        background: rgba(52,152,219,0.04);
     }
     .passport-card .passport-line {
         display: flex;
         justify-content: space-between;
-        padding: 8px 0;
+        padding: 7px 0;
         border-bottom: 1px solid rgba(255,255,255,0.05);
         color: #fff;
         font-size: 15px;
@@ -271,28 +275,20 @@
     }
     .passport-card .passport-label {
         opacity: 0.5;
+        font-size: 14px;
     }
     .passport-card .passport-value {
         font-weight: 500;
         text-align: right;
         word-break: break-all;
+        font-size: 14px;
     }
 
-    /* --- ЭКРАН 6: РАБОТА (выбор уровня) --- */
+    /* --- ЭКРАН 6: РАБОТА (уровни) --- */
     .screen-6 {
         justify-content: flex-start;
         gap: 12px;
-        min-height: 650px;
-    }
-    .screen-6 .form-title {
-        color: #fff;
-        font-size: 22px;
-        font-weight: 300;
-        letter-spacing: 1px;
-        border-bottom: 2px solid #e74c3c;
-        padding-bottom: 10px;
-        width: 100%;
-        text-align: center;
+        min-height: 620px;
     }
     .job-item {
         width: 100%;
@@ -304,7 +300,8 @@
         color: #fff;
         font-size: 16px;
         cursor: pointer;
-        transition: 0.2s;
+        transition: 0.15s;
+        letter-spacing: 0.3px;
     }
     .job-item:active {
         transform: scale(0.97);
@@ -320,7 +317,7 @@
     .job-item .job-arrow {
         opacity: 0.3;
     }
-    .job-item-blue {
+    .job-item.blue {
         border-color: #3498db;
     }
 
@@ -328,17 +325,7 @@
     .screen-7 {
         justify-content: flex-start;
         gap: 10px;
-        min-height: 650px;
-    }
-    .screen-7 .form-title {
-        color: #fff;
-        font-size: 20px;
-        font-weight: 300;
-        letter-spacing: 1px;
-        border-bottom: 2px solid #3498db;
-        padding-bottom: 10px;
-        width: 100%;
-        text-align: center;
+        min-height: 620px;
     }
     .job-sub-item {
         width: 100%;
@@ -350,7 +337,7 @@
         color: #fff;
         font-size: 14px;
         cursor: pointer;
-        transition: 0.2s;
+        transition: 0.15s;
     }
     .job-sub-item:active {
         transform: scale(0.97);
@@ -374,14 +361,14 @@
     /* --- ЭКРАН 8: УВОЛЬНЕНИЕ --- */
     .screen-8 {
         justify-content: center;
-        gap: 20px;
+        gap: 18px;
     }
     .confirm-box {
         width: 100%;
         border: 2px solid #e74c3c;
         padding: 20px;
         text-align: center;
-        background: rgba(231,76,60,0.05);
+        background: rgba(231,76,60,0.04);
     }
     .confirm-box p {
         color: #fff;
@@ -399,17 +386,7 @@
     .screen-9 {
         justify-content: flex-start;
         gap: 12px;
-        min-height: 650px;
-    }
-    .screen-9 .form-title {
-        color: #fff;
-        font-size: 22px;
-        font-weight: 300;
-        letter-spacing: 1px;
-        border-bottom: 2px solid #e74c3c;
-        padding-bottom: 10px;
-        width: 100%;
-        text-align: center;
+        min-height: 620px;
     }
     .car-class-item {
         width: 100%;
@@ -421,7 +398,7 @@
         color: #fff;
         font-size: 16px;
         cursor: pointer;
-        transition: 0.2s;
+        transition: 0.15s;
     }
     .car-class-item:active {
         transform: scale(0.97);
@@ -434,23 +411,35 @@
         padding: 2px 10px;
         border-radius: 20px;
     }
+    .car-class-item .car-arrow {
+        opacity: 0.3;
+    }
 
     /* --- ЭКРАН 10: АВТОСАЛОН (авто) --- */
     .screen-10 {
         justify-content: flex-start;
         gap: 10px;
-        min-height: 650px;
+        min-height: 620px;
     }
-    .screen-10 .form-title {
-        color: #fff;
-        font-size: 20px;
-        font-weight: 300;
-        letter-spacing: 1px;
-        border-bottom: 2px solid #3498db;
-        padding-bottom: 10px;
+    .search-input {
         width: 100%;
-        text-align: center;
+        padding: 13px 16px;
+        background: transparent;
+        border: 2px solid #3498db;
+        color: #fff;
+        font-size: 15px;
+        outline: none;
+        transition: 0.2s;
+        margin-bottom: 4px;
     }
+    .search-input:focus {
+        background: rgba(52,152,219,0.05);
+        border-color: #e74c3c;
+    }
+    .search-input::placeholder {
+        color: rgba(255,255,255,0.2);
+    }
+
     .car-sub-item {
         width: 100%;
         display: flex;
@@ -461,7 +450,7 @@
         color: #fff;
         font-size: 14px;
         cursor: pointer;
-        transition: 0.2s;
+        transition: 0.15s;
     }
     .car-sub-item:active {
         transform: scale(0.97);
@@ -489,33 +478,7 @@
     .screen-11 {
         justify-content: flex-start;
         gap: 10px;
-        min-height: 650px;
-    }
-    .screen-11 .form-title {
-        color: #fff;
-        font-size: 20px;
-        font-weight: 300;
-        letter-spacing: 1px;
-        border-bottom: 2px solid #e74c3c;
-        padding-bottom: 10px;
-        width: 100%;
-        text-align: center;
-    }
-    .search-input {
-        width: 100%;
-        padding: 14px 16px;
-        background: transparent;
-        border: 2px solid #3498db;
-        color: #fff;
-        font-size: 16px;
-        outline: none;
-        transition: 0.2s;
-    }
-    .search-input:focus {
-        background: rgba(52,152,219,0.05);
-    }
-    .search-input::placeholder {
-        color: rgba(255,255,255,0.2);
+        min-height: 620px;
     }
     .pts-item {
         width: 100%;
@@ -527,7 +490,7 @@
         color: #fff;
         font-size: 14px;
         cursor: pointer;
-        transition: 0.2s;
+        transition: 0.15s;
     }
     .pts-item:active {
         transform: scale(0.97);
@@ -554,17 +517,7 @@
     /* --- ЭКРАН 12: ГОСНОМЕР (выбор типа) --- */
     .screen-12 {
         justify-content: center;
-        gap: 15px;
-    }
-    .screen-12 .form-title {
-        color: #fff;
-        font-size: 24px;
-        font-weight: 300;
-        letter-spacing: 1px;
-        border-bottom: 2px solid #e74c3c;
-        padding-bottom: 10px;
-        width: 100%;
-        text-align: center;
+        gap: 14px;
     }
     .gos-type-item {
         width: 100%;
@@ -574,7 +527,8 @@
         font-size: 18px;
         text-align: center;
         cursor: pointer;
-        transition: 0.2s;
+        transition: 0.15s;
+        letter-spacing: 0.5px;
     }
     .gos-type-item:active {
         transform: scale(0.97);
@@ -587,29 +541,19 @@
     /* --- ЭКРАН 13: ГЕНЕРАТОР --- */
     .screen-13 {
         justify-content: center;
-        gap: 15px;
-    }
-    .screen-13 .form-title {
-        color: #fff;
-        font-size: 22px;
-        font-weight: 300;
-        letter-spacing: 1px;
-        border-bottom: 2px solid #3498db;
-        padding-bottom: 10px;
-        width: 100%;
-        text-align: center;
+        gap: 14px;
     }
     .slot-display {
         width: 100%;
-        padding: 30px 20px;
+        padding: 28px 16px;
         border: 2px solid #3498db;
         color: #fff;
-        font-size: 32px;
+        font-size: 30px;
         font-weight: 700;
         letter-spacing: 4px;
         text-align: center;
         font-family: 'Courier New', monospace;
-        background: rgba(52,152,219,0.03);
+        background: rgba(52,152,219,0.02);
     }
     .slot-display.generated {
         border-color: #2ecc71;
@@ -631,17 +575,7 @@
     .screen-14 {
         justify-content: flex-start;
         gap: 10px;
-        min-height: 650px;
-    }
-    .screen-14 .form-title {
-        color: #fff;
-        font-size: 22px;
-        font-weight: 300;
-        letter-spacing: 1px;
-        border-bottom: 2px solid #e74c3c;
-        padding-bottom: 10px;
-        width: 100%;
-        text-align: center;
+        min-height: 620px;
     }
     .tuning-item {
         width: 100%;
@@ -653,7 +587,7 @@
         color: #fff;
         font-size: 14px;
         cursor: pointer;
-        transition: 0.2s;
+        transition: 0.15s;
     }
     .tuning-item:active {
         transform: scale(0.97);
@@ -661,13 +595,14 @@
     }
     .tuning-item .part-price {
         opacity: 0.5;
+        font-size: 13px;
     }
     .tuning-cart {
         width: 100%;
         border: 2px solid #3498db;
         padding: 16px;
         min-height: 80px;
-        background: rgba(52,152,219,0.03);
+        background: rgba(52,152,219,0.02);
     }
     .tuning-cart .empty {
         text-align: center;
@@ -697,28 +632,6 @@
         font-size: 15px;
     }
 
-    /* --- КНОПКИ НАВИГАЦИИ (назад) --- */
-    .btn-back {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid #e74c3c;
-        color: #fff;
-        font-size: 16px;
-        text-align: center;
-        cursor: pointer;
-        background: transparent;
-        transition: 0.2s;
-        text-transform: lowercase;
-        margin-top: 5px;
-    }
-    .btn-back:active {
-        transform: scale(0.97);
-        opacity: 0.7;
-    }
-    .btn-back.blue {
-        border-color: #3498db;
-    }
-
     /* --- УТИЛИТЫ --- */
     .flex-buttons {
         display: flex;
@@ -728,49 +641,67 @@
     .flex-buttons .btn {
         flex: 1;
     }
-    .mt-1 { margin-top: 6px; }
-    .mt-2 { margin-top: 12px; }
     .w-100 { width: 100%; }
+    .mt-1 { margin-top: 4px; }
+    .mb-1 { margin-bottom: 4px; }
 
-    /* Стили для поиска в ПТС и автосалоне */
     .search-container {
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 10px;
-    }
-    .search-container .search-input {
-        margin-bottom: 5px;
+        gap: 8px;
     }
 
-    /* Адаптив */
+    /* --- АДАПТИВ --- */
     @media (max-width: 400px) {
         .phone-screen {
-            padding: 15px;
-            min-height: 580px;
+            padding: 14px;
+            min-height: 560px;
         }
         .grid-menu .btn {
-            font-size: 14px;
-            padding: 14px 8px;
-            min-height: 50px;
+            font-size: 13px;
+            padding: 13px 6px;
+            min-height: 48px;
         }
         .btn {
-            font-size: 17px;
-            padding: 13px;
+            font-size: 16px;
+            padding: 12px;
         }
         .logo-title {
-            font-size: 28px;
+            font-size: 26px;
         }
         .header-name {
-            font-size: 14px;
+            font-size: 13px;
         }
         .job-item, .car-class-item, .car-sub-item, .pts-item, .tuning-item {
-            padding: 10px 14px;
+            padding: 10px 12px;
             font-size: 13px;
         }
         .slot-display {
-            font-size: 26px;
-            padding: 20px 16px;
+            font-size: 24px;
+            padding: 18px 14px;
+        }
+        .form-title {
+            font-size: 19px;
+        }
+        .form-wrapper {
+            padding: 16px 12px;
+        }
+        .form-input {
+            padding: 11px 14px;
+            font-size: 14px;
+        }
+        .btn-back {
+            padding: 10px;
+            font-size: 14px;
+        }
+        .passport-card .passport-line {
+            font-size: 13px;
+            padding: 5px 0;
+        }
+        .slot-info {
+            font-size: 13px;
+            padding: 10px 14px;
         }
     }
 </style>
@@ -807,11 +738,11 @@
 
     <div class="grid-menu">
         <button class="btn" onclick="showScreen('screen4')">Паспорт</button>
-        <button class="btn" onclick="showScreen('screen6')">Работа</button>
-        <button class="btn" onclick="showScreen('screen9')">Авто</button>
-        <button class="btn" onclick="showScreen('screen11')">ПТС</button>
+        <button class="btn" onclick="loadJobLevels()">Работа</button>
+        <button class="btn" onclick="loadCarClasses()">Авто</button>
+        <button class="btn" onclick="loadPTS()">ПТС</button>
         <button class="btn" onclick="showScreen('screen12')">Гос номер</button>
-        <button class="btn" onclick="showScreen('screen14')">ТЮННИНГ</button>
+        <button class="btn" onclick="loadTuning()">ТЮННИНГ</button>
     </div>
 
     <div class="bottom-actions">
@@ -864,9 +795,9 @@
 
 <!-- ===== ЭКРАН 5: ПАСПОРТ ГОТОВ ===== -->
 <div id="screen5" class="phone-screen screen-5" style="display:none;">
-    <div style="display:flex; justify-content:space-between; align-items:center; width:100%; border-bottom:2px solid #3498db; padding-bottom:10px; margin-bottom:10px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; width:100%; border-bottom:2px solid #3498db; padding-bottom:10px; margin-bottom:8px;">
         <span style="color:#fff; font-size:20px; font-weight:300;">✅ паспорт</span>
-        <button class="btn" style="width:auto; padding:6px 18px; font-size:14px; border-color:#3498db;" onclick="editPassport()">✏️</button>
+        <button class="btn" style="width:auto; padding:5px 16px; font-size:14px; border-color:#3498db;" onclick="editPassport()">✏️</button>
     </div>
     <div class="passport-card" id="passportCard">
         <div class="passport-line"><span class="passport-label">фио</span><span class="passport-value" id="passDisplayFio">—</span></div>
@@ -885,7 +816,7 @@
 
 <!-- ===== ЭКРАН 7: РАБОТЫ (СПИСОК) ===== -->
 <div id="screen7" class="phone-screen screen-7" style="display:none;">
-    <div class="form-title" id="jobSubTitle">📋 выберите работу</div>
+    <div class="form-title blue" id="jobSubTitle">📋 выберите работу</div>
     <div id="jobSubContainer" style="width:100%; display:flex; flex-direction:column; gap:8px;"></div>
     <button class="btn-back blue" onclick="showScreen('screen6')">← назад</button>
 </div>
@@ -913,7 +844,7 @@
 
 <!-- ===== ЭКРАН 10: АВТОСАЛОН (АВТО) ===== -->
 <div id="screen10" class="phone-screen screen-10" style="display:none;">
-    <div class="form-title" id="carSubTitle">🚗 выберите авто</div>
+    <div class="form-title blue" id="carSubTitle">🚗 выберите авто</div>
     <div class="search-container">
         <input type="text" class="search-input" id="carSearch" placeholder="🔍 поиск по авто...">
         <div id="carSubContainer" style="width:100%; display:flex; flex-direction:column; gap:8px;"></div>
@@ -942,7 +873,7 @@
 
 <!-- ===== ЭКРАН 13: ГЕНЕРАТОР ===== -->
 <div id="screen13" class="phone-screen screen-13" style="display:none;">
-    <div class="form-title" id="genTitle">🎰 генератор</div>
+    <div class="form-title blue" id="genTitle">🎰 генератор</div>
     <div class="slot-display" id="slotDisplay">???</div>
     <div class="form-group" style="width:100%;">
         <label class="form-label">регион (код региона)</label>
@@ -1435,6 +1366,10 @@
 
     // ===== РАБОТА =====
     function loadJobLevels() {
+        if (!activity.passport) {
+            showToast('Сначала получите паспорт!');
+            return;
+        }
         const container = document.getElementById('jobLevelsContainer');
         container.innerHTML = '';
         const levels = Object.keys(jobsData);
@@ -1539,6 +1474,10 @@
 
     // ===== АВТОСАЛОНЫ =====
     function loadCarClasses() {
+        if (!activity.passport) {
+            showToast('Сначала получите паспорт!');
+            return;
+        }
         const container = document.getElementById('carClassesContainer');
         container.innerHTML = '';
         const classes = Object.keys(carsData);
@@ -1548,7 +1487,7 @@
             div.innerHTML = `
                 <span>${cls}</span>
                 <span class="car-badge">${carsData[cls].length} авто</span>
-                <span style="opacity:0.3;">→</span>
+                <span class="car-arrow">→</span>
             `;
             div.onclick = () => {
                 selectedCarClass = cls;
@@ -1947,6 +1886,9 @@
             });
     }
 
+    // ===== ОБРАБОТЧИКИ УВОЛЬНЕНИЯ =====
+    document.getElementById('btnJobFire')?.addEventListener('click', showFireScreen);
+
     // ===== ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ =====
     function loadState() {
         const saved = localStorage.getItem('activity_kaskad');
@@ -1979,16 +1921,9 @@
         }
     }
 
-    // ===== ОБРАБОТЧИКИ КНОПОК =====
-    document.getElementById('btnJob').addEventListener('click', loadJobLevels);
-    document.getElementById('btnCarDealer').addEventListener('click', loadCarClasses);
-    document.getElementById('btnPTS').addEventListener('click', loadPTS);
-    document.getElementById('btnTuning').addEventListener('click', loadTuning);
-    document.getElementById('btnGosNumber').addEventListener('click', () => showScreen('screen12'));
-
     // ===== ЗАПУСК =====
     loadState();
-    console.log('✅ Kaskad RP с новым дизайном загружена!');
+    console.log('✅ Kaskad RP с единым дизайном загружена!');
 </script>
 </body>
     </html>
