@@ -811,14 +811,20 @@
 <div id="screen6" class="phone-screen screen-6" style="display:none;">
     <div class="form-title">💼 выберите уровень</div>
     <div id="jobLevelsContainer" style="width:100%; display:flex; flex-direction:column; gap:10px;"></div>
-    <button class="btn-back" onclick="showScreen('screen2')">← назад</button>
+    <div style="display:flex; gap:10px; width:100%; margin-top:6px;">
+        <button class="btn btn-red" onclick="showFireScreen()" style="flex:1;">🚫 уволиться</button>
+        <button class="btn-back" onclick="showScreen('screen2')" style="flex:1;">← назад</button>
+    </div>
 </div>
 
 <!-- ===== ЭКРАН 7: РАБОТЫ (СПИСОК) ===== -->
 <div id="screen7" class="phone-screen screen-7" style="display:none;">
     <div class="form-title blue" id="jobSubTitle">📋 выберите работу</div>
     <div id="jobSubContainer" style="width:100%; display:flex; flex-direction:column; gap:8px;"></div>
-    <button class="btn-back blue" onclick="showScreen('screen6')">← назад</button>
+    <div style="display:flex; gap:10px; width:100%; margin-top:6px;">
+        <button class="btn btn-red" onclick="showFireScreen()" style="flex:1;">🚫 уволиться</button>
+        <button class="btn-back blue" onclick="showScreen('screen6')" style="flex:1;">← назад</button>
+    </div>
 </div>
 
 <!-- ===== ЭКРАН 8: УВОЛЬНЕНИЕ ===== -->
@@ -830,9 +836,9 @@
     </div>
     <div class="flex-buttons">
         <button class="btn btn-red" onclick="confirmFire()">✅ да</button>
-        <button class="btn" onclick="showScreen('screen2')">❌ отмена</button>
+        <button class="btn" onclick="showScreen('screen6')">❌ отмена</button>
     </div>
-    <button class="btn-back" onclick="showScreen('screen2')">← назад</button>
+    <button class="btn-back" onclick="showScreen('screen6')">← назад</button>
 </div>
 
 <!-- ===== ЭКРАН 9: АВТОСАЛОНЫ (КЛАССЫ) ===== -->
@@ -1439,6 +1445,7 @@
             });
     }
 
+    // ===== УВОЛЬНЕНИЕ =====
     function showFireScreen() {
         if (!activity.job) {
             showToast('⚠️ Вы нигде не работаете!');
@@ -1451,7 +1458,7 @@
     function confirmFire() {
         if (!activity.job) {
             showToast('⚠️ Вы нигде не работаете!');
-            showScreen('screen2');
+            showScreen('screen6');
             return;
         }
 
@@ -1465,7 +1472,7 @@
                 activity.job = null;
                 localStorage.removeItem('activity_kaskad_job');
                 showToast(`✅ Вы уволились с работы: ${oldJob}`);
-                showScreen('screen2');
+                showScreen('screen6');
             })
             .catch(() => {
                 showToast('❌ Ошибка отправки');
@@ -1886,9 +1893,6 @@
             });
     }
 
-    // ===== ОБРАБОТЧИКИ УВОЛЬНЕНИЯ =====
-    document.getElementById('btnJobFire')?.addEventListener('click', showFireScreen);
-
     // ===== ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ =====
     function loadState() {
         const saved = localStorage.getItem('activity_kaskad');
@@ -1923,7 +1927,7 @@
 
     // ===== ЗАПУСК =====
     loadState();
-    console.log('✅ Kaskad RP с единым дизайном загружена!');
+    console.log('✅ Kaskad RP с увольнением загружена!');
 </script>
 </body>
     </html>
