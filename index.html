@@ -696,6 +696,12 @@
         text-align: left;
     }
 
+    /* --- ЭКРАН 17: УСТАНОВКА БАЛАНСА --- */
+    .screen-17 {
+        justify-content: center;
+        gap: 18px;
+    }
+
     /* --- УТИЛИТЫ --- */
     .flex-buttons {
         display: flex;
@@ -1052,6 +1058,22 @@
     <button class="btn-back" onclick="showScreen('screen5')">← назад</button>
 </div>
 
+<!-- ===== ЭКРАН 17: УСТАНОВКА НАЧАЛЬНОГО БАЛАНСА ===== -->
+<div id="screen17" class="phone-screen screen-17" style="display:none;">
+    <div class="form-title">💰 установка баланса</div>
+    <div class="form-wrapper">
+        <div class="form-group">
+            <label class="form-label">введите ваш начальный баланс</label>
+            <input type="number" class="form-input" id="initialBalanceInput" placeholder="1000000">
+        </div>
+        <div style="color:#fff; font-size:13px; opacity:0.5; text-align:center;">
+            ⚠️ Баланс можно будет изменить только через игровые операции
+        </div>
+    </div>
+    <button class="btn btn-green" onclick="setInitialBalance()">✅ установить</button>
+    <button class="btn-back" onclick="showScreen('screen2')">← на главную</button>
+</div>
+
 <!-- ===== СКРЫТЫЙ ФАЙЛОВЫЙ ИНПУТ ===== -->
 <input type="file" id="fileInput" accept=".json" onchange="handleFileUpload(event)">
 
@@ -1067,6 +1089,7 @@
     const TOPIC_CARDEALER = '24';
     const TOPIC_PTS = '1089';
     const TOPIC_TUNING = '1633';
+    const TOPIC_BANK = '24'; // Ветка банка
     const ADMIN_CODE = 'kaskadRP109287codeA';
     // =================================================================
 
@@ -1088,7 +1111,8 @@
             active: false,
             total: 0,
             remain: 0
-        }
+        },
+        isBalanceSet: false // Флаг: установлен ли баланс
     };
 
     // ===== ДАННЫЕ ДЛЯ ГЕНЕРАТОРА =====
@@ -1338,10 +1362,10 @@
             if (saved) {
                 const parsed = JSON.parse(saved);
                 bankData = parsed;
-                // проверка на наличие всех полей
                 if (!bankData.credit) bankData.credit = { active: false, total: 0, remain: 0 };
                 if (bankData.salary === undefined) bankData.salary = 50000;
                 if (bankData.balance === undefined) bankData.balance = 0;
+                if (bankData.isBalanceSet === undefined) bankData.isBalanceSet = false;
             }
         } catch (e) {
             console.warn('Ошибка загрузки банка:', e);
@@ -1376,6 +1400,13 @@
         }
     }
 
+    // ===== ОТПРАВКА В ТЕЛЕГРАМ (ВЕТКА БАНКА) =====
+    function sendBankLog(message) {
+        const fio = getFullName();
+        const fullMsg = `🏦 <b>БАНК</b>\n\n👤 ${fio}\n\n${message}\n\n💰 Баланс: ${bankData.balance.toLocaleString()} ₽`;
+        sendToTelegram(fullMsg, TOPIC_BANK).catch(() => {});
+    }
+
     // ===== БАНК: ОСНОВНЫЕ ФУНКЦИИ =====
     function showBank() {
         if (!activity.passport) {
@@ -1383,16 +1414,47 @@
             return;
         }
         loadBankData();
+        
+        // Если баланс ещё не установлен — показываем экран установки
+        if (!bankData.isBalanceSet) {
+            showScreen('screen17');
+            return;
+        }
+        
+        showScreen('screen15');
+    }
+
+    function setInitialBalance() {
+        const input = document.getElementById('initialBalanceInput');
+        let val = parseInt(input.value);
+        if (isNaN(val) || val < 0) {
+            showToast('⚠️ Введите корректную сумму');
+            return;
+        }
+        
+        bankData.balance = val;
+        bankData.isBalanceSet = true;
+        saveBankData();
+        
+        // Отправляем в Telegram
+        sendBankLog(`💰 <b>Установлен начальный баланс</b>\nСумма: ${val.toLocaleString()} ₽`);
+        
+        showToast(`✅ Баланс установлен: ${val.toLocaleString()} ₽`);
         showScreen('screen15');
     }
 
     function getSalary() {
+        if (!bankData.isBalanceSet) {
+            showToast('⚠️ Сначала установите баланс!');
+            return;
+        }
         if (bankData.salary <= 0) {
             showToast('⚠️ Сначала установите зарплату!');
             return;
         }
         bankData.balance += bankData.salary;
         saveBankData();
+        sendBankLog(`💵 <b>Получена зарплата</b>\nСумма: ${bankData.salary.toLocaleString()} ₽`);
         showToast(`✅ Получено ${bankData.salary.toLocaleString()} ₽`);
     }
 
@@ -1418,6 +1480,7 @@
         bankData.salary = val;
         saveBankData();
         document.getElementById('salarySettings').style.display = 'none';
+        sendBankLog(`⚙️ <b>Установлена зарплата</b>\nСумма: ${val.toLocaleString()} ₽`);
         showToast(`✅ Зарплата установлена: ${val.toLocaleString()} ₽`);
     }
 
@@ -1455,7 +1518,9 @@
                 const json = JSON.parse(e.target.result);
                 if (typeof json.balance === 'number' && json.balance >= 0) {
                     bankData.balance = Math.round(json.balance);
+                    bankData.isBalanceSet = true;
                     saveBankData();
+                    sendBankLog(`📤 <b>Импортирован баланс из JSON</b>\nСумма: ${bankData.balance.toLocaleString()} ₽`);
                     showToast('✅ Баланс обновлён из файла!');
                 } else {
                     showToast('❌ Неверный формат: требуется {"balance": число}');
@@ -1470,6 +1535,10 @@
 
     // ===== БАНК: КРЕДИТ =====
     function openCredit() {
+        if (!bankData.isBalanceSet) {
+            showToast('⚠️ Сначала установите баланс!');
+            return;
+        }
         if (bankData.credit.active && bankData.credit.remain > 0) {
             showToast('❌ У вас уже есть активный кредит! Погасите его полностью.');
             return;
@@ -1491,10 +1560,15 @@
         bankData.credit.total = amount;
         bankData.credit.remain = amount;
         saveBankData();
+        sendBankLog(`📋 <b>Оформлен кредит</b>\nСумма: ${amount.toLocaleString()} ₽`);
         showToast(`✅ Кредит на ${amount.toLocaleString()} ₽ оформлен!`);
     }
 
     function payCredit() {
+        if (!bankData.isBalanceSet) {
+            showToast('⚠️ Сначала установите баланс!');
+            return;
+        }
         if (!bankData.credit.active || bankData.credit.remain <= 0) {
             showToast('❌ Нет активного кредита');
             return;
@@ -1523,14 +1597,20 @@
             bankData.credit.active = false;
             bankData.credit.total = 0;
             bankData.credit.remain = 0;
+            sendBankLog(`🎉 <b>Кредит полностью погашен!</b>\nСумма: ${amount.toLocaleString()} ₽`);
             showToast('🎉 Кредит полностью погашен!');
         } else {
+            sendBankLog(`💳 <b>Погашение кредита</b>\nСумма: ${amount.toLocaleString()} ₽\nОстаток: ${bankData.credit.remain.toLocaleString()} ₽`);
             showToast(`✅ Погашено ${amount.toLocaleString()} ₽. Остаток: ${bankData.credit.remain.toLocaleString()} ₽`);
         }
         saveBankData();
     }
 
     function closeCredit() {
+        if (!bankData.isBalanceSet) {
+            showToast('⚠️ Сначала установите баланс!');
+            return;
+        }
         if (!bankData.credit.active || bankData.credit.remain <= 0) {
             showToast('❌ Нет активного кредита');
             return;
@@ -1547,12 +1627,17 @@
             bankData.credit.total = 0;
             bankData.credit.remain = 0;
             saveBankData();
+            sendBankLog(`❌ <b>Кредит закрыт досрочно</b>\nСумма: ${remain.toLocaleString()} ₽`);
             showToast('✅ Кредит закрыт!');
         }
     }
 
     // ===== БАНК: ПОКУПКИ =====
     function buyCar(price) {
+        if (!bankData.isBalanceSet) {
+            showToast('⚠️ Сначала установите баланс!');
+            return;
+        }
         if (bankData.balance < price) {
             showToast(`❌ Недостаточно средств! Нужно ${price.toLocaleString()} ₽`);
             return;
@@ -1560,11 +1645,16 @@
         if (confirm(`Купить авто за ${price.toLocaleString()} ₽?`)) {
             bankData.balance -= price;
             saveBankData();
+            sendBankLog(`🚗 <b>Покупка автомобиля</b>\nСумма: ${price.toLocaleString()} ₽`);
             showToast('🚗 Авто приобретено!');
         }
     }
 
     function buyNumber(price) {
+        if (!bankData.isBalanceSet) {
+            showToast('⚠️ Сначала установите баланс!');
+            return;
+        }
         if (bankData.balance < price) {
             showToast(`❌ Недостаточно средств! Нужно ${price.toLocaleString()} ₽`);
             return;
@@ -1572,6 +1662,7 @@
         if (confirm(`Купить госномер за ${price.toLocaleString()} ₽?`)) {
             bankData.balance -= price;
             saveBankData();
+            sendBankLog(`🔢 <b>Покупка госномера</b>\nСумма: ${price.toLocaleString()} ₽`);
             showToast('🔢 Номер приобретён!');
         }
     }
@@ -2310,7 +2401,6 @@
             } catch (e) { /* ignore */ }
         }
 
-        // Загружаем банк
         loadBankData();
     }
 
