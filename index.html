@@ -1018,15 +1018,6 @@
             <button class="btn btn-green" onclick="payCredit()">💳 погасить</button>
             <button class="btn btn-red" onclick="closeCredit()">❌ закрыть</button>
         </div>
-
-        <div style="border-top:1px solid #e74c3c; padding-top:8px; width:100%;">
-            <div class="bank-label">🚗 покупки</div>
-            <div class="bank-row">
-                <button class="btn" onclick="buyCar(800000)">авто (800к)</button>
-                <button class="btn" onclick="buyNumber(150000)">номер (150к)</button>
-                <button class="btn" onclick="buyNumber(300000)">VIP (300к)</button>
-            </div>
-        </div>
     </div>
 
     <button class="btn-back" onclick="showScreen('screen2')">← на главную</button>
@@ -1206,144 +1197,144 @@
     // ===== АВТОМОБИЛИ =====
     const carsData = {
         'Низкий класс': [
-            { name: 'BMW M5 E28', hp: '286 HP', price: '500.000💸' },
-            { name: 'Volkswagen GOLF GTI 2', hp: '150 HP', price: '200.000💸' },
-            { name: 'Honda Civic', hp: '150 HP', price: '800.000💸' },
-            { name: 'ВАЗ 2107', hp: '110 HP', price: '150.000₽💸' },
-            { name: 'Mercedes-Benz W210 E430', hp: '280 HP', price: '850.000₽💸' },
-            { name: 'LADA Niva 4х4 Urban', hp: '130 HP', price: '550.000💸' },
-            { name: 'Mercedes-Benz 190e', hp: '220 HP', price: '250.000₽💸' },
-            { name: 'ВАЗ 2114', hp: '100 HP', price: '170.000₽💸' },
-            { name: 'Лада Приора', hp: '140 HP', price: '500.000₽💸' },
-            { name: 'Mini Cooper', hp: '230 HP', price: '1.300.000₽💸' },
-            { name: 'BMW 535i E34', hp: '211 HP', price: '600.000₽💸' },
-            { name: 'Smart Fortvo', hp: '150 HP', price: '900.000₽💸' },
-            { name: 'Hyundai veloster', hp: '150 HP', price: '250.000₽💸' },
-            { name: 'Tofas Dogan SLX', hp: '83hp', price: '25.000' },
-            { name: 'Dacia Logan', hp: '74 HP', price: '380.000₽' },
-            { name: 'Peugeot 406', hp: '207 HP', price: '300.000₽' }
+            { name: 'BMW M5 E28', hp: '286 HP', price: 500000 },
+            { name: 'Volkswagen GOLF GTI 2', hp: '150 HP', price: 200000 },
+            { name: 'Honda Civic', hp: '150 HP', price: 800000 },
+            { name: 'ВАЗ 2107', hp: '110 HP', price: 150000 },
+            { name: 'Mercedes-Benz W210 E430', hp: '280 HP', price: 850000 },
+            { name: 'LADA Niva 4х4 Urban', hp: '130 HP', price: 550000 },
+            { name: 'Mercedes-Benz 190e', hp: '220 HP', price: 250000 },
+            { name: 'ВАЗ 2114', hp: '100 HP', price: 170000 },
+            { name: 'Лада Приора', hp: '140 HP', price: 500000 },
+            { name: 'Mini Cooper', hp: '230 HP', price: 1300000 },
+            { name: 'BMW 535i E34', hp: '211 HP', price: 600000 },
+            { name: 'Smart Fortvo', hp: '150 HP', price: 900000 },
+            { name: 'Hyundai veloster', hp: '150 HP', price: 250000 },
+            { name: 'Tofas Dogan SLX', hp: '83hp', price: 25000 },
+            { name: 'Dacia Logan', hp: '74 HP', price: 380000 },
+            { name: 'Peugeot 406', hp: '207 HP', price: 300000 }
         ],
         'Средний класс': [
-            { name: 'Toyota Camry XV70', hp: '280 HP', price: '3.700.000₽💸' },
-            { name: 'Audi S5', hp: '380 HP', price: '4.500.000₽💸' },
-            { name: 'Mitsubishi Lancer Evolution X', hp: '320 HP', price: '4.000.000₽💸' },
-            { name: 'Mercedes-Benz S600 W140', hp: '390 HP', price: '2.000.000₽💸' },
-            { name: 'Lexus IS F', hp: '420 HP', price: '2.500.000₽💸' },
-            { name: 'Subaru Impreza WRX', hp: '270 hp', price: '2.200.000₽💸' },
-            { name: 'Audi RS4', hp: '450 HP', price: '4.700.000₽💸' },
-            { name: 'Mercedes-Benz G55 AMG', hp: '575 HP', price: '5.600.000₽💸' },
-            { name: 'Porsche Cayenne Turbo S', hp: '570 HP', price: '5.000.000₽💸' },
-            { name: 'Mercedes-Benz S65 AMG W221', hp: '650 HP', price: '2.500.000₽💸' },
-            { name: 'BMW Х5М Е70', hp: '555 HP', price: '3.000.000💸' },
-            { name: 'Toyota Supra A80', hp: '280 HP', price: '4.000.000₽💸' },
-            { name: 'BMW M3 E46', hp: '350 HP', price: '3.700.000₽💸' },
-            { name: 'Mercedes-Benz CL63 AMG', hp: '630 HP', price: '3.200.000₽💸' },
-            { name: 'Mercedes-Benz C63 AMG W204', hp: '487 HP', price: '4.500.000₽💸' },
-            { name: 'BMW M2 F87', hp: '450 HP', price: '4.300.000₽💸' },
-            { name: 'BMW M4 F82', hp: '420 HP', price: '5.200.000₽💸' },
-            { name: 'Mitsubishi Lancer Evolution IX', hp: '350 HP', price: '3.800.000₽💸' },
-            { name: 'Nissan 180 SX', hp: '230 HP', price: '3.500.000₽💸' },
-            { name: 'Nissan 150SX', hp: '230 hp', price: '4.500.000' },
-            { name: 'Honda CR-X del Sol', hp: '168 HP', price: '2.500.000₽💸' },
-            { name: 'Honda Civic Type R', hp: '300 HP', price: '3.400.000₽💸' },
-            { name: 'Volkswagen Passat', hp: '220 HP', price: '2.300.000₽💸' },
-            { name: 'BMW M5 E60', hp: '507 HP', price: '3.000.000₽💸' },
-            { name: 'BMW M5 E39', hp: '400 HP', price: '2.300.000₽💸' },
-            { name: 'BMW M3 Е36', hp: '320 HP', price: '2.000.000₽💸' },
-            { name: 'Mercedes-Benz E55 AMG', hp: '354 HP', price: '1.300.000₽💸' },
-            { name: 'Fiat Doblo', hp: '256 HP', price: '2.200.000₽💸' },
-            { name: 'Jeep 4x4', hp: '234 HP', price: '2.400.000₽💸' },
-            { name: 'Chevrolet Tahoe', hp: '341 HP', price: '4.000.000₽💸' },
-            { name: 'Cadillac CTS-V 2009', hp: '564 HP', price: '3.000.000₽💸' },
-            { name: 'Honda S2000', hp: '240 HP', price: '2.500.000₽💸' },
-            { name: 'Audi Quattro', hp: '400 HP', price: '4.500.000₽💸' },
-            { name: 'BMW Z4', hp: '310 HP', price: '3.100.000₽💸' },
-            { name: 'Volkswagen Vintage', hp: '45 HP', price: '3.100.000₽💸' },
-            { name: 'Volswagen Golf GTI', hp: '240 HP', price: '3.000.000₽' },
-            { name: 'BMW X1', hp: '326 HP', price: '2.900.000₽' },
-            { name: 'BMW 525i', hp: '218 HP', price: '1.150.000₽💸' },
-            { name: 'BMW M3 E92', hp: '420 HP', price: '2.600.000₽' },
-            { name: 'dodge charger srt', hp: '432hp', price: '4.000.000' },
-            { name: 'Volkswagen Scirocco', hp: '250 HP', price: '950.000₽' },
-            { name: 'Audi TT', hp: '230 HP', price: '1.300.000₽' },
-            { name: 'Mazda rx7', hp: '550 HP', price: '5.000.000₽' },
-            { name: 'mercedes cls63', hp: '578hp', price: '3.600.000' },
-            { name: 'Skoda Octavia A8', hp: '190hp', price: '2.700.000' }
+            { name: 'Toyota Camry XV70', hp: '280 HP', price: 3700000 },
+            { name: 'Audi S5', hp: '380 HP', price: 4500000 },
+            { name: 'Mitsubishi Lancer Evolution X', hp: '320 HP', price: 4000000 },
+            { name: 'Mercedes-Benz S600 W140', hp: '390 HP', price: 2000000 },
+            { name: 'Lexus IS F', hp: '420 HP', price: 2500000 },
+            { name: 'Subaru Impreza WRX', hp: '270 hp', price: 2200000 },
+            { name: 'Audi RS4', hp: '450 HP', price: 4700000 },
+            { name: 'Mercedes-Benz G55 AMG', hp: '575 HP', price: 5600000 },
+            { name: 'Porsche Cayenne Turbo S', hp: '570 HP', price: 5000000 },
+            { name: 'Mercedes-Benz S65 AMG W221', hp: '650 HP', price: 2500000 },
+            { name: 'BMW Х5М Е70', hp: '555 HP', price: 3000000 },
+            { name: 'Toyota Supra A80', hp: '280 HP', price: 4000000 },
+            { name: 'BMW M3 E46', hp: '350 HP', price: 3700000 },
+            { name: 'Mercedes-Benz CL63 AMG', hp: '630 HP', price: 3200000 },
+            { name: 'Mercedes-Benz C63 AMG W204', hp: '487 HP', price: 4500000 },
+            { name: 'BMW M2 F87', hp: '450 HP', price: 4300000 },
+            { name: 'BMW M4 F82', hp: '420 HP', price: 5200000 },
+            { name: 'Mitsubishi Lancer Evolution IX', hp: '350 HP', price: 3800000 },
+            { name: 'Nissan 180 SX', hp: '230 HP', price: 3500000 },
+            { name: 'Nissan 150SX', hp: '230 hp', price: 4500000 },
+            { name: 'Honda CR-X del Sol', hp: '168 HP', price: 2500000 },
+            { name: 'Honda Civic Type R', hp: '300 HP', price: 3400000 },
+            { name: 'Volkswagen Passat', hp: '220 HP', price: 2300000 },
+            { name: 'BMW M5 E60', hp: '507 HP', price: 3000000 },
+            { name: 'BMW M5 E39', hp: '400 HP', price: 2300000 },
+            { name: 'BMW M3 Е36', hp: '320 HP', price: 2000000 },
+            { name: 'Mercedes-Benz E55 AMG', hp: '354 HP', price: 1300000 },
+            { name: 'Fiat Doblo', hp: '256 HP', price: 2200000 },
+            { name: 'Jeep 4x4', hp: '234 HP', price: 2400000 },
+            { name: 'Chevrolet Tahoe', hp: '341 HP', price: 4000000 },
+            { name: 'Cadillac CTS-V 2009', hp: '564 HP', price: 3000000 },
+            { name: 'Honda S2000', hp: '240 HP', price: 2500000 },
+            { name: 'Audi Quattro', hp: '400 HP', price: 4500000 },
+            { name: 'BMW Z4', hp: '310 HP', price: 3100000 },
+            { name: 'Volkswagen Vintage', hp: '45 HP', price: 3100000 },
+            { name: 'Volswagen Golf GTI', hp: '240 HP', price: 3000000 },
+            { name: 'BMW X1', hp: '326 HP', price: 2900000 },
+            { name: 'BMW 525i', hp: '218 HP', price: 1150000 },
+            { name: 'BMW M3 E92', hp: '420 HP', price: 2600000 },
+            { name: 'dodge charger srt', hp: '432hp', price: 4000000 },
+            { name: 'Volkswagen Scirocco', hp: '250 HP', price: 950000 },
+            { name: 'Audi TT', hp: '230 HP', price: 1300000 },
+            { name: 'Mazda rx7', hp: '550 HP', price: 5000000 },
+            { name: 'mercedes cls63', hp: '578hp', price: 3600000 },
+            { name: 'Skoda Octavia A8', hp: '190hp', price: 2700000 }
         ],
         'Высокий класс': [
-            { name: 'Mercedes-Benz AMG GT 63', hp: '640 HP', price: '15.000.000💸' },
-            { name: 'Porsche Panamera Turbo S', hp: '550 HP', price: '13.500.000₽💸' },
-            { name: 'BMW X6M F86', hp: '620 HP', price: '8.500.000₽💸' },
-            { name: 'BMW M5 F10', hp: '560 HP', price: '5.500.000💸' },
-            { name: 'Range Rover SPORT SVR', hp: '580 HP', price: '13.000.000₽💸' },
-            { name: 'Audi R8', hp: '550 HP', price: '9.700.000₽💸' },
-            { name: 'Audi R8 V10 Plus', hp: '620 HP', price: '17.500.000💸' },
-            { name: 'Nissan GT-R R35', hp: '580 HP', price: '7.500.000₽💸' },
-            { name: 'Mercedes-Benz G63 AMG', hp: '585 HP', price: '26.000.000₽💸' },
-            { name: 'Mercedes-Benz E63 AMG W213', hp: '630 HP', price: '10.200.000₽💸' },
-            { name: 'Mercedes-Benz S63 AMG W222', hp: '612 HP', price: '11.400.000₽💸' },
-            { name: 'Audi RS6 C8', hp: '600 HP', price: '15.000.000₽💸' },
-            { name: 'Audi RS7 C8', hp: '630 HP', price: '18.000.000₽💸' },
-            { name: 'Mercedes-Benz AMG GT', hp: '600 HP', price: '12.300.000₽💸' },
-            { name: 'BMW Х7 M50i', hp: '530 HP', price: '14.500.000💸' },
-            { name: 'Dodge Challenger SRT Hellcat Redeye', hp: '808 HP', price: '12.000.000₽💸' },
-            { name: 'Porsche 911 Turbo', hp: '580 HP', price: '17.580.000₽💸' },
-            { name: 'Ferrari 458 italia', hp: '570 HP', price: '24.700.000₽💸' },
-            { name: 'BMW M5 F90 (рестайлинг)', hp: '625 HP', price: '15.000.000💸' },
-            { name: 'BMW M5 F90 (до рестайлинг)', hp: '600 HP', price: '9.000.000💸' },
-            { name: 'BMW М5 CS', hp: '650 HP', price: '20.000.000💸' },
-            { name: 'BMW М8 F92 Competition', hp: '635 HP', price: '16.500.000💸' },
-            { name: 'Mercedes-Benz Maybach S650 W222', hp: '630 HP', price: '16.500.000₽💸' },
-            { name: 'BMW M6', hp: '560 HP', price: '5.000.000💸' },
-            { name: 'BMW M4 G82 Competition', hp: '510 HP', price: '11.000.000💸' },
-            { name: 'BMW М3 G81', hp: '510 HP', price: '11.000.000💸' },
-            { name: 'Mercedes-Benz GLE 53', hp: '435 HP', price: '10.000.000₽💸' },
-            { name: 'Bentley Continental GT', hp: '640 HP', price: '26.000.000₽💸' },
-            { name: 'BMW i8', hp: '250 HP', price: '8.500.000₽💸' },
-            { name: 'Alfa Romeo Giulia', hp: '505 HP', price: '8.600.000₽💸' },
-            { name: 'Jeep Grand Cherokee SRT', hp: '470 HP', price: '9.000.000₽💸' },
-            { name: 'Jeep Grand Cherokee Trackhawk', hp: '717 HP', price: '13.000.000₽💸' },
-            { name: 'Dodge Viper ACR', hp: '650 HP', price: '21.000.000₽💸' },
-            { name: 'Chevrolet Corvette C8', hp: '510 HP', price: '16.000.000₽💸' },
-            { name: 'Chevrolet Corvette C7', hp: '630 HP', price: '9.000.000₽💸' },
-            { name: 'Chevrolet Corvette C6', hp: '436 HP', price: '7.500.000₽' },
-            { name: 'Dodge Durango', hp: '475 HP', price: '7.000.000💸' },
-            { name: 'Dodge Durango SRT', hp: '720 HP', price: '16.000.000₽💸' },
-            { name: 'Ford Raptor F-150', hp: '430 HP', price: '13.000.000💸' },
-            { name: 'RAM 1500 TRX', hp: '702 HP', price: '12.000.000💸' },
-            { name: 'Toyota Land Cruiser 200', hp: '362 HP', price: '6.000.000₽💸' },
-            { name: 'BMW i7', hp: '544 HP', price: '13.500.000₽💸' },
-            { name: 'Dodge Charger SRT Hellcat Redeye', hp: '807hp', price: '17.000.000' },
-            { name: 'Bmw m6 competition edition', hp: '600hp', price: '15.000.000' },
-            { name: 'Chevrolet Camaro', hp: '650hp', price: '15.000.000' },
-            { name: 'Cadillac Escalade', hp: '682hp', price: '27.000.000' },
-            { name: 'Range rover', hp: '542hp', price: '20.000.000' },
-            { name: 'bmw m2 g87', hp: '460hp', price: '9.000.000' },
-            { name: 'DODGE CHALLENGER HELLCAT SRT', hp: '808hp', price: '12.000.000' },
-            { name: 'Land Rover Defender', hp: '394 HP', price: '9.381.000₽💸' },
-            { name: 'Aston Martin Vantage Roadster', hp: '690 HP', price: '24.900.100₽💸' },
-            { name: 'BMW M5 G90', hp: '585 HP', price: '20.000.000₽' },
-            { name: 'Mercedes-Benz W223 S63E Performance', hp: '612 HP', price: '22.000.000₽' },
-            { name: 'Mercedes-Benz W223 Maybach S680', hp: '612 HP', price: '30.000.000₽' },
-            { name: 'bmw m5 f10 competition', hp: '600hp', price: '6.500.000' }
+            { name: 'Mercedes-Benz AMG GT 63', hp: '640 HP', price: 15000000 },
+            { name: 'Porsche Panamera Turbo S', hp: '550 HP', price: 13500000 },
+            { name: 'BMW X6M F86', hp: '620 HP', price: 8500000 },
+            { name: 'BMW M5 F10', hp: '560 HP', price: 5500000 },
+            { name: 'Range Rover SPORT SVR', hp: '580 HP', price: 13000000 },
+            { name: 'Audi R8', hp: '550 HP', price: 9700000 },
+            { name: 'Audi R8 V10 Plus', hp: '620 HP', price: 17500000 },
+            { name: 'Nissan GT-R R35', hp: '580 HP', price: 7500000 },
+            { name: 'Mercedes-Benz G63 AMG', hp: '585 HP', price: 26000000 },
+            { name: 'Mercedes-Benz E63 AMG W213', hp: '630 HP', price: 10200000 },
+            { name: 'Mercedes-Benz S63 AMG W222', hp: '612 HP', price: 11400000 },
+            { name: 'Audi RS6 C8', hp: '600 HP', price: 15000000 },
+            { name: 'Audi RS7 C8', hp: '630 HP', price: 18000000 },
+            { name: 'Mercedes-Benz AMG GT', hp: '600 HP', price: 12300000 },
+            { name: 'BMW Х7 M50i', hp: '530 HP', price: 14500000 },
+            { name: 'Dodge Challenger SRT Hellcat Redeye', hp: '808 HP', price: 12000000 },
+            { name: 'Porsche 911 Turbo', hp: '580 HP', price: 17580000 },
+            { name: 'Ferrari 458 italia', hp: '570 HP', price: 24700000 },
+            { name: 'BMW M5 F90 (рестайлинг)', hp: '625 HP', price: 15000000 },
+            { name: 'BMW M5 F90 (до рестайлинг)', hp: '600 HP', price: 9000000 },
+            { name: 'BMW М5 CS', hp: '650 HP', price: 20000000 },
+            { name: 'BMW М8 F92 Competition', hp: '635 HP', price: 16500000 },
+            { name: 'Mercedes-Benz Maybach S650 W222', hp: '630 HP', price: 16500000 },
+            { name: 'BMW M6', hp: '560 HP', price: 5000000 },
+            { name: 'BMW M4 G82 Competition', hp: '510 HP', price: 11000000 },
+            { name: 'BMW М3 G81', hp: '510 HP', price: 11000000 },
+            { name: 'Mercedes-Benz GLE 53', hp: '435 HP', price: 10000000 },
+            { name: 'Bentley Continental GT', hp: '640 HP', price: 26000000 },
+            { name: 'BMW i8', hp: '250 HP', price: 8500000 },
+            { name: 'Alfa Romeo Giulia', hp: '505 HP', price: 8600000 },
+            { name: 'Jeep Grand Cherokee SRT', hp: '470 HP', price: 9000000 },
+            { name: 'Jeep Grand Cherokee Trackhawk', hp: '717 HP', price: 13000000 },
+            { name: 'Dodge Viper ACR', hp: '650 HP', price: 21000000 },
+            { name: 'Chevrolet Corvette C8', hp: '510 HP', price: 16000000 },
+            { name: 'Chevrolet Corvette C7', hp: '630 HP', price: 9000000 },
+            { name: 'Chevrolet Corvette C6', hp: '436 HP', price: 7500000 },
+            { name: 'Dodge Durango', hp: '475 HP', price: 7000000 },
+            { name: 'Dodge Durango SRT', hp: '720 HP', price: 16000000 },
+            { name: 'Ford Raptor F-150', hp: '430 HP', price: 13000000 },
+            { name: 'RAM 1500 TRX', hp: '702 HP', price: 12000000 },
+            { name: 'Toyota Land Cruiser 200', hp: '362 HP', price: 6000000 },
+            { name: 'BMW i7', hp: '544 HP', price: 13500000 },
+            { name: 'Dodge Charger SRT Hellcat Redeye', hp: '807hp', price: 17000000 },
+            { name: 'Bmw m6 competition edition', hp: '600hp', price: 15000000 },
+            { name: 'Chevrolet Camaro', hp: '650hp', price: 15000000 },
+            { name: 'Cadillac Escalade', hp: '682hp', price: 27000000 },
+            { name: 'Range rover', hp: '542hp', price: 20000000 },
+            { name: 'bmw m2 g87', hp: '460hp', price: 9000000 },
+            { name: 'DODGE CHALLENGER HELLCAT SRT', hp: '808hp', price: 12000000 },
+            { name: 'Land Rover Defender', hp: '394 HP', price: 9381000 },
+            { name: 'Aston Martin Vantage Roadster', hp: '690 HP', price: 24900100 },
+            { name: 'BMW M5 G90', hp: '585 HP', price: 20000000 },
+            { name: 'Mercedes-Benz W223 S63E Performance', hp: '612 HP', price: 22000000 },
+            { name: 'Mercedes-Benz W223 Maybach S680', hp: '612 HP', price: 30000000 },
+            { name: 'bmw m5 f10 competition', hp: '600hp', price: 6500000 }
         ],
         'Люкс класс': [
-            { name: 'Ferrari F12 Berlinetta', hp: '760 HP', price: '40.000.000₽💸' },
-            { name: 'Honda NSX', hp: '580 HP', price: '35.000.000₽💸' },
-            { name: 'Rolls-Royce Cullinan', hp: '555 HP', price: '60.000.000₽💸' },
-            { name: 'Mercedes-Benz SLR McLaren', hp: '641 HP', price: '65.000.000₽💸' },
-            { name: 'Porsche 911 GT3 RS', hp: '502 HP', price: '55.000.000₽💸' },
-            { name: 'Rolls-Royce Dawn', hp: '580 HP', price: '50.000.000₽💸' },
-            { name: 'porsche carrera gt', hp: '612hp', price: '25.000.000' },
-            { name: 'porsche spyder 918', hp: '608hp', price: '50.000.000' },
-            { name: 'Bugatti Veyron', hp: '1001 HP', price: '170.000.000₽' },
-            { name: 'Bugatti Chiron', hp: '1500 HP', price: '350.000.000₽' },
-            { name: 'Mercedes-Benz CLK GTR AMG', hp: '660 HP', price: '280.000.000₽' },
-            { name: 'McLaren 720S', hp: '710 HP', price: '27.000.000₽' },
-            { name: 'Mercedes-Benz AMG ONE', hp: '1049 HP', price: '350.000.000₽' },
-            { name: 'Lexus LFA', hp: '540 HP', price: '90.000.000₽' },
-            { name: 'Ferrari F40', hp: '478 HP', price: '70.000.000₽' },
-            { name: 'Pagani Zonda F', hp: '764 HP', price: '200.000.000₽' }
+            { name: 'Ferrari F12 Berlinetta', hp: '760 HP', price: 40000000 },
+            { name: 'Honda NSX', hp: '580 HP', price: 35000000 },
+            { name: 'Rolls-Royce Cullinan', hp: '555 HP', price: 60000000 },
+            { name: 'Mercedes-Benz SLR McLaren', hp: '641 HP', price: 65000000 },
+            { name: 'Porsche 911 GT3 RS', hp: '502 HP', price: 55000000 },
+            { name: 'Rolls-Royce Dawn', hp: '580 HP', price: 50000000 },
+            { name: 'porsche carrera gt', hp: '612hp', price: 25000000 },
+            { name: 'porsche spyder 918', hp: '608hp', price: 50000000 },
+            { name: 'Bugatti Veyron', hp: '1001 HP', price: 170000000 },
+            { name: 'Bugatti Chiron', hp: '1500 HP', price: 350000000 },
+            { name: 'Mercedes-Benz CLK GTR AMG', hp: '660 HP', price: 280000000 },
+            { name: 'McLaren 720S', hp: '710 HP', price: 27000000 },
+            { name: 'Mercedes-Benz AMG ONE', hp: '1049 HP', price: 350000000 },
+            { name: 'Lexus LFA', hp: '540 HP', price: 90000000 },
+            { name: 'Ferrari F40', hp: '478 HP', price: 70000000 },
+            { name: 'Pagani Zonda F', hp: '764 HP', price: 200000000 }
         ]
     };
 
@@ -1579,39 +1570,72 @@
         }
     }
 
-    // ===== БАНК: ПОКУПКИ =====
-    function buyCar(price) {
+    // ===== ОБНОВЛЕННЫЕ ФУНКЦИИ ПОКУПОК (СПИСЫВАЮТ БАЛАНС) =====
+    function buyCarDealer(cls, car) {
         if (!bankData.isBalanceSet) {
             showToast('⚠️ Сначала установите баланс!');
             return;
         }
-        if (bankData.balance < price) {
-            showToast(`❌ Недостаточно средств! Нужно ${price.toLocaleString()} ₽`);
+        if (bankData.balance < car.price) {
+            showToast(`❌ Недостаточно средств! Нужно ${car.price.toLocaleString()} ₽`);
             return;
         }
-        if (confirm(`Купить авто за ${price.toLocaleString()} ₽?`)) {
-            bankData.balance -= price;
-            saveBankData();
-            sendBankLog(`🚗 <b>Покупка автомобиля</b>\nСумма: ${price.toLocaleString()} ₽`);
-            showToast('🚗 Авто приобретено!');
+        
+        if (!confirm(`🚗 Вы уверены, что хотите купить ${car.name} за ${car.price.toLocaleString()} ₽?`)) {
+            return;
         }
+        
+        // Списываем деньги
+        bankData.balance -= car.price;
+        saveBankData();
+        sendBankLog(`🚗 <b>Покупка автомобиля</b>\nАвто: ${car.name}\nКласс: ${cls}\nСумма: ${car.price.toLocaleString()} ₽`);
+        
+        const fio = getFullName();
+        const msg = `🏎️ <b>ПОКУПКА АВТОМОБИЛЯ</b>\n\n👤 Пользователь: ${fio}\n📂 Класс: ${cls}\n🚗 Автомобиль: ${car.name}\n💰 Цена: ${car.price.toLocaleString()} ₽\n✅ Оплачено с баланса`;
+        sendToTelegram(msg, TOPIC_CARDEALER).catch(() => {});
+        
+        showToast(`✅ ${car.name} приобретён! С баланса списано ${car.price.toLocaleString()} ₽`);
+        showScreen('screen9');
     }
 
-    function buyNumber(price) {
+    function buyGosNumber() {
+        if (!currentGeneratedNumber) {
+            showToast('Сначала сгенерируйте номер!');
+            return;
+        }
+        if (!activity.passport) {
+            showToast('Паспорт не найден! Получите паспорт.');
+            return;
+        }
         if (!bankData.isBalanceSet) {
             showToast('⚠️ Сначала установите баланс!');
             return;
         }
-        if (bankData.balance < price) {
-            showToast(`❌ Недостаточно средств! Нужно ${price.toLocaleString()} ₽`);
+        if (bankData.balance < currentPrice) {
+            showToast(`❌ Недостаточно средств! Нужно ${currentPrice.toLocaleString()} ₽`);
             return;
         }
-        if (confirm(`Купить госномер за ${price.toLocaleString()} ₽?`)) {
-            bankData.balance -= price;
-            saveBankData();
-            sendBankLog(`🔢 <b>Покупка госномера</b>\nСумма: ${price.toLocaleString()} ₽`);
-            showToast('🔢 Номер приобретён!');
+
+        if (!confirm(`🔢 Вы уверены, что хотите купить госномер ${currentGeneratedNumber} за ${currentPrice.toLocaleString()} ₽?`)) {
+            return;
         }
+
+        // Списываем деньги
+        bankData.balance -= currentPrice;
+        saveBankData();
+        sendBankLog(`🔢 <b>Покупка госномера</b>\nНомер: ${currentGeneratedNumber}\nТип: ${currentGeneratedType}\nСумма: ${currentPrice.toLocaleString()} ₽`);
+
+        const fio = getFullName();
+        const msg = `🚘 <b>НОВЫЙ ГОСНОМЕР</b>\n\n🔢 Номер: ${currentGeneratedNumber}\n👤 Пользователь: ${fio}\n💰 К оплате: ${currentPrice.toLocaleString()} ₽\n🏷 Тип: ${currentGeneratedType}\n✅ Оплачено с баланса`;
+        sendToTelegram(msg, TOPIC_GOSNUMBER).catch(() => {});
+
+        showToast('✅ Госномер приобретён!');
+        isGenerated = false;
+        document.getElementById('btnGenerateSlot').disabled = false;
+        document.getElementById('slotDisplay').textContent = '???';
+        document.getElementById('slotDisplay').className = 'slot-display';
+        currentGeneratedNumber = '';
+        showScreen('screen2');
     }
 
     // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
@@ -1909,6 +1933,10 @@
             showToast('Сначала получите паспорт!');
             return;
         }
+        if (!bankData.isBalanceSet) {
+            showToast('⚠️ Сначала установите баланс в банке!');
+            return;
+        }
         const container = document.getElementById('carClassesContainer');
         container.innerHTML = '';
         const classes = Object.keys(carsData);
@@ -1966,25 +1994,11 @@
                     <span>${car.name}</span>
                     ${car.hp ? `<span class="car-hp">${car.hp}</span>` : ''}
                 </div>
-                <span class="car-price">${car.price}</span>
+                <span class="car-price">${car.price.toLocaleString()} ₽</span>
             `;
             div.onclick = () => buyCarDealer(cls, car);
             container.appendChild(div);
         });
-    }
-
-    function buyCarDealer(cls, car) {
-        const fio = getFullName();
-        const msg = `🏎️ <b>ПОКУПКА АВТОМОБИЛЯ</b>\n\n👤 Пользователь: ${fio}\n📂 Класс: ${cls}\n🚗 Автомобиль: ${car.name}\n💰 Цена: ${car.price}`;
-
-        sendToTelegram(msg, TOPIC_CARDEALER)
-            .then(() => {
-                showToast(`✅ Чек отправлен! Авто: ${car.name}`);
-                showScreen('screen9');
-            })
-            .catch(() => {
-                showToast('❌ Ошибка отправки чека');
-            });
     }
 
     // ===== ПТС =====
@@ -2179,38 +2193,14 @@
         showToast('✅ Номер сгенерирован!');
     }
 
-    function buyGosNumber() {
-        if (!currentGeneratedNumber) {
-            showToast('Сначала сгенерируйте номер!');
-            return;
-        }
-        if (!activity.passport) {
-            showToast('Паспорт не найден! Получите паспорт.');
-            return;
-        }
-
-        const fio = getFullName();
-        const msg = `🚘 <b>НОВЫЙ ГОСНОМЕР</b>\n\n🔢 Номер: ${currentGeneratedNumber}\n👤 Пользователь: ${fio}\n💰 К оплате: ${currentPrice.toLocaleString()} ₽\n🏷 Тип: ${currentGeneratedType}`;
-
-        sendToTelegram(msg, TOPIC_GOSNUMBER)
-            .then(() => {
-                showToast('✅ Госномер отправлен!');
-                isGenerated = false;
-                document.getElementById('btnGenerateSlot').disabled = false;
-                document.getElementById('slotDisplay').textContent = '???';
-                document.getElementById('slotDisplay').className = 'slot-display';
-                currentGeneratedNumber = '';
-                showScreen('screen2');
-            })
-            .catch(() => {
-                showToast('❌ Ошибка отправки');
-            });
-    }
-
     // ===== ТЮНИНГ =====
     function loadTuning() {
         if (!activity.passport) {
             showToast('Сначала получите паспорт!');
+            return;
+        }
+        if (!bankData.isBalanceSet) {
+            showToast('⚠️ Сначала установите баланс в банке!');
             return;
         }
         renderTuningParts();
@@ -2293,7 +2283,6 @@
             return;
         }
 
-        const fio = getFullName();
         let total = 0;
         let itemsList = '';
         
@@ -2303,7 +2292,22 @@
             itemsList += `${index + 1}. ${item.name} × ${item.quantity} — ${itemTotal.toLocaleString()} ₽\n`;
         });
 
-        const msg = `🔧 <b>ЗАКАЗ НА ТЮНИНГ</b>\n\n👤 Пользователь: ${fio}\n\n📦 <b>Запчасти:</b>\n${itemsList}\n💰 <b>Общая стоимость:</b> ${total.toLocaleString()} ₽`;
+        if (bankData.balance < total) {
+            showToast(`❌ Недостаточно средств! Нужно ${total.toLocaleString()} ₽`);
+            return;
+        }
+
+        if (!confirm(`🔧 Вы уверены, что хотите заказать тюнинг на ${total.toLocaleString()} ₽?`)) {
+            return;
+        }
+
+        // Списываем деньги
+        bankData.balance -= total;
+        saveBankData();
+        sendBankLog(`🔧 <b>Заказ тюнинга</b>\nСумма: ${total.toLocaleString()} ₽\n${itemsList}`);
+
+        const fio = getFullName();
+        const msg = `🔧 <b>ЗАКАЗ НА ТЮНИНГ</b>\n\n👤 Пользователь: ${fio}\n\n📦 <b>Запчасти:</b>\n${itemsList}\n💰 <b>Общая стоимость:</b> ${total.toLocaleString()} ₽\n✅ Оплачено с баланса`;
 
         sendToTelegram(msg, TOPIC_TUNING)
             .then(() => {
