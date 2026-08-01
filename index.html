@@ -722,7 +722,7 @@
         gap: 8px;
     }
 
-    /* --- СКРЫТЫЙ ФАЙЛОВЫЙ ИНПУТ --- */
+    /* --- СКРЫТЫЙ ФАЙЛОВЫЙ ИНПУТ (больше не нужен) --- */
     #fileInput {
         display: none;
     }
@@ -1014,11 +1014,6 @@
         </div>
 
         <div class="bank-row">
-            <button class="btn btn-blue" onclick="exportBalance()">📥 скачать JSON</button>
-            <button class="btn btn-blue" onclick="importBalance()">📤 загрузить JSON</button>
-        </div>
-
-        <div class="bank-row">
             <button class="btn" onclick="openCredit()">📋 оформить кредит</button>
             <button class="btn btn-green" onclick="payCredit()">💳 погасить</button>
             <button class="btn btn-red" onclick="closeCredit()">❌ закрыть</button>
@@ -1074,9 +1069,6 @@
     <button class="btn-back" onclick="showScreen('screen2')">← на главную</button>
 </div>
 
-<!-- ===== СКРЫТЫЙ ФАЙЛОВЫЙ ИНПУТ ===== -->
-<input type="file" id="fileInput" accept=".json" onchange="handleFileUpload(event)">
-
 <script>
     // =================================================================
     // === НАСТРОЙКИ ===================================================
@@ -1089,7 +1081,7 @@
     const TOPIC_CARDEALER = '24';
     const TOPIC_PTS = '1089';
     const TOPIC_TUNING = '1633';
-    const TOPIC_BANK = '24'; // Ветка банка
+    const TOPIC_BANK = '24';
     const ADMIN_CODE = 'kaskadRP109287codeA';
     // =================================================================
 
@@ -1112,7 +1104,7 @@
             total: 0,
             remain: 0
         },
-        isBalanceSet: false // Флаг: установлен ли баланс
+        isBalanceSet: false
     };
 
     // ===== ДАННЫЕ ДЛЯ ГЕНЕРАТОРА =====
@@ -1415,7 +1407,6 @@
         }
         loadBankData();
         
-        // Если баланс ещё не установлен — показываем экран установки
         if (!bankData.isBalanceSet) {
             showScreen('screen17');
             return;
@@ -1435,10 +1426,7 @@
         bankData.balance = val;
         bankData.isBalanceSet = true;
         saveBankData();
-        
-        // Отправляем в Telegram
         sendBankLog(`💰 <b>Установлен начальный баланс</b>\nСумма: ${val.toLocaleString()} ₽`);
-        
         showToast(`✅ Баланс установлен: ${val.toLocaleString()} ₽`);
         showScreen('screen15');
     }
@@ -1490,47 +1478,6 @@
         document.getElementById('salarySettings').style.gap = '8px';
         document.getElementById('salaryInput').value = bankData.salary;
         document.getElementById('salaryInput').focus();
-    }
-
-    // ===== БАНК: ЭКСПОРТ/ИМПОРТ JSON =====
-    function exportBalance() {
-        const data = { balance: bankData.balance };
-        const json = JSON.stringify(data, null, 2);
-        const blob = new Blob([json], { type: 'application/json' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'my_balance.json';
-        link.click();
-        URL.revokeObjectURL(link.href);
-        showToast('📥 JSON скачан');
-    }
-
-    function importBalance() {
-        document.getElementById('fileInput').click();
-    }
-
-    function handleFileUpload(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            try {
-                const json = JSON.parse(e.target.result);
-                if (typeof json.balance === 'number' && json.balance >= 0) {
-                    bankData.balance = Math.round(json.balance);
-                    bankData.isBalanceSet = true;
-                    saveBankData();
-                    sendBankLog(`📤 <b>Импортирован баланс из JSON</b>\nСумма: ${bankData.balance.toLocaleString()} ₽`);
-                    showToast('✅ Баланс обновлён из файла!');
-                } else {
-                    showToast('❌ Неверный формат: требуется {"balance": число}');
-                }
-            } catch (err) {
-                showToast('❌ Ошибка чтения JSON');
-            }
-        };
-        reader.readAsText(file);
-        event.target.value = '';
     }
 
     // ===== БАНК: КРЕДИТ =====
