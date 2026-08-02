@@ -171,8 +171,15 @@
         border-color: #e74c3c;
         letter-spacing: 0.5px;
     }
-    .grid-menu .btn:nth-child(odd) {
+    .grid-menu .btn:nth-child(odd):not(.btn-full) {
         border-color: #3498db;
+    }
+    .grid-menu .btn-full {
+        grid-column: 1 / -1;
+        border-color: #f1c40f;
+        font-size: 18px;
+        padding: 18px 8px;
+        min-height: 60px;
     }
 
     .bottom-actions {
@@ -820,13 +827,13 @@
     </div>
 
     <div class="grid-menu">
-        <button class="btn" onclick="showBank()">банк</button>
-        <button class="btn" onclick="showScreen('screen4')">Паспорт</button>
-        <button class="btn" onclick="loadJobLevels()">Работа</button>
-        <button class="btn" onclick="loadCarClasses()">Авто</button>
-        <button class="btn" onclick="loadPTS()">ПТС</button>
-        <button class="btn" onclick="showScreen('screen12')">Гос номер</button>
-        <button class="btn" onclick="loadTuning()">ТЮННИНГ</button>
+        <button class="btn btn-full" onclick="showBank()">🏦 банк</button>
+        <button class="btn" onclick="showScreen('screen4')">🪪 Паспорт</button>
+        <button class="btn" onclick="loadJobLevels()">💼 Работа</button>
+        <button class="btn" onclick="loadCarClasses()">🏎️ Авто</button>
+        <button class="btn" onclick="loadPTS()">📄 ПТС</button>
+        <button class="btn" onclick="showScreen('screen12')">🚘 Гос номер</button>
+        <button class="btn" onclick="loadTuning()">🔧 ТЮННИНГ</button>
     </div>
 
     <div class="bottom-actions">
@@ -2323,6 +2330,7 @@
 
     // ===== ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ =====
     function loadState() {
+        // Восстановление авторизации
         const saved = localStorage.getItem('activity_kaskad');
         if (saved) {
             try {
@@ -2338,13 +2346,17 @@
             } catch (e) { /* ignore */ }
         }
 
+        // Восстановление паспорта
         const passportSaved = localStorage.getItem('passport_kaskad');
         if (passportSaved) {
             try {
                 activity.passport = JSON.parse(passportSaved);
+                // Если паспорт есть, обновляем заголовок
+                updateHeader();
             } catch (e) { /* ignore */ }
         }
 
+        // Восстановление работы
         const jobSaved = localStorage.getItem('activity_kaskad_job');
         if (jobSaved) {
             try {
@@ -2352,6 +2364,7 @@
             } catch (e) { /* ignore */ }
         }
 
+        // Восстановление банка
         loadBankData();
     }
 
