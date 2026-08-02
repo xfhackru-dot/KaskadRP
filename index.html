@@ -77,6 +77,14 @@
     .btn-white {
         border-color: #fff;
     }
+    .btn-gold {
+        border-color: #f1c40f;
+        color: #f1c40f;
+    }
+    .btn-gold:active {
+        transform: scale(0.96);
+        opacity: 0.7;
+    }
 
     .btn-back {
         width: 100%;
@@ -709,6 +717,12 @@
         gap: 18px;
     }
 
+    /* --- ЭКРАН 18: ПЕРЕВОД ДЕНЕГ --- */
+    .screen-18 {
+        justify-content: center;
+        gap: 14px;
+    }
+
     /* --- УТИЛИТЫ --- */
     .flex-buttons {
         display: flex;
@@ -1021,7 +1035,10 @@
         </div>
 
         <div class="bank-row">
-            <button class="btn" onclick="openCredit()">📋 оформить кредит</button>
+            <button class="btn btn-gold" onclick="showTransfer()">💸 перевод</button>
+            <button class="btn" onclick="openCredit()">📋 кредит</button>
+        </div>
+        <div class="bank-row">
             <button class="btn btn-green" onclick="payCredit()">💳 погасить</button>
             <button class="btn btn-red" onclick="closeCredit()">❌ закрыть</button>
         </div>
@@ -1065,6 +1082,26 @@
     </div>
     <button class="btn btn-green" onclick="setInitialBalance()">✅ установить</button>
     <button class="btn-back" onclick="showScreen('screen2')">← на главную</button>
+</div>
+
+<!-- ===== ЭКРАН 18: ПЕРЕВОД ДЕНЕГ ===== -->
+<div id="screen18" class="phone-screen screen-18" style="display:none;">
+    <div class="form-title">💸 перевод</div>
+    <div class="form-wrapper">
+        <div class="form-group">
+            <label class="form-label">сумма перевода</label>
+            <input type="number" class="form-input" id="transferAmount" placeholder="1000">
+        </div>
+        <div class="form-group">
+            <label class="form-label">сообщение</label>
+            <input type="text" class="form-input" id="transferMessage" placeholder="комментарий к переводу">
+        </div>
+        <div style="color:#fff; font-size:13px; opacity:0.4; text-align:center;">
+            💰 Ваш баланс: <span id="transferBalanceDisplay">0</span> ₽
+        </div>
+    </div>
+    <button class="btn btn-gold" onclick="sendTransfer()">📤 отправить</button>
+    <button class="btn-back" onclick="showScreen('screen15')">← назад</button>
 </div>
 
 <script>
@@ -1478,6 +1515,52 @@
         document.getElementById('salaryInput').focus();
     }
 
+    // ===== ПЕРЕВОД ДЕНЕГ =====
+    function showTransfer() {
+        if (!bankData.isBalanceSet) {
+            showToast('⚠️ Сначала установите баланс!');
+            return;
+        }
+        document.getElementById('transferBalanceDisplay').textContent = bankData.balance.toLocaleString();
+        document.getElementById('transferAmount').value = '';
+        document.getElementById('transferMessage').value = '';
+        showScreen('screen18');
+    }
+
+    function sendTransfer() {
+        const amountInput = document.getElementById('transferAmount');
+        const messageInput = document.getElementById('transferMessage');
+        
+        let amount = parseInt(amountInput.value);
+        const message = messageInput.value.trim() || 'без комментария';
+        
+        if (isNaN(amount) || amount <= 0) {
+            showToast('⚠️ Введите корректную сумму');
+            return;
+        }
+        
+        if (amount > bankData.balance) {
+            showToast(`❌ Недостаточно средств! Нужно ${amount.toLocaleString()} ₽, у вас ${bankData.balance.toLocaleString()} ₽`);
+            return;
+        }
+        
+        if (!confirm(`💸 Вы уверены, что хотите перевести ${amount.toLocaleString()} ₽?\nСообщение: "${message}"`)) {
+            return;
+        }
+        
+        // Списываем деньги
+        bankData.balance -= amount;
+        saveBankData();
+        
+        // Отправляем в Telegram
+        const fio = getFullName();
+        const logMsg = `💸 <b>ПЕРЕВОД ДЕНЕГ</b>\n\n👤 Отправитель: ${fio}\n💰 Сумма: ${amount.toLocaleString()} ₽\n📝 Сообщение: ${message}\n\n💳 Остаток: ${bankData.balance.toLocaleString()} ₽`;
+        sendBankLog(logMsg);
+        
+        showToast(`✅ Перевод ${amount.toLocaleString()} ₽ отправлен!`);
+        showScreen('screen15');
+    }
+
     // ===== БАНК: КРЕДИТ =====
     function openCredit() {
         if (!bankData.isBalanceSet) {
@@ -1592,7 +1675,6 @@
             return;
         }
         
-        // Списываем деньги
         bankData.balance -= car.price;
         saveBankData();
         sendBankLog(`🚗 <b>Покупка автомобиля</b>\nАвто: ${car.name}\nКласс: ${cls}\nСумма: ${car.price.toLocaleString()} ₽`);
@@ -1627,7 +1709,6 @@
             return;
         }
 
-        // Списываем деньги
         bankData.balance -= currentPrice;
         saveBankData();
         sendBankLog(`🔢 <b>Покупка госномера</b>\nНомер: ${currentGeneratedNumber}\nТип: ${currentGeneratedType}\nСумма: ${currentPrice.toLocaleString()} ₽`);
@@ -2308,7 +2389,6 @@
             return;
         }
 
-        // Списываем деньги
         bankData.balance -= total;
         saveBankData();
         sendBankLog(`🔧 <b>Заказ тюнинга</b>\nСумма: ${total.toLocaleString()} ₽\n${itemsList}`);
@@ -2330,7 +2410,6 @@
 
     // ===== ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ =====
     function loadState() {
-        // Восстановление авторизации
         const saved = localStorage.getItem('activity_kaskad');
         if (saved) {
             try {
@@ -2346,17 +2425,14 @@
             } catch (e) { /* ignore */ }
         }
 
-        // Восстановление паспорта
         const passportSaved = localStorage.getItem('passport_kaskad');
         if (passportSaved) {
             try {
                 activity.passport = JSON.parse(passportSaved);
-                // Если паспорт есть, обновляем заголовок
                 updateHeader();
             } catch (e) { /* ignore */ }
         }
 
-        // Восстановление работы
         const jobSaved = localStorage.getItem('activity_kaskad_job');
         if (jobSaved) {
             try {
@@ -2364,7 +2440,6 @@
             } catch (e) { /* ignore */ }
         }
 
-        // Восстановление банка
         loadBankData();
     }
 
