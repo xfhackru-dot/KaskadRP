@@ -924,7 +924,7 @@
         .kc-earn-input .bank-input {
             border-color: #7b4cff;
             flex: 2;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
         }
         .kc-earn-input .btn {
             flex: 1;
@@ -1456,15 +1456,14 @@
         // === НАСТРОЙКИ ===================================================
         const BOT_TOKEN = '8098284771:AAHHkybTZ6a_mMB8dF52EY9JlLIEiAqPXzI';
         const CHAT_ID = '-1003755482745';
-        const TOPIC_REG = '16058';
-        const TOPIC_PASSPORT = '16064';
-        const TOPIC_GOSNUMBER = '16066';
-        const TOPIC_JOB = '16072';
-        const TOPIC_CARDEALER = '16063';
-        const TOPIC_PTS = '16068';
-        const TOPIC_TUNING = '16070';
-        const TOPIC_BANK = '16063';
-        const TOPIC_BANK = '16063';
+        const TOPIC_REG = '14';
+        const TOPIC_PASSPORT = '389';
+        const TOPIC_GOSNUMBER = '399';
+        const TOPIC_JOB = '441';
+        const TOPIC_CARDEALER = '24';
+        const TOPIC_PTS = '1089';
+        const TOPIC_TUNING = '1633';
+        const TOPIC_BANK = '24';
         const ADMIN_CODE = 'kaskadRP109287codeA';
         // =================================================================
 
@@ -1975,9 +1974,9 @@
                 const div = document.createElement('div');
                 div.className = 'kc-shop-item';
                 div.innerHTML = `
-                    <span><span class="kc-emoji">${item.emoji}</span> ${item.name}</span>
-                    <span class="kc-price">${item.price} KC</span>
-                `;
+                        <span><span class="kc-emoji">${item.emoji}</span> ${item.name}</span>
+                        <span class="kc-price">${item.price} KC</span>
+                    `;
                 div.onclick = () => buyKCItem(item);
                 container.appendChild(div);
             });
@@ -2114,10 +2113,10 @@
                 const isUnlocked = r.level <= currentLevel;
                 div.className = `bp-level ${isUnlocked ? 'unlocked' : 'locked'}`;
                 div.innerHTML = `
-                    <span class="bp-level-num">${r.level}</span>
-                    <span class="bp-reward">${r.reward}</span>
-                    <span class="bp-status">${isUnlocked ? '✅' : '🔒'}</span>
-                `;
+                        <span class="bp-level-num">${r.level}</span>
+                        <span class="bp-reward">${r.reward}</span>
+                        <span class="bp-status">${isUnlocked ? '✅' : '🔒'}</span>
+                    `;
                 container.appendChild(div);
             });
 
@@ -2222,9 +2221,9 @@
                 const div = document.createElement('div');
                 div.className = 'biz-item';
                 div.innerHTML = `
-                    <span><span class="biz-emoji">${biz.emoji}</span> ${biz.name} ${owned ? '✅' : ''}</span>
-                    <span class="biz-price">${owned ? 'Владение' : biz.price.toLocaleString() + ' ₽'}</span>
-                `;
+                        <span><span class="biz-emoji">${biz.emoji}</span> ${biz.name} ${owned ? '✅' : ''}</span>
+                        <span class="biz-price">${owned ? 'Владение' : biz.price.toLocaleString() + ' ₽'}</span>
+                    `;
                 if (!owned) {
                     div.onclick = () => buyBusiness(biz);
                 }
@@ -2254,8 +2253,8 @@
             renderBusinesses();
         }
 
-        // ===== ОБНОВЛЕННЫЕ ФУНКЦИИ ПОКУПОК =====
-        function buyCarDealer(cls, car) {
+        // ===== ФУНКЦИЯ ПОКУПКИ АВТО =====
+        function buyCar(cls, car) {
             if (!bankData.isBalanceSet) {
                 showToast('⚠️ Сначала установите баланс!');
                 return;
@@ -2279,6 +2278,7 @@
             showScreen('screen9');
         }
 
+        // ===== ФУНКЦИЯ ПОКУПКИ ГОСНОМЕРА =====
         function buyGosNumber() {
             if (!currentGeneratedNumber) {
                 showToast('Сначала сгенерируйте номер!');
@@ -2677,7 +2677,7 @@
                         </div>
                         <span class="car-price">${car.price.toLocaleString()} ₽</span>
                     `;
-                div.onclick = () => buyCarDealer(cls, car);
+                div.onclick = () => buyCar(cls, car);
                 container.appendChild(div);
             });
         }
@@ -3123,7 +3123,8 @@
             }
 
             if (amount > bankData.balance) {
-                showToast(`❌ Недостаточно средств! Нужно ${amount.toLocaleString()} ₽, у вас ${bankData.balance.toLocaleString()} ₽`);
+                showToast(
+                    `❌ Недостаточно средств! Нужно ${amount.toLocaleString()} ₽, у вас ${bankData.balance.toLocaleString()} ₽`);
                 return;
             }
 
@@ -3207,7 +3208,8 @@
                 return;
             }
 
-            let amount = prompt(`Введите сумму для погашения (остаток: ${bankData.credit.remain.toLocaleString()} ₽):`, bankData
+            let amount = prompt(`Введите сумму для погашения (остаток: ${bankData.credit.remain.toLocaleString()} ₽):`,
+            bankData
                 .credit.remain);
             if (amount === null) return;
             amount = parseInt(amount);
@@ -3220,7 +3222,8 @@
                 return;
             }
             if (amount > bankData.balance) {
-                showToast(`❌ Недостаточно средств! Нужно ${amount.toLocaleString()} ₽, у вас ${bankData.balance.toLocaleString()} ₽`);
+                showToast(
+                    `❌ Недостаточно средств! Нужно ${amount.toLocaleString()} ₽, у вас ${bankData.balance.toLocaleString()} ₽`);
                 return;
             }
 
@@ -3234,7 +3237,8 @@
                 sendBankLog(`🎉 <b>Кредит полностью погашен!</b>\nСумма: ${amount.toLocaleString()} ₽`);
                 showToast('🎉 Кредит полностью погашен!');
             } else {
-                sendBankLog(`💳 <b>Погашение кредита</b>\nСумма: ${amount.toLocaleString()} ₽\nОстаток: ${bankData.credit.remain.toLocaleString()} ₽`);
+                sendBankLog(
+                    `💳 <b>Погашение кредита</b>\nСумма: ${amount.toLocaleString()} ₽\nОстаток: ${bankData.credit.remain.toLocaleString()} ₽`);
                 showToast(`✅ Погашено ${amount.toLocaleString()} ₽. Остаток: ${bankData.credit.remain.toLocaleString()} ₽`);
             }
             saveBankData();
