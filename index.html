@@ -827,6 +827,264 @@
                 padding: 10px 6px;
             }
         }
+
+        /* --- СТИЛИ ДЛЯ ТЕМЫ KC БАНК --- */
+        .screen-kc-bank {
+            background: linear-gradient(135deg, #0a0e2a 0%, #1a0a2e 50%, #2a0a1a 100%);
+            border-color: #ff3388;
+            min-height: 620px;
+        }
+        .screen-kc-bank .form-title {
+            color: #ff66aa;
+            border-bottom-color: #ff3388;
+            text-shadow: 0 0 20px rgba(255, 51, 136, 0.3);
+        }
+        .screen-kc-bank .btn {
+            border-color: #ff3388;
+            color: #fff;
+        }
+        .screen-kc-bank .btn:active {
+            opacity: 0.7;
+            transform: scale(0.96);
+        }
+        .kc-balance {
+            color: #ff66aa;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            border: 2px solid #ff3388;
+            width: 100%;
+            margin-bottom: 6px;
+            background: rgba(255, 51, 136, 0.08);
+            text-shadow: 0 0 30px rgba(255, 51, 136, 0.2);
+        }
+        .kc-shop-item {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border: 2px solid #ff3388;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.15s;
+            background: rgba(255, 51, 136, 0.03);
+        }
+        .kc-shop-item:active {
+            transform: scale(0.97);
+            opacity: 0.7;
+        }
+        .kc-shop-item .kc-price {
+            color: #ff66aa;
+            font-weight: 500;
+        }
+        .kc-shop-item .kc-emoji {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        /* --- СТИЛИ ДЛЯ БАТЛ ПАСС --- */
+        .screen-battlepass {
+            background: #0a0a1a;
+            border-color: #ff4444;
+            min-height: 620px;
+        }
+        .screen-battlepass .form-title {
+            color: #ff6666;
+            border-bottom-color: #ff4444;
+        }
+        .screen-battlepass .btn {
+            border-color: #ff4444;
+            color: #fff;
+        }
+        .bp-header {
+            color: #ff6666;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            border-bottom: 2px solid #ff4444;
+            width: 100%;
+            margin-bottom: 12px;
+            text-shadow: 0 0 30px rgba(255, 68, 68, 0.2);
+        }
+        .bp-level {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            border: 2px solid #ff4444;
+            color: #fff;
+            font-size: 13px;
+            margin-bottom: 6px;
+            background: rgba(255, 68, 68, 0.03);
+            transition: 0.15s;
+        }
+        .bp-level.locked {
+            opacity: 0.5;
+            border-color: #555;
+        }
+        .bp-level.locked .bp-reward {
+            color: #888;
+        }
+        .bp-level.unlocked {
+            border-color: #66ff66;
+            background: rgba(102, 255, 102, 0.05);
+        }
+        .bp-level.unlocked .bp-reward {
+            color: #66ff66;
+        }
+        .bp-level .bp-level-num {
+            font-weight: bold;
+            color: #ff6666;
+            min-width: 30px;
+        }
+        .bp-level .bp-reward {
+            flex: 1;
+            margin-left: 12px;
+            font-size: 13px;
+        }
+        .bp-level .bp-status {
+            font-size: 18px;
+        }
+
+        /* --- СТИЛИ ДЛЯ БИЗНЕСОВ --- */
+        .screen-business {
+            background: #1a1208;
+            border-color: #d4a574;
+            min-height: 620px;
+        }
+        .screen-business .form-title {
+            color: #d4a574;
+            border-bottom-color: #d4a574;
+        }
+        .screen-business .btn {
+            border-color: #d4a574;
+            color: #fff;
+        }
+        .biz-item {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border: 2px solid #d4a574;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.15s;
+            background: rgba(212, 165, 116, 0.03);
+        }
+        .biz-item:active {
+            transform: scale(0.97);
+            opacity: 0.7;
+        }
+        .biz-item .biz-price {
+            color: #d4a574;
+            font-weight: 500;
+        }
+        .biz-item .biz-emoji {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        /* --- СТИЛИ ДЛЯ ВЫБОРА BP --- */
+        .bp-select {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+        .bp-select .btn {
+            font-size: 18px;
+            padding: 18px;
+            border-width: 3px;
+        }
+        .bp-select .btn-standard {
+            border-color: #66aaff;
+            color: #66aaff;
+        }
+        .bp-select .btn-premium {
+            border-color: #ffcc00;
+            color: #ffcc00;
+        }
+        .bp-level-standart .bp-level {
+            border-color: #66aaff;
+        }
+        .bp-level-standart .bp-level.locked {
+            border-color: #445566;
+            opacity: 0.5;
+        }
+        .bp-level-standart .bp-level.unlocked {
+            border-color: #66ff66;
+        }
+        .bp-level-standart .bp-level .bp-level-num {
+            color: #66aaff;
+        }
+        .bp-level-premium .bp-level {
+            border-color: #ffcc00;
+        }
+        .bp-level-premium .bp-level.locked {
+            border-color: #665533;
+            opacity: 0.5;
+        }
+        .bp-level-premium .bp-level.unlocked {
+            border-color: #66ff66;
+        }
+        .bp-level-premium .bp-level .bp-level-num {
+            color: #ffcc00;
+        }
+
+        /* --- СТИЛИ ДЛЯ КНОПКИ НАЧИСЛЕНИЯ --- */
+        .kc-earn-input {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            margin-top: 6px;
+        }
+        .kc-earn-input .bank-input {
+            border-color: #ff3388;
+            flex: 2;
+        }
+        .kc-earn-input .btn {
+            flex: 1;
+            border-color: #ff3388;
+            color: #ff66aa;
+        }
+
+        /* --- СТИЛИ ДЛЯ ПЕРЕХОДА В ЧАТ --- */
+        .kc-chat-link {
+            color: #ff66aa;
+            text-decoration: none;
+            font-size: 16px;
+            border: 2px solid #ff3388;
+            padding: 12px;
+            display: block;
+            text-align: center;
+            width: 100%;
+            transition: 0.15s;
+            background: rgba(255, 51, 136, 0.05);
+        }
+        .kc-chat-link:active {
+            transform: scale(0.96);
+            opacity: 0.7;
+        }
+        .kc-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            text-align: center;
+            margin: 4px 0;
+        }
+        .kc-title {
+            color: #ff66aa;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0 0 30px rgba(255, 51, 136, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -861,12 +1119,15 @@
 
         <div class="grid-menu">
             <button class="btn btn-full" onclick="showBank()">🏦 банк</button>
+            <button class="btn btn-full" style="border-color:#ff3388; color:#ff66aa;" onclick="showKCBank()">🪙 KC банк</button>
             <button class="btn" onclick="showScreen('screen4')">🪪 Паспорт</button>
             <button class="btn" onclick="loadJobLevels()">💼 Работа</button>
             <button class="btn" onclick="loadCarClasses()">🏎️ Авто</button>
             <button class="btn" onclick="loadPTS()">📄 ПТС</button>
             <button class="btn" onclick="showScreen('screen12')">🚘 Гос номер</button>
             <button class="btn" onclick="loadTuning()">🔧 ТЮННИНГ</button>
+            <button class="btn btn-full" style="border-color:#ff4444; color:#ff6666;" onclick="showBattlePassMenu()">🎖️ Батл Пасс</button>
+            <button class="btn btn-full" style="border-color:#d4a574; color:#d4a574;" onclick="showBusiness()">🏢 Бизнесы</button>
         </div>
 
         <div class="bottom-actions">
@@ -1031,17 +1292,13 @@
     <!-- ===== ЭКРАН 15: БАНК ===== -->
     <div id="screen15" class="phone-screen screen-15" style="display:none;">
         <div class="form-title">🏦 банк</div>
-
         <div class="bank-balance" id="bankBalanceDisplay">0 ₽</div>
-
         <div class="credit-info" id="creditInfoDisplay">💰 кредитов нет</div>
-
         <div style="width:100%; display:flex; flex-direction:column; gap:8px;">
             <div class="bank-row">
                 <button class="btn btn-green" onclick="getSalary()">💵 получить ЗП</button>
                 <button class="btn" onclick="toggleSalarySettings()">⚙️ ЗП</button>
             </div>
-
             <div id="salarySettings" style="display:none; width:100%;">
                 <div class="bank-row">
                     <input type="number" class="bank-input" id="salaryInput" placeholder="сумма ЗП" value="50000">
@@ -1052,7 +1309,6 @@
                     <button class="btn" onclick="toggleSalarySettings()">❌ закрыть</button>
                 </div>
             </div>
-
             <div class="bank-row">
                 <button class="btn btn-gold" onclick="showTransferMenu()">💸 перевод</button>
                 <button class="btn" onclick="openCredit()">📋 кредит</button>
@@ -1062,7 +1318,6 @@
                 <button class="btn btn-red" onclick="closeCredit()">❌ закрыть</button>
             </div>
         </div>
-
         <button class="btn-back" onclick="showScreen('screen2')">← на главную</button>
     </div>
 
@@ -1087,7 +1342,7 @@
         <button class="btn-back" onclick="showScreen('screen5')">← назад</button>
     </div>
 
-    <!-- ===== ЭКРАН 17: УСТАНОВКА НАЧАЛЬНОГО БАЛАНСА ===== -->
+    <!-- ===== ЭКРАН 17: УСТАНОВКА БАЛАНСА ===== -->
     <div id="screen17" class="phone-screen screen-17" style="display:none;">
         <div class="form-title">💰 установка баланса</div>
         <div class="form-wrapper">
@@ -1153,6 +1408,57 @@
         <button class="btn-back" onclick="showTransferMenu()">← назад</button>
     </div>
 
+    <!-- ===== ЭКРАН 21: KC БАНК ===== -->
+    <div id="screen21" class="phone-screen screen-kc-bank" style="display:none;">
+        <div class="kc-title">Kaskad Coin</div>
+        <div class="kc-subtitle">KC можно купить в лс у создателя</div>
+        <a class="kc-chat-link" href="https://t.me/A933MP97" target="_blank">перейти в чат</a>
+
+        <div style="width:100%; margin:10px 0; padding:8px; border:2px solid #ff3388; text-align:center; color:#ff66aa; font-size:16px;">
+            1 KC = 1₽ или 1 тг звезда
+        </div>
+
+        <div class="kc-balance" id="kcBalanceDisplay">0 KC</div>
+
+        <button class="btn" onclick="showKCBuy()" style="border-color:#ff3388; color:#ff66aa; margin-bottom:6px;">Купить KC</button>
+
+        <div class="kc-earn-input">
+            <input type="number" class="bank-input" id="kcEarnInput" placeholder="Кол-во KC" min="1">
+            <button class="btn" onclick="addKC()" style="border-color:#ff3388; color:#ff66aa;">Начислить</button>
+        </div>
+
+        <div style="width:100%; margin:12px 0 6px; border-bottom:2px solid #ff3388; padding-bottom:6px; text-align:center; color:#ff66aa; font-size:18px;">🛒 МАГАЗИН</div>
+
+        <div id="kcShopContainer" style="width:100%; display:flex; flex-direction:column; gap:6px; max-height:300px; overflow-y:auto; padding-right:4px;"></div>
+
+        <button class="btn-back" onclick="showScreen('screen2')" style="border-color:#ff3388; color:#ff66aa; margin-top:10px;">← на главную</button>
+    </div>
+
+    <!-- ===== ЭКРАН 22: БАТЛ ПАСС МЕНЮ ===== -->
+    <div id="screen22" class="phone-screen screen-battlepass" style="display:none;">
+        <div class="bp-header">🎖️ Батл Пасс</div>
+        <div class="bp-select">
+            <button class="btn btn-standard" onclick="buyBattlePass('standard')">Standard BP</button>
+            <button class="btn btn-premium" onclick="buyBattlePass('premium')">Premium BP</button>
+        </div>
+        <button class="btn-back" onclick="showScreen('screen2')" style="border-color:#ff4444; color:#ff6666; margin-top:10px;">← на главную</button>
+    </div>
+
+    <!-- ===== ЭКРАН 23: БАТЛ ПАСС СТАНДАРТ ===== -->
+    <div id="screen23" class="phone-screen screen-battlepass" style="display:none;">
+        <div class="bp-header">🎖️ Standard BP</div>
+        <div id="bpLevelsContainer" style="width:100%; display:flex; flex-direction:column; gap:4px; max-height:380px; overflow-y:auto; padding-right:4px;"></div>
+        <button class="btn" onclick="upgradeBP()" style="border-color:#66aaff; color:#66aaff; margin-top:8px;">⬆ Повысить</button>
+        <button class="btn-back" onclick="showScreen('screen22')" style="border-color:#ff4444; color:#ff6666; margin-top:6px;">← назад</button>
+    </div>
+
+    <!-- ===== ЭКРАН 24: БИЗНЕСЫ ===== -->
+    <div id="screen24" class="phone-screen screen-business" style="display:none;">
+        <div class="form-title">🏢 Бизнесы</div>
+        <div id="businessContainer" style="width:100%; display:flex; flex-direction:column; gap:6px; max-height:400px; overflow-y:auto; padding-right:4px;"></div>
+        <button class="btn-back" onclick="showScreen('screen2')" style="border-color:#d4a574; color:#d4a574; margin-top:10px;">← на главную</button>
+    </div>
+
     <script>
         // =================================================================
         // === НАСТРОЙКИ ===================================================
@@ -1183,12 +1489,22 @@
         let bankData = {
             balance: 0,
             salary: 50000,
-            credit: {
-                active: false,
-                total: 0,
-                remain: 0
-            },
+            credit: { active: false, total: 0, remain: 0 },
             isBalanceSet: false
+        };
+
+        // ===== ДАННЫЕ KC БАНКА =====
+        let kcData = {
+            balance: 0
+        };
+
+        // ===== ДАННЫЕ БАТЛ ПАСС =====
+        let bpData = {
+            active: false,
+            type: 'standard', // 'standard' или 'premium'
+            level: 1,
+            maxLevel: 40,
+            rewards: []
         };
 
         // ===== ДАННЫЕ ДЛЯ ГЕНЕРАТОРА =====
@@ -1205,6 +1521,23 @@
 
         // ===== ДАННЫЕ ДЛЯ ТЮНИНГА =====
         let tuningCart = [];
+
+        // ===== БИЗНЕСЫ =====
+        let businessData = {
+            owned: [],
+            list: [
+                { name: 'Автомойка', price: 500000, emoji: '🚗' },
+                { name: 'Магазин одежды', price: 750000, emoji: '👕' },
+                { name: 'Ресторан', price: 1000000, emoji: '🍽️' },
+                { name: 'АЗС', price: 1500000, emoji: '⛽' },
+                { name: 'Автосалон', price: 2500000, emoji: '🏎️' },
+                { name: 'Отель', price: 3500000, emoji: '🏨' },
+                { name: 'Клуб', price: 5000000, emoji: '🎵' },
+                { name: 'Завод', price: 8000000, emoji: '🏭' },
+                { name: 'Торговый центр', price: 12000000, emoji: '🛍️' },
+                { name: 'Нефтяная вышка', price: 20000000, emoji: '🛢️' }
+            ]
+        };
 
         // ===== ВСЕ ЗАПЧАСТИ =====
         const tuningParts = [
@@ -1431,6 +1764,97 @@
             ]
         };
 
+        // ===== НАГРАДЫ БП =====
+        function getBPRewards(type) {
+            if (type === 'standard') {
+                return [
+                    { level: 1, reward: 'VIP Silver на 5 часов 🥈' },
+                    { level: 2, reward: '20.000₽💸' },
+                    { level: 3, reward: '3 exp🔋' },
+                    { level: 4, reward: '5 KC (Kaskad Coin) 🪙' },
+                    { level: 5, reward: 'Кейс бомжа 🧰' },
+                    { level: 6, reward: 'VIP Silver на 5 часов 🥈' },
+                    { level: 7, reward: '20.000₽💸' },
+                    { level: 8, reward: '3 exp🔋' },
+                    { level: 9, reward: '5 KC 🪙' },
+                    { level: 10, reward: 'Акссесуар "Белый гоночный шлем" 🏎' },
+                    { level: 11, reward: 'VIP Silver на 5 часов 🥈' },
+                    { level: 12, reward: '25.000₽ 💸' },
+                    { level: 13, reward: '5 exp🔋' },
+                    { level: 14, reward: '5 KC 🪙' },
+                    { level: 15, reward: 'Кейс бомжа 🧰' },
+                    { level: 16, reward: 'VIP Silver на 8 часов 🥈' },
+                    { level: 17, reward: '25.000₽💸' },
+                    { level: 18, reward: '5 exp🔋' },
+                    { level: 19, reward: '5 КС 🪙' },
+                    { level: 20, reward: 'Акссесуар "Черный гоночный шлем" 🏎' },
+                    { level: 21, reward: 'VIP Silver на 8 часов 🥈' },
+                    { level: 22, reward: '30.000₽ 💸' },
+                    { level: 23, reward: '7 exp🔋' },
+                    { level: 24, reward: '10 KC 🪙' },
+                    { level: 25, reward: 'Кейс бомжа 🧰' },
+                    { level: 26, reward: 'VIP Silver на 8 часов 🥈' },
+                    { level: 27, reward: '30.000₽  💸' },
+                    { level: 28, reward: '7 exp🔋' },
+                    { level: 29, reward: '10 КС 🪙' },
+                    { level: 30, reward: 'Скин Гонщика 🏎' },
+                    { level: 31, reward: 'VIP Gold на 5 часов 🥇' },
+                    { level: 32, reward: '35.000₽ 💸' },
+                    { level: 33, reward: '10 exp🔋' },
+                    { level: 34, reward: '15 КС 🪙' },
+                    { level: 35, reward: 'Кейс бомжа 🧰' },
+                    { level: 36, reward: 'VIP Gold на 5 часов 🥇' },
+                    { level: 37, reward: '35.000₽ 💸' },
+                    { level: 38, reward: '10 exp🔋' },
+                    { level: 39, reward: '15 КС 🪙' },
+                    { level: 40, reward: 'Mitsubishi Lancer Evo VII из Форсажа (Госс. стоимость - 3.000.000₽) 🚘' }
+                ];
+            } else {
+                return [
+                    { level: 1, reward: 'VIP Gold на 1 день 🥇' },
+                    { level: 2, reward: '200.000₽💸' },
+                    { level: 3, reward: '15 exp🔋' },
+                    { level: 4, reward: '50 KC (Kaskad Coin) 🪙' },
+                    { level: 5, reward: 'Кейс стандартный 🧰' },
+                    { level: 6, reward: 'VIP Gold на 1 день🥇' },
+                    { level: 7, reward: '200.000₽💸' },
+                    { level: 8, reward: '15 exp🔋' },
+                    { level: 9, reward: '50 KC 🪙' },
+                    { level: 10, reward: 'Кейс стандартный 🧰' },
+                    { level: 11, reward: 'VIP Gold на 1 день 🥇' },
+                    { level: 12, reward: '300.000₽ 💸' },
+                    { level: 13, reward: '20 exp🔋' },
+                    { level: 14, reward: '75 KC 🪙' },
+                    { level: 15, reward: 'Кейс стандартный 🧰' },
+                    { level: 16, reward: 'VIP Gold на 2 дня🥇' },
+                    { level: 17, reward: '300.000₽💸' },
+                    { level: 18, reward: '20 exp🔋' },
+                    { level: 19, reward: '75 КС 🪙' },
+                    { level: 20, reward: 'Dodge Charger 1970 Fast and furious (Госс. стоимость - 6.000.000₽) 🚘' },
+                    { level: 21, reward: 'VIP Gold на 2 дня 🥇' },
+                    { level: 22, reward: '400.000₽ 💸' },
+                    { level: 23, reward: '25 exp🔋' },
+                    { level: 24, reward: '100 KC 🪙' },
+                    { level: 25, reward: 'Кейс стандартный 🧰' },
+                    { level: 26, reward: 'VIP Gold на 2 дня 🥇' },
+                    { level: 27, reward: '400.000₽  💸' },
+                    { level: 28, reward: '25 exp🔋' },
+                    { level: 29, reward: '100 КС 🪙' },
+                    { level: 30, reward: 'Скин Элитного гонщика 🏎' },
+                    { level: 31, reward: 'VIP Platinum на 12 часов 🏅' },
+                    { level: 32, reward: '500.000₽ 💸' },
+                    { level: 33, reward: '30 exp🔋' },
+                    { level: 34, reward: '150 КС 🪙' },
+                    { level: 35, reward: 'Кейс стандартный 🧰' },
+                    { level: 36, reward: 'VIP Platinum на 1 день 🏅' },
+                    { level: 37, reward: '500.000₽ 💸' },
+                    { level: 38, reward: '30 exp🔋' },
+                    { level: 39, reward: '150 КС 🪙' },
+                    { level: 40, reward: 'Nissan Skyline GT-R R34 Fast and furious (Госс. стоимость - 20.000.000₽) 🚘' }
+                ];
+            }
+        }
+
         // ===== ФУНКЦИИ БАНКА (сохранение/загрузка) =====
         function loadBankData() {
             try {
@@ -1443,27 +1867,20 @@
                     if (bankData.balance === undefined) bankData.balance = 0;
                     if (bankData.isBalanceSet === undefined) bankData.isBalanceSet = false;
                 }
-            } catch (e) {
-                console.warn('Ошибка загрузки банка:', e);
-            }
+            } catch (e) { console.warn('Ошибка загрузки банка:', e); }
             updateBankUI();
         }
 
         function saveBankData() {
             try {
                 localStorage.setItem('kaskad_bank_data', JSON.stringify(bankData));
-            } catch (e) {
-                console.warn('Ошибка сохранения банка:', e);
-            }
+            } catch (e) { console.warn('Ошибка сохранения банка:', e); }
             updateBankUI();
         }
 
         function updateBankUI() {
             const balanceEl = document.getElementById('bankBalanceDisplay');
-            if (balanceEl) {
-                balanceEl.textContent = bankData.balance.toLocaleString() + ' ₽';
-            }
-
+            if (balanceEl) balanceEl.textContent = bankData.balance.toLocaleString() + ' ₽';
             const creditEl = document.getElementById('creditInfoDisplay');
             if (creditEl) {
                 if (bankData.credit.active && bankData.credit.remain > 0) {
@@ -1476,288 +1893,387 @@
             }
         }
 
-        // ===== ОТПРАВКА В ТЕЛЕГРАМ (ВЕТКА БАНКА) =====
-        function sendBankLog(message) {
-            const fio = getFullName();
-            const fullMsg = `🏦 <b>БАНК</b>\n\n👤 ${fio}\n\n${message}\n\n💰 Баланс: ${bankData.balance.toLocaleString()} ₽`;
-            sendToTelegram(fullMsg, TOPIC_BANK).catch(() => {});
+        // ===== ФУНКЦИИ KC БАНКА =====
+        function loadKCData() {
+            try {
+                const saved = localStorage.getItem('kaskad_kc_data');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    kcData = parsed;
+                }
+            } catch (e) { console.warn('Ошибка загрузки KC:', e); }
+            updateKCUI();
         }
 
-        // ===== БАНК: ОСНОВНЫЕ ФУНКЦИИ =====
-        function showBank() {
+        function saveKCData() {
+            try {
+                localStorage.setItem('kaskad_kc_data', JSON.stringify(kcData));
+            } catch (e) { console.warn('Ошибка сохранения KC:', e); }
+            updateKCUI();
+        }
+
+        function updateKCUI() {
+            const el = document.getElementById('kcBalanceDisplay');
+            if (el) el.textContent = kcData.balance + ' KC';
+        }
+
+        function showKCBank() {
             if (!activity.passport) {
                 showToast('Сначала получите паспорт!');
                 return;
             }
-            loadBankData();
-
-            if (!bankData.isBalanceSet) {
-                showScreen('screen17');
-                return;
-            }
-
-            showScreen('screen15');
+            loadKCData();
+            renderKCShop();
+            showScreen('screen21');
         }
 
-        function setInitialBalance() {
-            const input = document.getElementById('initialBalanceInput');
+        function showKCBuy() {
+            // просто информационное сообщение
+            showToast('KC можно купить в лс у создателя: @A933MP97');
+        }
+
+        function addKC() {
+            const input = document.getElementById('kcEarnInput');
             let val = parseInt(input.value);
-            if (isNaN(val) || val < 0) {
-                showToast('⚠️ Введите корректную сумму');
+            if (isNaN(val) || val <= 0) {
+                showToast('⚠️ Введите корректное количество KC');
                 return;
             }
-
-            bankData.balance = val;
-            bankData.isBalanceSet = true;
-            saveBankData();
-            sendBankLog(`💰 <b>Установлен начальный баланс</b>\nСумма: ${val.toLocaleString()} ₽`);
-            showToast(`✅ Баланс установлен: ${val.toLocaleString()} ₽`);
-            showScreen('screen15');
+            kcData.balance += val;
+            saveKCData();
+            showToast(`✅ Начислено ${val} KC!`);
+            input.value = '';
         }
 
-        function getSalary() {
+        // ===== МАГАЗИН KC =====
+        const kcShopItems = [
+            // Автомобильные контейнеры
+            { category: 'Автомобильный контейнер', name: 'Контейнер с авто низкого класса', price: 60, emoji: '🚘' },
+            { category: 'Автомобильный контейнер', name: 'Контейнер с авто среднего класса', price: 105, emoji: '🚘' },
+            { category: 'Автомобильный контейнер', name: 'Контейнер с авто высокого класса', price: 220, emoji: '🚘' },
+            // RP валюта
+            { category: 'RP валюта', name: '500.000 ₽', price: 20, emoji: '💸' },
+            { category: 'RP валюта', name: '1.000.000 ₽', price: 40, emoji: '💸' },
+            { category: 'RP валюта', name: '5.000.000 ₽', price: 200, emoji: '💸' },
+            { category: 'RP валюта', name: '10.000.000 ₽', price: 400, emoji: '💸' },
+            { category: 'RP валюта', name: '25.000.000 ₽', price: 1000, emoji: '💸' },
+            { category: 'RP валюта', name: '50.000.000 ₽', price: 2000, emoji: '💸' },
+            { category: 'RP валюта', name: '100.000.000 ₽', price: 4000, emoji: '💸' },
+            { category: 'RP валюта', name: '150.000.000 ₽', price: 6000, emoji: '💸' },
+            // VIP SILVER
+            { category: 'VIP SILVER', name: '🥈 VIP SILVER 3 дня', price: 30, emoji: '🥈' },
+            { category: 'VIP SILVER', name: '🥈 VIP SILVER 7 дней', price: 65, emoji: '🥈' },
+            { category: 'VIP SILVER', name: '🥈 VIP SILVER 15 дней', price: 140, emoji: '🥈' },
+            { category: 'VIP SILVER', name: '🥈 VIP SILVER 30 дней', price: 280, emoji: '🥈' },
+            // VIP GOLD
+            { category: 'VIP GOLD', name: '🥇 VIP GOLD 3 дня', price: 70, emoji: '🥇' },
+            { category: 'VIP GOLD', name: '🥇 VIP GOLD 7 дней', price: 145, emoji: '🥇' },
+            { category: 'VIP GOLD', name: '🥇 VIP GOLD 15 дней', price: 300, emoji: '🥇' },
+            { category: 'VIP GOLD', name: '🥇 VIP GOLD 30 дней', price: 600, emoji: '🥇' },
+            // VIP PLATINUM
+            { category: 'VIP PLATINUM', name: '🏅 VIP PLATINUM 3 дня', price: 130, emoji: '🏅' },
+            { category: 'VIP PLATINUM', name: '🏅 VIP PLATINUM 7 дней', price: 270, emoji: '🏅' },
+            { category: 'VIP PLATINUM', name: '🏅 VIP PLATINUM 15 дней', price: 550, emoji: '🏅' },
+            { category: 'VIP PLATINUM', name: '🏅 VIP PLATINUM 30 дней', price: 1000, emoji: '🏅' },
+            // EXP
+            { category: 'EXP', name: '5 exp', price: 10, emoji: '🔋' },
+            { category: 'EXP', name: '10 exp', price: 20, emoji: '🔋' },
+            { category: 'EXP', name: '20 exp', price: 40, emoji: '🔋' },
+            { category: 'EXP', name: '50 exp', price: 85, emoji: '🔋' },
+        ];
+
+        function renderKCShop() {
+            const container = document.getElementById('kcShopContainer');
+            container.innerHTML = '';
+            kcShopItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'kc-shop-item';
+                div.innerHTML = `
+                    <span><span class="kc-emoji">${item.emoji}</span> ${item.name}</span>
+                    <span class="kc-price">${item.price} KC</span>
+                `;
+                div.onclick = () => buyKCItem(item);
+                container.appendChild(div);
+            });
+        }
+
+        function buyKCItem(item) {
             if (!bankData.isBalanceSet) {
-                showToast('⚠️ Сначала установите баланс!');
+                showToast('⚠️ Сначала установите баланс в банке!');
                 return;
             }
-            if (bankData.salary <= 0) {
-                showToast('⚠️ Сначала установите зарплату!');
+            if (kcData.balance < item.price) {
+                showToast(`❌ Недостаточно KC! Нужно ${item.price} KC, у вас ${kcData.balance} KC`);
                 return;
             }
-            bankData.balance += bankData.salary;
-            saveBankData();
-            sendBankLog(`💵 <b>Получена зарплата</b>\nСумма: ${bankData.salary.toLocaleString()} ₽`);
-            showToast(`✅ Получено ${bankData.salary.toLocaleString()} ₽`);
-        }
+            if (!confirm(`🛒 Купить "${item.name}" за ${item.price} KC?`)) return;
 
-        function toggleSalarySettings() {
-            const el = document.getElementById('salarySettings');
-            if (el.style.display === 'none') {
-                el.style.display = 'flex';
-                el.style.flexDirection = 'column';
-                el.style.gap = '8px';
-                document.getElementById('salaryInput').value = bankData.salary;
+            kcData.balance -= item.price;
+            saveKCData();
+
+            // Начисляем награду в зависимости от категории
+            let rewardMsg = '';
+            if (item.category === 'RP валюта') {
+                const amount = parseInt(item.name.replace(/[^0-9]/g, ''));
+                if (!isNaN(amount)) {
+                    bankData.balance += amount;
+                    saveBankData();
+                    rewardMsg = `💰 Начислено ${amount.toLocaleString()} ₽ на банковский счет`;
+                    sendBankLog(`🛒 <b>Покупка в KC магазине</b>\nТовар: ${item.name}\nЦена: ${item.price} KC\n${rewardMsg}`);
+                }
+            } else if (item.category === 'Автомобильный контейнер') {
+                // Имитация открытия контейнера - выдаем случайное авто из соответствующего класса
+                let cls = 'Низкий класс';
+                if (item.name.includes('среднего')) cls = 'Средний класс';
+                if (item.name.includes('высокого')) cls = 'Высокий класс';
+                const cars = carsData[cls] || [];
+                if (cars.length > 0) {
+                    const randomCar = cars[Math.floor(Math.random() * cars.length)];
+                    rewardMsg = `🚗 Вы получили: ${randomCar.name} (${cls})!`;
+                    sendBankLog(`🛒 <b>Покупка в KC магазине</b>\nТовар: ${item.name}\nЦена: ${item.price} KC\n${rewardMsg}`);
+                    showToast(`🎉 ${rewardMsg}`);
+                } else {
+                    rewardMsg = '❌ Контейнер пуст';
+                }
             } else {
-                el.style.display = 'none';
+                // VIP и EXP - просто логируем
+                rewardMsg = `✅ Приобретено: ${item.name}`;
+                sendBankLog(`🛒 <b>Покупка в KC магазине</b>\nТовар: ${item.name}\nЦена: ${item.price} KC\n${rewardMsg}`);
+                showToast(`✅ ${item.name} куплено!`);
+            }
+
+            renderKCShop();
+            updateKCUI();
+            if (rewardMsg && !rewardMsg.includes('🚗')) {
+                showToast(`✅ ${item.name} куплено! ${rewardMsg}`);
             }
         }
 
-        function setSalary() {
-            const input = document.getElementById('salaryInput');
-            let val = parseInt(input.value);
-            if (isNaN(val) || val < 0) {
-                showToast('⚠️ Введите корректную сумму');
-                return;
-            }
-            bankData.salary = val;
-            saveBankData();
-            document.getElementById('salarySettings').style.display = 'none';
-            sendBankLog(`⚙️ <b>Установлена зарплата</b>\nСумма: ${val.toLocaleString()} ₽`);
-            showToast(`✅ Зарплата установлена: ${val.toLocaleString()} ₽`);
+        // ===== БАТЛ ПАСС =====
+        function loadBPData() {
+            try {
+                const saved = localStorage.getItem('kaskad_bp_data');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    bpData = parsed;
+                }
+            } catch (e) { console.warn('Ошибка загрузки BP:', e); }
         }
 
-        function editSalary() {
-            document.getElementById('salarySettings').style.display = 'flex';
-            document.getElementById('salarySettings').style.flexDirection = 'column';
-            document.getElementById('salarySettings').style.gap = '8px';
-            document.getElementById('salaryInput').value = bankData.salary;
-            document.getElementById('salaryInput').focus();
+        function saveBPData() {
+            try {
+                localStorage.setItem('kaskad_bp_data', JSON.stringify(bpData));
+            } catch (e) { console.warn('Ошибка сохранения BP:', e); }
         }
 
-        // ===== ПЕРЕВОД ДЕНЕГ (НОВОЕ МЕНЮ) =====
-        function showTransferMenu() {
-            if (!bankData.isBalanceSet) {
-                showToast('⚠️ Сначала установите баланс!');
+        function showBattlePassMenu() {
+            if (!activity.passport) {
+                showToast('Сначала получите паспорт!');
                 return;
             }
-            showScreen('screen18');
-        }
-
-        function showTransferSend() {
-            document.getElementById('transferBalanceDisplay').textContent = bankData.balance.toLocaleString();
-            document.getElementById('transferAmount').value = '';
-            document.getElementById('transferMessage').value = '';
-            showScreen('screen19');
-        }
-
-        function showTransferReceive() {
-            document.getElementById('receiveBalanceDisplay').textContent = bankData.balance.toLocaleString();
-            document.getElementById('receiveAmount').value = '';
-            document.getElementById('receiveMessage').value = '';
-            showScreen('screen20');
-        }
-
-        // Утилита для парсинга чисел с пробелами и точками
-        function parseAmountString(str) {
-            if (!str) return NaN;
-            // Удаляем все пробелы и точки (разделители тысяч)
-            let cleaned = str.replace(/[\s.]/g, '');
-            // Если осталась запятая как разделитель, заменяем на точку
-            cleaned = cleaned.replace(',', '.');
-            return parseFloat(cleaned);
-        }
-
-        function sendTransfer() {
-            const amountInput = document.getElementById('transferAmount');
-            const messageInput = document.getElementById('transferMessage');
-
-            const rawAmount = amountInput.value.trim();
-            const amount = parseAmountString(rawAmount);
-            const message = messageInput.value.trim() || 'без комментария';
-
-            if (isNaN(amount) || amount <= 0) {
-                showToast('⚠️ Введите корректную сумму (например, 1230009 или 1 230 009)');
-                return;
-            }
-
-            if (amount > bankData.balance) {
-                showToast(`❌ Недостаточно средств! Нужно ${amount.toLocaleString()} ₽, у вас ${bankData.balance.toLocaleString()} ₽`);
-                return;
-            }
-
-            if (!confirm(`💸 Вы уверены, что хотите перевести ${amount.toLocaleString()} ₽?\nСообщение: "${message}"`)) {
-                return;
-            }
-
-            // Списываем деньги
-            bankData.balance -= amount;
-            saveBankData();
-
-            // Отправляем в Telegram
-            const fio = getFullName();
-            const logMsg =
-            `💸 <b>ПЕРЕВОД ДЕНЕГ (ОТПРАВКА)</b>\n\n👤 Отправитель: ${fio}\n💰 Сумма: ${amount.toLocaleString()} ₽\n📝 Сообщение: ${message}\n\n💳 Остаток: ${bankData.balance.toLocaleString()} ₽`;
-            sendBankLog(logMsg);
-
-            showToast(`✅ Перевод ${amount.toLocaleString()} ₽ отправлен!`);
-            showScreen('screen15');
-        }
-
-        function receiveTransfer() {
-            const amountInput = document.getElementById('receiveAmount');
-            const messageInput = document.getElementById('receiveMessage');
-
-            const rawAmount = amountInput.value.trim();
-            const amount = parseAmountString(rawAmount);
-            const message = messageInput.value.trim() || 'без комментария';
-
-            if (isNaN(amount) || amount <= 0) {
-                showToast('⚠️ Введите корректную сумму (например, 1230009 или 1 230 009)');
-                return;
-            }
-
-            // Зачисляем деньги (получение)
-            bankData.balance += amount;
-            saveBankData();
-
-            // Отправляем в Telegram
-            const fio = getFullName();
-            const logMsg =
-            `💸 <b>ПЕРЕВОД ДЕНЕГ (ПОЛУЧЕНИЕ)</b>\n\n👤 Получатель: ${fio}\n💰 Сумма: ${amount.toLocaleString()} ₽\n📝 Сообщение: ${message}\n\n💳 Новый баланс: ${bankData.balance.toLocaleString()} ₽`;
-            sendBankLog(logMsg);
-
-            showToast(`✅ Получено ${amount.toLocaleString()} ₽! Баланс обновлен.`);
-            showScreen('screen15');
-        }
-
-        // ===== БАНК: КРЕДИТ =====
-        function openCredit() {
-            if (!bankData.isBalanceSet) {
-                showToast('⚠️ Сначала установите баланс!');
-                return;
-            }
-            if (bankData.credit.active && bankData.credit.remain > 0) {
-                showToast('❌ У вас уже есть активный кредит! Погасите его полностью.');
-                return;
-            }
-
-            let amount = prompt('Введите сумму кредита (макс. 3 000 000 ₽):', '1000000');
-            if (amount === null) return;
-            amount = parseInt(amount);
-            if (isNaN(amount) || amount <= 0) {
-                showToast('❌ Некорректная сумма');
-                return;
-            }
-            if (amount > 3000000) {
-                showToast('❌ Максимальная сумма — 3 000 000 ₽');
-                return;
-            }
-
-            bankData.credit.active = true;
-            bankData.credit.total = amount;
-            bankData.credit.remain = amount;
-            saveBankData();
-            sendBankLog(`📋 <b>Оформлен кредит</b>\nСумма: ${amount.toLocaleString()} ₽`);
-            showToast(`✅ Кредит на ${amount.toLocaleString()} ₽ оформлен!`);
-        }
-
-        function payCredit() {
-            if (!bankData.isBalanceSet) {
-                showToast('⚠️ Сначала установите баланс!');
-                return;
-            }
-            if (!bankData.credit.active || bankData.credit.remain <= 0) {
-                showToast('❌ Нет активного кредита');
-                return;
-            }
-
-            let amount = prompt(`Введите сумму для погашения (остаток: ${bankData.credit.remain.toLocaleString()} ₽):`, bankData
-                .credit.remain);
-            if (amount === null) return;
-            amount = parseInt(amount);
-            if (isNaN(amount) || amount <= 0) {
-                showToast('❌ Введите положительное число');
-                return;
-            }
-            if (amount > bankData.credit.remain) {
-                showToast('❌ Сумма больше остатка кредита');
-                return;
-            }
-            if (amount > bankData.balance) {
-                showToast(`❌ Недостаточно средств! Нужно ${amount.toLocaleString()} ₽, у вас ${bankData.balance.toLocaleString()} ₽`);
-                return;
-            }
-
-            bankData.balance -= amount;
-            bankData.credit.remain -= amount;
-
-            if (bankData.credit.remain <= 0) {
-                bankData.credit.active = false;
-                bankData.credit.total = 0;
-                bankData.credit.remain = 0;
-                sendBankLog(`🎉 <b>Кредит полностью погашен!</b>\nСумма: ${amount.toLocaleString()} ₽`);
-                showToast('🎉 Кредит полностью погашен!');
+            loadBPData();
+            if (bpData.active) {
+                showBPScreen();
             } else {
-                sendBankLog(`💳 <b>Погашение кредита</b>\nСумма: ${amount.toLocaleString()} ₽\nОстаток: ${bankData.credit.remain.toLocaleString()} ₽`);
-                showToast(`✅ Погашено ${amount.toLocaleString()} ₽. Остаток: ${bankData.credit.remain.toLocaleString()} ₽`);
+                showScreen('screen22');
             }
-            saveBankData();
         }
 
-        function closeCredit() {
+        function buyBattlePass(type) {
             if (!bankData.isBalanceSet) {
-                showToast('⚠️ Сначала установите баланс!');
+                showToast('⚠️ Сначала установите баланс в банке!');
                 return;
             }
-            if (!bankData.credit.active || bankData.credit.remain <= 0) {
-                showToast('❌ Нет активного кредита');
-                return;
-            }
-            const remain = bankData.credit.remain;
-            if (remain > bankData.balance) {
-                showToast(`❌ Недостаточно средств! Нужно ${remain.toLocaleString()} ₽`);
+            if (bpData.active) {
+                showToast('❌ Батл Пасс уже активирован!');
                 return;
             }
 
-            if (confirm(`Закрыть кредит досрочно? Спишется ${remain.toLocaleString()} ₽ с баланса.`)) {
-                bankData.balance -= remain;
-                bankData.credit.active = false;
-                bankData.credit.total = 0;
-                bankData.credit.remain = 0;
-                saveBankData();
-                sendBankLog(`❌ <b>Кредит закрыт досрочно</b>\nСумма: ${remain.toLocaleString()} ₽`);
-                showToast('✅ Кредит закрыт!');
+            let price = 0;
+            if (type === 'standard') {
+                price = 500000;
+            } else {
+                price = 100000000;
             }
+
+            if (bankData.balance < price) {
+                showToast(`❌ Недостаточно средств! Нужно ${price.toLocaleString()} ₽`);
+                return;
+            }
+
+            if (!confirm(`🎖️ Купить ${type === 'standard' ? 'Standard' : 'Premium'} BP за ${price.toLocaleString()} ₽?`)) return;
+
+            bankData.balance -= price;
+            saveBankData();
+
+            bpData.active = true;
+            bpData.type = type;
+            bpData.level = 1;
+            bpData.rewards = getBPRewards(type);
+            saveBPData();
+
+            // Начисляем награду за 1 уровень
+            applyBPLevelReward(1);
+
+            sendBankLog(`🎖️ <b>Покупка Батл Пасс</b>\nТип: ${type}\nЦена: ${price.toLocaleString()} ₽`);
+            showToast(`✅ ${type} BP активирован! Получена награда за 1 уровень.`);
+            showBPScreen();
+        }
+
+        function showBPScreen() {
+            const container = document.getElementById('bpLevelsContainer');
+            container.innerHTML = '';
+
+            const rewards = bpData.rewards || [];
+            const currentLevel = bpData.level || 1;
+
+            rewards.forEach(r => {
+                const div = document.createElement('div');
+                const isUnlocked = r.level <= currentLevel;
+                div.className = `bp-level ${isUnlocked ? 'unlocked' : 'locked'}`;
+                div.innerHTML = `
+                    <span class="bp-level-num">${r.level}</span>
+                    <span class="bp-reward">${r.reward}</span>
+                    <span class="bp-status">${isUnlocked ? '✅' : '🔒'}</span>
+                `;
+                container.appendChild(div);
+            });
+
+            // Прокручиваем к текущему уровню
+            const levelEl = container.querySelector(`.bp-level:nth-child(${currentLevel})`);
+            if (levelEl) {
+                levelEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+            }
+
+            showScreen('screen23');
+        }
+
+        function upgradeBP() {
+            if (!bpData.active) {
+                showToast('❌ Батл Пасс не активирован!');
+                return;
+            }
+            if (bpData.level >= 40) {
+                showToast('🎉 Батл Пасс полностью пройден!');
+                return;
+            }
+
+            const nextLevel = bpData.level + 1;
+            bpData.level = nextLevel;
+            saveBPData();
+
+            applyBPLevelReward(nextLevel);
+            showBPScreen();
+            showToast(`⬆ Повышен до ${nextLevel} уровня!`);
+        }
+
+        function applyBPLevelReward(level) {
+            const rewards = bpData.rewards || [];
+            const reward = rewards.find(r => r.level === level);
+            if (!reward) return;
+
+            // Парсим награду
+            const text = reward.reward;
+
+            // Проверяем на деньги (содержит ₽)
+            if (text.includes('₽')) {
+                const match = text.match(/([\d.]+)\s*₽/);
+                if (match) {
+                    const amount = parseInt(match[1].replace(/[^0-9]/g, ''));
+                    if (!isNaN(amount)) {
+                        bankData.balance += amount;
+                        saveBankData();
+                        sendBankLog(`🎖️ <b>Награда BP (${level} уровень)</b>\n${reward.reward}\n💰 Начислено ${amount.toLocaleString()} ₽`);
+                        showToast(`💰 Начислено ${amount.toLocaleString()} ₽ за ${level} уровень BP!`);
+                    }
+                }
+            }
+
+            // Проверяем на KC
+            if (text.includes('KC')) {
+                const match = text.match(/([\d.]+)\s*KC/);
+                if (match) {
+                    const amount = parseInt(match[1].replace(/[^0-9]/g, ''));
+                    if (!isNaN(amount)) {
+                        kcData.balance += amount;
+                        saveKCData();
+                        sendBankLog(`🎖️ <b>Награда BP (${level} уровень)</b>\n${reward.reward}\n🪙 Начислено ${amount} KC`);
+                        showToast(`🪙 Начислено ${amount} KC за ${level} уровень BP!`);
+                    }
+                }
+            }
+        }
+
+        // ===== БИЗНЕСЫ =====
+        function loadBusinessData() {
+            try {
+                const saved = localStorage.getItem('kaskad_business_data');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    businessData.owned = parsed.owned || [];
+                }
+            } catch (e) { console.warn('Ошибка загрузки бизнесов:', e); }
+        }
+
+        function saveBusinessData() {
+            try {
+                localStorage.setItem('kaskad_business_data', JSON.stringify({ owned: businessData.owned }));
+            } catch (e) { console.warn('Ошибка сохранения бизнесов:', e); }
+        }
+
+        function showBusiness() {
+            if (!activity.passport) {
+                showToast('Сначала получите паспорт!');
+                return;
+            }
+            if (!bankData.isBalanceSet) {
+                showToast('⚠️ Сначала установите баланс в банке!');
+                return;
+            }
+            loadBusinessData();
+            renderBusinesses();
+            showScreen('screen24');
+        }
+
+        function renderBusinesses() {
+            const container = document.getElementById('businessContainer');
+            container.innerHTML = '';
+
+            businessData.list.forEach(biz => {
+                const owned = businessData.owned.includes(biz.name);
+                const div = document.createElement('div');
+                div.className = 'biz-item';
+                div.innerHTML = `
+                    <span><span class="biz-emoji">${biz.emoji}</span> ${biz.name} ${owned ? '✅' : ''}</span>
+                    <span class="biz-price">${owned ? 'Владение' : biz.price.toLocaleString() + ' ₽'}</span>
+                `;
+                if (!owned) {
+                    div.onclick = () => buyBusiness(biz);
+                }
+                container.appendChild(div);
+            });
+        }
+
+        function buyBusiness(biz) {
+            if (businessData.owned.includes(biz.name)) {
+                showToast('❌ Вы уже владеете этим бизнесом!');
+                return;
+            }
+            if (bankData.balance < biz.price) {
+                showToast(`❌ Недостаточно средств! Нужно ${biz.price.toLocaleString()} ₽`);
+                return;
+            }
+            if (!confirm(`🏢 Купить "${biz.name}" за ${biz.price.toLocaleString()} ₽?`)) return;
+
+            bankData.balance -= biz.price;
+            saveBankData();
+
+            businessData.owned.push(biz.name);
+            saveBusinessData();
+
+            sendBankLog(`🏢 <b>Покупка бизнеса</b>\nБизнес: ${biz.name}\nЦена: ${biz.price.toLocaleString()} ₽`);
+            showToast(`✅ Бизнес "${biz.name}" приобретен!`);
+            renderBusinesses();
         }
 
         // ===== ОБНОВЛЕННЫЕ ФУНКЦИИ ПОКУПОК (СПИСЫВАЮТ БАЛАНС) =====
@@ -1770,10 +2286,7 @@
                 showToast(`❌ Недостаточно средств! Нужно ${car.price.toLocaleString()} ₽`);
                 return;
             }
-
-            if (!confirm(`🚗 Вы уверены, что хотите купить ${car.name} за ${car.price.toLocaleString()} ₽?`)) {
-                return;
-            }
+            if (!confirm(`🚗 Вы уверены, что хотите купить ${car.name} за ${car.price.toLocaleString()} ₽?`)) return;
 
             bankData.balance -= car.price;
             saveBankData();
@@ -1806,9 +2319,7 @@
                 return;
             }
 
-            if (!confirm(`🔢 Вы уверены, что хотите купить госномер ${currentGeneratedNumber} за ${currentPrice.toLocaleString()} ₽?`)) {
-                return;
-            }
+            if (!confirm(`🔢 Вы уверены, что хотите купить госномер ${currentGeneratedNumber} за ${currentPrice.toLocaleString()} ₽?`)) return;
 
             bankData.balance -= currentPrice;
             saveBankData();
@@ -1870,18 +2381,21 @@
                 });
         }
 
+        function sendBankLog(message) {
+            const fio = getFullName();
+            const fullMsg = `🏦 <b>БАНК</b>\n\n👤 ${fio}\n\n${message}\n\n💰 Баланс: ${bankData.balance.toLocaleString()} ₽`;
+            sendToTelegram(fullMsg, TOPIC_BANK).catch(() => {});
+        }
+
         function generateRandomVIN() {
             const chars = 'ABCDEFGHJKLMNPRSTUVWXYZ1234567890';
             let vin = '';
-            for (let i = 0; i < 17; i++) {
-                vin += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
+            for (let i = 0; i < 17; i++) vin += chars.charAt(Math.floor(Math.random() * chars.length));
             return vin;
         }
 
         function generateRandomYear() {
-            const currentYear = new Date().getFullYear();
-            return currentYear - Math.floor(Math.random() * 30);
+            return new Date().getFullYear() - Math.floor(Math.random() * 30);
         }
 
         function generateRandomDate() {
@@ -1967,7 +2481,7 @@
             localStorage.setItem('passport_kaskad', JSON.stringify(passportData));
 
             const msg =
-            `🪪 <b>НОВЫЙ ПАСПОРТ</b>\n\n👤 ФИО: ${fio}\n📅 Возраст: ${age}\n🔑 Код: ${code}`;
+                `🪪 <b>НОВЫЙ ПАСПОРТ</b>\n\n👤 ФИО: ${fio}\n📅 Возраст: ${age}\n🔑 Код: ${code}`;
             sendToTelegram(msg, TOPIC_PASSPORT);
 
             showPassport(passportData);
@@ -2071,12 +2585,7 @@
 
             sendToTelegram(msg, TOPIC_JOB)
                 .then(() => {
-                    activity.job = {
-                        level: level,
-                        name: job.name,
-                        salary: job.salary,
-                        emoji: job.emoji
-                    };
+                    activity.job = { level: level, name: job.name, salary: job.salary, emoji: job.emoji };
                     localStorage.setItem('activity_kaskad_job', JSON.stringify(activity.job));
                     showToast(`✅ Вы устроились на работу: ${job.name}!`);
                     showScreen('screen2');
@@ -2200,12 +2709,7 @@
             const allCars = [];
             Object.keys(carsData).forEach(cls => {
                 carsData[cls].forEach(car => {
-                    allCars.push({
-                        class: cls,
-                        name: car.name,
-                        hp: car.hp || 'N/A',
-                        price: car.price
-                    });
+                    allCars.push({ class: cls, name: car.name, hp: car.hp || 'N/A', price: car.price });
                 });
             });
             return allCars;
@@ -2494,9 +2998,7 @@
                 return;
             }
 
-            if (!confirm(`🔧 Вы уверены, что хотите заказать тюнинг на ${total.toLocaleString()} ₽?`)) {
-                return;
-            }
+            if (!confirm(`🔧 Вы уверены, что хотите заказать тюнинг на ${total.toLocaleString()} ₽?`)) return;
 
             bankData.balance -= total;
             saveBankData();
@@ -2516,6 +3018,274 @@
                 .catch(() => {
                     showToast('❌ Ошибка отправки заказа');
                 });
+        }
+
+        // ===== БАНК: ОСНОВНЫЕ ФУНКЦИИ =====
+        function showBank() {
+            if (!activity.passport) {
+                showToast('Сначала получите паспорт!');
+                return;
+            }
+            loadBankData();
+
+            if (!bankData.isBalanceSet) {
+                showScreen('screen17');
+                return;
+            }
+
+            showScreen('screen15');
+        }
+
+        function setInitialBalance() {
+            const input = document.getElementById('initialBalanceInput');
+            let val = parseInt(input.value);
+            if (isNaN(val) || val < 0) {
+                showToast('⚠️ Введите корректную сумму');
+                return;
+            }
+
+            bankData.balance = val;
+            bankData.isBalanceSet = true;
+            saveBankData();
+            sendBankLog(`💰 <b>Установлен начальный баланс</b>\nСумма: ${val.toLocaleString()} ₽`);
+            showToast(`✅ Баланс установлен: ${val.toLocaleString()} ₽`);
+            showScreen('screen15');
+        }
+
+        function getSalary() {
+            if (!bankData.isBalanceSet) {
+                showToast('⚠️ Сначала установите баланс!');
+                return;
+            }
+            if (bankData.salary <= 0) {
+                showToast('⚠️ Сначала установите зарплату!');
+                return;
+            }
+            bankData.balance += bankData.salary;
+            saveBankData();
+            sendBankLog(`💵 <b>Получена зарплата</b>\nСумма: ${bankData.salary.toLocaleString()} ₽`);
+            showToast(`✅ Получено ${bankData.salary.toLocaleString()} ₽`);
+        }
+
+        function toggleSalarySettings() {
+            const el = document.getElementById('salarySettings');
+            if (el.style.display === 'none') {
+                el.style.display = 'flex';
+                el.style.flexDirection = 'column';
+                el.style.gap = '8px';
+                document.getElementById('salaryInput').value = bankData.salary;
+            } else {
+                el.style.display = 'none';
+            }
+        }
+
+        function setSalary() {
+            const input = document.getElementById('salaryInput');
+            let val = parseInt(input.value);
+            if (isNaN(val) || val < 0) {
+                showToast('⚠️ Введите корректную сумму');
+                return;
+            }
+            bankData.salary = val;
+            saveBankData();
+            document.getElementById('salarySettings').style.display = 'none';
+            sendBankLog(`⚙️ <b>Установлена зарплата</b>\nСумма: ${val.toLocaleString()} ₽`);
+            showToast(`✅ Зарплата установлена: ${val.toLocaleString()} ₽`);
+        }
+
+        function editSalary() {
+            document.getElementById('salarySettings').style.display = 'flex';
+            document.getElementById('salarySettings').style.flexDirection = 'column';
+            document.getElementById('salarySettings').style.gap = '8px';
+            document.getElementById('salaryInput').value = bankData.salary;
+            document.getElementById('salaryInput').focus();
+        }
+
+        // ===== ПЕРЕВОД ДЕНЕГ =====
+        function showTransferMenu() {
+            if (!bankData.isBalanceSet) {
+                showToast('⚠️ Сначала установите баланс!');
+                return;
+            }
+            showScreen('screen18');
+        }
+
+        function showTransferSend() {
+            document.getElementById('transferBalanceDisplay').textContent = bankData.balance.toLocaleString();
+            document.getElementById('transferAmount').value = '';
+            document.getElementById('transferMessage').value = '';
+            showScreen('screen19');
+        }
+
+        function showTransferReceive() {
+            document.getElementById('receiveBalanceDisplay').textContent = bankData.balance.toLocaleString();
+            document.getElementById('receiveAmount').value = '';
+            document.getElementById('receiveMessage').value = '';
+            showScreen('screen20');
+        }
+
+        function parseAmountString(str) {
+            if (!str) return NaN;
+            let cleaned = str.replace(/[\s.]/g, '');
+            cleaned = cleaned.replace(',', '.');
+            return parseFloat(cleaned);
+        }
+
+        function sendTransfer() {
+            const amountInput = document.getElementById('transferAmount');
+            const messageInput = document.getElementById('transferMessage');
+
+            const rawAmount = amountInput.value.trim();
+            const amount = parseAmountString(rawAmount);
+            const message = messageInput.value.trim() || 'без комментария';
+
+            if (isNaN(amount) || amount <= 0) {
+                showToast('⚠️ Введите корректную сумму (например, 1230009 или 1 230 009)');
+                return;
+            }
+
+            if (amount > bankData.balance) {
+                showToast(`❌ Недостаточно средств! Нужно ${amount.toLocaleString()} ₽, у вас ${bankData.balance.toLocaleString()} ₽`);
+                return;
+            }
+
+            if (!confirm(`💸 Вы уверены, что хотите перевести ${amount.toLocaleString()} ₽?\nСообщение: "${message}"`)) return;
+
+            bankData.balance -= amount;
+            saveBankData();
+
+            const fio = getFullName();
+            const logMsg =
+                `💸 <b>ПЕРЕВОД ДЕНЕГ (ОТПРАВКА)</b>\n\n👤 Отправитель: ${fio}\n💰 Сумма: ${amount.toLocaleString()} ₽\n📝 Сообщение: ${message}\n\n💳 Остаток: ${bankData.balance.toLocaleString()} ₽`;
+            sendBankLog(logMsg);
+
+            showToast(`✅ Перевод ${amount.toLocaleString()} ₽ отправлен!`);
+            showScreen('screen15');
+        }
+
+        function receiveTransfer() {
+            const amountInput = document.getElementById('receiveAmount');
+            const messageInput = document.getElementById('receiveMessage');
+
+            const rawAmount = amountInput.value.trim();
+            const amount = parseAmountString(rawAmount);
+            const message = messageInput.value.trim() || 'без комментария';
+
+            if (isNaN(amount) || amount <= 0) {
+                showToast('⚠️ Введите корректную сумму (например, 1230009 или 1 230 009)');
+                return;
+            }
+
+            bankData.balance += amount;
+            saveBankData();
+
+            const fio = getFullName();
+            const logMsg =
+                `💸 <b>ПЕРЕВОД ДЕНЕГ (ПОЛУЧЕНИЕ)</b>\n\n👤 Получатель: ${fio}\n💰 Сумма: ${amount.toLocaleString()} ₽\n📝 Сообщение: ${message}\n\n💳 Новый баланс: ${bankData.balance.toLocaleString()} ₽`;
+            sendBankLog(logMsg);
+
+            showToast(`✅ Получено ${amount.toLocaleString()} ₽! Баланс обновлен.`);
+            showScreen('screen15');
+        }
+
+        // ===== БАНК: КРЕДИТ =====
+        function openCredit() {
+            if (!bankData.isBalanceSet) {
+                showToast('⚠️ Сначала установите баланс!');
+                return;
+            }
+            if (bankData.credit.active && bankData.credit.remain > 0) {
+                showToast('❌ У вас уже есть активный кредит! Погасите его полностью.');
+                return;
+            }
+
+            let amount = prompt('Введите сумму кредита (макс. 3 000 000 ₽):', '1000000');
+            if (amount === null) return;
+            amount = parseInt(amount);
+            if (isNaN(amount) || amount <= 0) {
+                showToast('❌ Некорректная сумма');
+                return;
+            }
+            if (amount > 3000000) {
+                showToast('❌ Максимальная сумма — 3 000 000 ₽');
+                return;
+            }
+
+            bankData.credit.active = true;
+            bankData.credit.total = amount;
+            bankData.credit.remain = amount;
+            saveBankData();
+            sendBankLog(`📋 <b>Оформлен кредит</b>\nСумма: ${amount.toLocaleString()} ₽`);
+            showToast(`✅ Кредит на ${amount.toLocaleString()} ₽ оформлен!`);
+        }
+
+        function payCredit() {
+            if (!bankData.isBalanceSet) {
+                showToast('⚠️ Сначала установите баланс!');
+                return;
+            }
+            if (!bankData.credit.active || bankData.credit.remain <= 0) {
+                showToast('❌ Нет активного кредита');
+                return;
+            }
+
+            let amount = prompt(`Введите сумму для погашения (остаток: ${bankData.credit.remain.toLocaleString()} ₽):`, bankData
+                .credit.remain);
+            if (amount === null) return;
+            amount = parseInt(amount);
+            if (isNaN(amount) || amount <= 0) {
+                showToast('❌ Введите положительное число');
+                return;
+            }
+            if (amount > bankData.credit.remain) {
+                showToast('❌ Сумма больше остатка кредита');
+                return;
+            }
+            if (amount > bankData.balance) {
+                showToast(`❌ Недостаточно средств! Нужно ${amount.toLocaleString()} ₽, у вас ${bankData.balance.toLocaleString()} ₽`);
+                return;
+            }
+
+            bankData.balance -= amount;
+            bankData.credit.remain -= amount;
+
+            if (bankData.credit.remain <= 0) {
+                bankData.credit.active = false;
+                bankData.credit.total = 0;
+                bankData.credit.remain = 0;
+                sendBankLog(`🎉 <b>Кредит полностью погашен!</b>\nСумма: ${amount.toLocaleString()} ₽`);
+                showToast('🎉 Кредит полностью погашен!');
+            } else {
+                sendBankLog(`💳 <b>Погашение кредита</b>\nСумма: ${amount.toLocaleString()} ₽\nОстаток: ${bankData.credit.remain.toLocaleString()} ₽`);
+                showToast(`✅ Погашено ${amount.toLocaleString()} ₽. Остаток: ${bankData.credit.remain.toLocaleString()} ₽`);
+            }
+            saveBankData();
+        }
+
+        function closeCredit() {
+            if (!bankData.isBalanceSet) {
+                showToast('⚠️ Сначала установите баланс!');
+                return;
+            }
+            if (!bankData.credit.active || bankData.credit.remain <= 0) {
+                showToast('❌ Нет активного кредита');
+                return;
+            }
+            const remain = bankData.credit.remain;
+            if (remain > bankData.balance) {
+                showToast(`❌ Недостаточно средств! Нужно ${remain.toLocaleString()} ₽`);
+                return;
+            }
+
+            if (confirm(`Закрыть кредит досрочно? Спишется ${remain.toLocaleString()} ₽ с баланса.`)) {
+                bankData.balance -= remain;
+                bankData.credit.active = false;
+                bankData.credit.total = 0;
+                bankData.credit.remain = 0;
+                saveBankData();
+                sendBankLog(`❌ <b>Кредит закрыт досрочно</b>\nСумма: ${remain.toLocaleString()} ₽`);
+                showToast('✅ Кредит закрыт!');
+            }
         }
 
         // ===== ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ =====
@@ -2551,11 +3321,14 @@
             }
 
             loadBankData();
+            loadKCData();
+            loadBPData();
+            loadBusinessData();
         }
 
         // ===== ЗАПУСК =====
         loadState();
-        console.log('✅ Kaskad RP с банком и новым меню перевода загружена!');
+        console.log('✅ Kaskad RP с KC банком, магазином, BP и бизнесами загружена!');
     </script>
 </body>
     </html>
