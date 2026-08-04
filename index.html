@@ -828,19 +828,19 @@
             }
         }
 
-        /* --- СТИЛИ ДЛЯ ТЕМЫ KC БАНК --- */
+        /* --- СТИЛИ ДЛЯ ТЕМЫ KC БАНК (СИНЕ-ФИОЛЕТОВЫЙ ГРАДИЕНТ) --- */
         .screen-kc-bank {
-            background: linear-gradient(135deg, #0a0e2a 0%, #1a0a2e 50%, #2a0a1a 100%);
-            border-color: #ff3388;
+            background: linear-gradient(135deg, #0a0e2a 0%, #1a0a3e 50%, #2a0a5a 100%);
+            border-color: #7b4cff;
             min-height: 620px;
         }
         .screen-kc-bank .form-title {
-            color: #ff66aa;
-            border-bottom-color: #ff3388;
-            text-shadow: 0 0 20px rgba(255, 51, 136, 0.3);
+            color: #a78bfa;
+            border-bottom-color: #7b4cff;
+            text-shadow: 0 0 20px rgba(123, 76, 255, 0.3);
         }
         .screen-kc-bank .btn {
-            border-color: #ff3388;
+            border-color: #7b4cff;
             color: #fff;
         }
         .screen-kc-bank .btn:active {
@@ -848,16 +848,16 @@
             transform: scale(0.96);
         }
         .kc-balance {
-            color: #ff66aa;
+            color: #a78bfa;
             font-size: 32px;
             font-weight: bold;
             text-align: center;
             padding: 15px;
-            border: 2px solid #ff3388;
+            border: 2px solid #7b4cff;
             width: 100%;
             margin-bottom: 6px;
-            background: rgba(255, 51, 136, 0.08);
-            text-shadow: 0 0 30px rgba(255, 51, 136, 0.2);
+            background: rgba(123, 76, 255, 0.08);
+            text-shadow: 0 0 30px rgba(123, 76, 255, 0.2);
         }
         .kc-shop-item {
             width: 100%;
@@ -865,24 +865,78 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 16px;
-            border: 2px solid #ff3388;
+            border: 2px solid #7b4cff;
             color: #fff;
             font-size: 14px;
             cursor: pointer;
             transition: 0.15s;
-            background: rgba(255, 51, 136, 0.03);
+            background: rgba(123, 76, 255, 0.03);
         }
         .kc-shop-item:active {
             transform: scale(0.97);
             opacity: 0.7;
         }
         .kc-shop-item .kc-price {
-            color: #ff66aa;
+            color: #a78bfa;
             font-weight: 500;
         }
         .kc-shop-item .kc-emoji {
             font-size: 20px;
             margin-right: 10px;
+        }
+        .kc-title {
+            color: #a78bfa;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0 0 30px rgba(123, 76, 255, 0.2);
+        }
+        .kc-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            text-align: center;
+            margin: 4px 0;
+        }
+        .kc-chat-link {
+            color: #a78bfa;
+            text-decoration: none;
+            font-size: 16px;
+            border: 2px solid #7b4cff;
+            padding: 12px;
+            display: block;
+            text-align: center;
+            width: 100%;
+            transition: 0.15s;
+            background: rgba(123, 76, 255, 0.05);
+        }
+        .kc-chat-link:active {
+            transform: scale(0.96);
+            opacity: 0.7;
+        }
+        .kc-earn-input {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            margin-top: 6px;
+        }
+        .kc-earn-input .bank-input {
+            border-color: #7b4cff;
+            flex: 2;
+        }
+        .kc-earn-input .btn {
+            flex: 1;
+            border-color: #7b4cff;
+            color: #a78bfa;
+        }
+        .kc-rate {
+            width: 100%;
+            margin: 10px 0;
+            padding: 8px;
+            border: 2px solid #7b4cff;
+            text-align: center;
+            color: #a78bfa;
+            font-size: 16px;
+            background: rgba(123, 76, 255, 0.05);
         }
 
         /* --- СТИЛИ ДЛЯ БАТЛ ПАСС --- */
@@ -1037,54 +1091,6 @@
         .bp-level-premium .bp-level .bp-level-num {
             color: #ffcc00;
         }
-
-        /* --- СТИЛИ ДЛЯ КНОПКИ НАЧИСЛЕНИЯ --- */
-        .kc-earn-input {
-            display: flex;
-            gap: 8px;
-            width: 100%;
-            margin-top: 6px;
-        }
-        .kc-earn-input .bank-input {
-            border-color: #ff3388;
-            flex: 2;
-        }
-        .kc-earn-input .btn {
-            flex: 1;
-            border-color: #ff3388;
-            color: #ff66aa;
-        }
-
-        /* --- СТИЛИ ДЛЯ ПЕРЕХОДА В ЧАТ --- */
-        .kc-chat-link {
-            color: #ff66aa;
-            text-decoration: none;
-            font-size: 16px;
-            border: 2px solid #ff3388;
-            padding: 12px;
-            display: block;
-            text-align: center;
-            width: 100%;
-            transition: 0.15s;
-            background: rgba(255, 51, 136, 0.05);
-        }
-        .kc-chat-link:active {
-            transform: scale(0.96);
-            opacity: 0.7;
-        }
-        .kc-subtitle {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 14px;
-            text-align: center;
-            margin: 4px 0;
-        }
-        .kc-title {
-            color: #ff66aa;
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            text-shadow: 0 0 30px rgba(255, 51, 136, 0.2);
-        }
     </style>
 </head>
 <body>
@@ -1119,7 +1125,7 @@
 
         <div class="grid-menu">
             <button class="btn btn-full" onclick="showBank()">🏦 банк</button>
-            <button class="btn btn-full" style="border-color:#ff3388; color:#ff66aa;" onclick="showKCBank()">🪙 KC банк</button>
+            <button class="btn btn-full" style="border-color:#7b4cff; color:#a78bfa;" onclick="showKCBank()">🪙 KC банк</button>
             <button class="btn" onclick="showScreen('screen4')">🪪 Паспорт</button>
             <button class="btn" onclick="loadJobLevels()">💼 Работа</button>
             <button class="btn" onclick="loadCarClasses()">🏎️ Авто</button>
@@ -1408,30 +1414,30 @@
         <button class="btn-back" onclick="showTransferMenu()">← назад</button>
     </div>
 
-    <!-- ===== ЭКРАН 21: KC БАНК ===== -->
+    <!-- ===== ЭКРАН 21: KC БАНК (СИНЕ-ФИОЛЕТОВЫЙ) ===== -->
     <div id="screen21" class="phone-screen screen-kc-bank" style="display:none;">
         <div class="kc-title">Kaskad Coin</div>
         <div class="kc-subtitle">KC можно купить в лс у создателя</div>
         <a class="kc-chat-link" href="https://t.me/A933MP97" target="_blank">перейти в чат</a>
 
-        <div style="width:100%; margin:10px 0; padding:8px; border:2px solid #ff3388; text-align:center; color:#ff66aa; font-size:16px;">
+        <div class="kc-rate">
             1 KC = 1₽ или 1 тг звезда
         </div>
 
         <div class="kc-balance" id="kcBalanceDisplay">0 KC</div>
 
-        <button class="btn" onclick="showKCBuy()" style="border-color:#ff3388; color:#ff66aa; margin-bottom:6px;">Купить KC</button>
+        <button class="btn" onclick="showKCBuy()" style="border-color:#7b4cff; color:#a78bfa; margin-bottom:6px;">Купить KC</button>
 
         <div class="kc-earn-input">
             <input type="number" class="bank-input" id="kcEarnInput" placeholder="Кол-во KC" min="1">
-            <button class="btn" onclick="addKC()" style="border-color:#ff3388; color:#ff66aa;">Начислить</button>
+            <button class="btn" onclick="addKC()" style="border-color:#7b4cff; color:#a78bfa;">Начислить</button>
         </div>
 
-        <div style="width:100%; margin:12px 0 6px; border-bottom:2px solid #ff3388; padding-bottom:6px; text-align:center; color:#ff66aa; font-size:18px;">🛒 МАГАЗИН</div>
+        <div style="width:100%; margin:12px 0 6px; border-bottom:2px solid #7b4cff; padding-bottom:6px; text-align:center; color:#a78bfa; font-size:18px;">🛒 МАГАЗИН</div>
 
         <div id="kcShopContainer" style="width:100%; display:flex; flex-direction:column; gap:6px; max-height:300px; overflow-y:auto; padding-right:4px;"></div>
 
-        <button class="btn-back" onclick="showScreen('screen2')" style="border-color:#ff3388; color:#ff66aa; margin-top:10px;">← на главную</button>
+        <button class="btn-back" onclick="showScreen('screen2')" style="border-color:#7b4cff; color:#a78bfa; margin-top:10px;">← на главную</button>
     </div>
 
     <!-- ===== ЭКРАН 22: БАТЛ ПАСС МЕНЮ ===== -->
@@ -1501,7 +1507,7 @@
         // ===== ДАННЫЕ БАТЛ ПАСС =====
         let bpData = {
             active: false,
-            type: 'standard', // 'standard' или 'premium'
+            type: 'standard',
             level: 1,
             maxLevel: 40,
             rewards: []
@@ -1928,7 +1934,6 @@
         }
 
         function showKCBuy() {
-            // просто информационное сообщение
             showToast('KC можно купить в лс у создателя: @A933MP97');
         }
 
@@ -1947,11 +1952,9 @@
 
         // ===== МАГАЗИН KC =====
         const kcShopItems = [
-            // Автомобильные контейнеры
             { category: 'Автомобильный контейнер', name: 'Контейнер с авто низкого класса', price: 60, emoji: '🚘' },
             { category: 'Автомобильный контейнер', name: 'Контейнер с авто среднего класса', price: 105, emoji: '🚘' },
             { category: 'Автомобильный контейнер', name: 'Контейнер с авто высокого класса', price: 220, emoji: '🚘' },
-            // RP валюта
             { category: 'RP валюта', name: '500.000 ₽', price: 20, emoji: '💸' },
             { category: 'RP валюта', name: '1.000.000 ₽', price: 40, emoji: '💸' },
             { category: 'RP валюта', name: '5.000.000 ₽', price: 200, emoji: '💸' },
@@ -1960,22 +1963,18 @@
             { category: 'RP валюта', name: '50.000.000 ₽', price: 2000, emoji: '💸' },
             { category: 'RP валюта', name: '100.000.000 ₽', price: 4000, emoji: '💸' },
             { category: 'RP валюта', name: '150.000.000 ₽', price: 6000, emoji: '💸' },
-            // VIP SILVER
             { category: 'VIP SILVER', name: '🥈 VIP SILVER 3 дня', price: 30, emoji: '🥈' },
             { category: 'VIP SILVER', name: '🥈 VIP SILVER 7 дней', price: 65, emoji: '🥈' },
             { category: 'VIP SILVER', name: '🥈 VIP SILVER 15 дней', price: 140, emoji: '🥈' },
             { category: 'VIP SILVER', name: '🥈 VIP SILVER 30 дней', price: 280, emoji: '🥈' },
-            // VIP GOLD
             { category: 'VIP GOLD', name: '🥇 VIP GOLD 3 дня', price: 70, emoji: '🥇' },
             { category: 'VIP GOLD', name: '🥇 VIP GOLD 7 дней', price: 145, emoji: '🥇' },
             { category: 'VIP GOLD', name: '🥇 VIP GOLD 15 дней', price: 300, emoji: '🥇' },
             { category: 'VIP GOLD', name: '🥇 VIP GOLD 30 дней', price: 600, emoji: '🥇' },
-            // VIP PLATINUM
             { category: 'VIP PLATINUM', name: '🏅 VIP PLATINUM 3 дня', price: 130, emoji: '🏅' },
             { category: 'VIP PLATINUM', name: '🏅 VIP PLATINUM 7 дней', price: 270, emoji: '🏅' },
             { category: 'VIP PLATINUM', name: '🏅 VIP PLATINUM 15 дней', price: 550, emoji: '🏅' },
             { category: 'VIP PLATINUM', name: '🏅 VIP PLATINUM 30 дней', price: 1000, emoji: '🏅' },
-            // EXP
             { category: 'EXP', name: '5 exp', price: 10, emoji: '🔋' },
             { category: 'EXP', name: '10 exp', price: 20, emoji: '🔋' },
             { category: 'EXP', name: '20 exp', price: 40, emoji: '🔋' },
@@ -2011,7 +2010,6 @@
             kcData.balance -= item.price;
             saveKCData();
 
-            // Начисляем награду в зависимости от категории
             let rewardMsg = '';
             if (item.category === 'RP валюта') {
                 const amount = parseInt(item.name.replace(/[^0-9]/g, ''));
@@ -2022,7 +2020,6 @@
                     sendBankLog(`🛒 <b>Покупка в KC магазине</b>\nТовар: ${item.name}\nЦена: ${item.price} KC\n${rewardMsg}`);
                 }
             } else if (item.category === 'Автомобильный контейнер') {
-                // Имитация открытия контейнера - выдаем случайное авто из соответствующего класса
                 let cls = 'Низкий класс';
                 if (item.name.includes('среднего')) cls = 'Средний класс';
                 if (item.name.includes('высокого')) cls = 'Высокий класс';
@@ -2036,7 +2033,6 @@
                     rewardMsg = '❌ Контейнер пуст';
                 }
             } else {
-                // VIP и EXP - просто логируем
                 rewardMsg = `✅ Приобретено: ${item.name}`;
                 sendBankLog(`🛒 <b>Покупка в KC магазине</b>\nТовар: ${item.name}\nЦена: ${item.price} KC\n${rewardMsg}`);
                 showToast(`✅ ${item.name} куплено!`);
@@ -2112,7 +2108,6 @@
             bpData.rewards = getBPRewards(type);
             saveBPData();
 
-            // Начисляем награду за 1 уровень
             applyBPLevelReward(1);
 
             sendBankLog(`🎖️ <b>Покупка Батл Пасс</b>\nТип: ${type}\nЦена: ${price.toLocaleString()} ₽`);
@@ -2139,7 +2134,6 @@
                 container.appendChild(div);
             });
 
-            // Прокручиваем к текущему уровню
             const levelEl = container.querySelector(`.bp-level:nth-child(${currentLevel})`);
             if (levelEl) {
                 levelEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
@@ -2172,10 +2166,8 @@
             const reward = rewards.find(r => r.level === level);
             if (!reward) return;
 
-            // Парсим награду
             const text = reward.reward;
 
-            // Проверяем на деньги (содержит ₽)
             if (text.includes('₽')) {
                 const match = text.match(/([\d.]+)\s*₽/);
                 if (match) {
@@ -2189,7 +2181,6 @@
                 }
             }
 
-            // Проверяем на KC
             if (text.includes('KC')) {
                 const match = text.match(/([\d.]+)\s*KC/);
                 if (match) {
@@ -2276,7 +2267,7 @@
             renderBusinesses();
         }
 
-        // ===== ОБНОВЛЕННЫЕ ФУНКЦИИ ПОКУПОК (СПИСЫВАЮТ БАЛАНС) =====
+        // ===== ОБНОВЛЕННЫЕ ФУНКЦИИ ПОКУПОК =====
         function buyCarDealer(cls, car) {
             if (!bankData.isBalanceSet) {
                 showToast('⚠️ Сначала установите баланс!');
@@ -3328,7 +3319,7 @@
 
         // ===== ЗАПУСК =====
         loadState();
-        console.log('✅ Kaskad RP с KC банком, магазином, BP и бизнесами загружена!');
+        console.log('✅ Kaskad RP с KC банком (сине-фиолетовый), магазином, BP и бизнесами загружена!');
     </script>
 </body>
     </html>
