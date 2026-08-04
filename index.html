@@ -828,10 +828,12 @@
             }
         }
 
-        /* --- СТИЛИ ДЛЯ ТЕМЫ KC БАНК (СИНЕ-ФИОЛЕТОВЫЙ ГРАДИЕНТ) --- */
+        /* --- СТИЛИ ДЛЯ ТЕМЫ KC БАНК (ЧЕРНЫЙ ФОН + ГРАДИЕНТНАЯ ОБВОДКА) --- */
         .screen-kc-bank {
-            background: linear-gradient(135deg, #0a0e2a 0%, #1a0a3e 50%, #2a0a5a 100%);
-            border-color: #7b4cff;
+            background: #000000;
+            border-image: linear-gradient(135deg, #0a0e5a, #4a1a8a, #7b2fbe) 1;
+            border-width: 2px;
+            border-style: solid;
             min-height: 620px;
         }
         .screen-kc-bank .form-title {
@@ -856,7 +858,7 @@
             border: 2px solid #7b4cff;
             width: 100%;
             margin-bottom: 6px;
-            background: rgba(123, 76, 255, 0.08);
+            background: rgba(123, 76, 255, 0.05);
             text-shadow: 0 0 30px rgba(123, 76, 255, 0.2);
         }
         .kc-shop-item {
@@ -922,6 +924,7 @@
         .kc-earn-input .bank-input {
             border-color: #7b4cff;
             flex: 2;
+            background: rgba(0,0,0,0.3);
         }
         .kc-earn-input .btn {
             flex: 1;
@@ -938,11 +941,20 @@
             font-size: 16px;
             background: rgba(123, 76, 255, 0.05);
         }
+        .kc-shop-divider {
+            width: 100%;
+            margin: 12px 0 6px;
+            border-bottom: 2px solid #7b4cff;
+            padding-bottom: 6px;
+            text-align: center;
+            color: #a78bfa;
+            font-size: 18px;
+        }
 
-        /* --- СТИЛИ ДЛЯ БАТЛ ПАСС --- */
+        /* --- СТИЛИ ДЛЯ БАТЛ ПАСС (ЧЕРНЫЙ ФОН) --- */
         .screen-battlepass {
-            background: #0a0a1a;
-            border-color: #ff4444;
+            background: #000000;
+            border: 2px solid #ff4444;
             min-height: 620px;
         }
         .screen-battlepass .form-title {
@@ -1004,11 +1016,19 @@
         .bp-level .bp-status {
             font-size: 18px;
         }
+        .bp-select .btn-standard {
+            border-color: #66aaff;
+            color: #66aaff;
+        }
+        .bp-select .btn-premium {
+            border-color: #ffcc00;
+            color: #ffcc00;
+        }
 
-        /* --- СТИЛИ ДЛЯ БИЗНЕСОВ --- */
+        /* --- СТИЛИ ДЛЯ БИЗНЕСОВ (ЧЕРНЫЙ ФОН) --- */
         .screen-business {
-            background: #1a1208;
-            border-color: #d4a574;
+            background: #000000;
+            border: 2px solid #d4a574;
             min-height: 620px;
         }
         .screen-business .form-title {
@@ -1056,40 +1076,6 @@
             font-size: 18px;
             padding: 18px;
             border-width: 3px;
-        }
-        .bp-select .btn-standard {
-            border-color: #66aaff;
-            color: #66aaff;
-        }
-        .bp-select .btn-premium {
-            border-color: #ffcc00;
-            color: #ffcc00;
-        }
-        .bp-level-standart .bp-level {
-            border-color: #66aaff;
-        }
-        .bp-level-standart .bp-level.locked {
-            border-color: #445566;
-            opacity: 0.5;
-        }
-        .bp-level-standart .bp-level.unlocked {
-            border-color: #66ff66;
-        }
-        .bp-level-standart .bp-level .bp-level-num {
-            color: #66aaff;
-        }
-        .bp-level-premium .bp-level {
-            border-color: #ffcc00;
-        }
-        .bp-level-premium .bp-level.locked {
-            border-color: #665533;
-            opacity: 0.5;
-        }
-        .bp-level-premium .bp-level.unlocked {
-            border-color: #66ff66;
-        }
-        .bp-level-premium .bp-level .bp-level-num {
-            color: #ffcc00;
         }
     </style>
 </head>
@@ -1414,7 +1400,7 @@
         <button class="btn-back" onclick="showTransferMenu()">← назад</button>
     </div>
 
-    <!-- ===== ЭКРАН 21: KC БАНК (СИНЕ-ФИОЛЕТОВЫЙ) ===== -->
+    <!-- ===== ЭКРАН 21: KC БАНК (ЧЕРНЫЙ ФОН + ГРАДИЕНТНАЯ ОБВОДКА) ===== -->
     <div id="screen21" class="phone-screen screen-kc-bank" style="display:none;">
         <div class="kc-title">Kaskad Coin</div>
         <div class="kc-subtitle">KC можно купить в лс у создателя</div>
@@ -1433,7 +1419,7 @@
             <button class="btn" onclick="addKC()" style="border-color:#7b4cff; color:#a78bfa;">Начислить</button>
         </div>
 
-        <div style="width:100%; margin:12px 0 6px; border-bottom:2px solid #7b4cff; padding-bottom:6px; text-align:center; color:#a78bfa; font-size:18px;">🛒 МАГАЗИН</div>
+        <div class="kc-shop-divider">🛒 МАГАЗИН</div>
 
         <div id="kcShopContainer" style="width:100%; display:flex; flex-direction:column; gap:6px; max-height:300px; overflow-y:auto; padding-right:4px;"></div>
 
@@ -3319,7 +3305,7 @@
 
         // ===== ЗАПУСК =====
         loadState();
-        console.log('✅ Kaskad RP с KC банком (сине-фиолетовый), магазином, BP и бизнесами загружена!');
+        console.log('✅ Kaskad RP с KC банком (черный фон + градиентная обводка), магазином, BP и бизнесами загружена!');
     </script>
 </body>
     </html>
